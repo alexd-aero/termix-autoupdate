@@ -7295,6 +7295,7 @@ ${r3.join("\n")}
 
 // src/backend/index.ts
 import { randomUUID as randomUUID2 } from "node:crypto";
+import http from "node:http";
 
 // src/backend/bg-session.ts
 var import_headless = __toESM(require_xterm_headless(), 1);
@@ -7345,6 +7346,8 @@ var BgSession = class {
   disposed = false;
   /** Set once an attach succeeded on the current keeper socket. */
   attachedOnSocket = false;
+  /** Callers waiting on a "cwd" answer, oldest first. */
+  cwdWaiters = [];
   lastActivityAt = Date.now();
   get id() {
     return this.record.id;
@@ -7495,6 +7498,11 @@ var BgSession = class {
       case "sessionList":
         this.onSessionList(msg.sessions);
         break;
+      case "cwd":
+        this.cwdWaiters.shift()?.(
+          typeof msg.path === "string" && msg.path ? msg.path : "/"
+        );
+        break;
       case "session_ended":
         this.end(
           typeof msg.code === "number" ? `The shell exited (code ${msg.code}).` : "The shell exited."
@@ -7608,6 +7616,25 @@ var BgSession = class {
   removeViewer(viewer) {
     this.viewers.delete(viewer);
     this.pendingViewers.delete(viewer);
+  }
+  /** The shell's working directory, as the terminal tab's Files button asks it. */
+  cwd() {
+    return new Promise((resolve) => {
+      if (this.status !== "live" || !this.sendKeeper({ type: "get_cwd" })) {
+        resolve("/");
+        return;
+      }
+      const waiter = (path2) => {
+        clearTimeout(timer);
+        resolve(path2);
+      };
+      const timer = setTimeout(() => {
+        const index = this.cwdWaiters.indexOf(waiter);
+        if (index >= 0) this.cwdWaiters.splice(index, 1);
+        resolve("/");
+      }, 8e3);
+      this.cwdWaiters.push(waiter);
+    });
   }
   input(data) {
     if (this.status !== "live" || !this.attachedOnSocket) return false;
@@ -7991,6 +8018,10 @@ var BgShellManager = class {
       if (session.record.userId === userId) session.kick();
     }
   }
+  /** Where core's backend listens. */
+  backend() {
+    return this.store.backend() ?? DEFAULT_BACKEND;
+  }
   getToken(userId) {
     const entry = this.tokens.get(userId);
     if (!entry) return null;
@@ -8020,6 +8051,8 @@ var BgShellManager = class {
     const r = session.record;
     return {
       id: r.id,
+      sessionId: r.sessionId,
+      tabInstanceId: r.tabInstanceId,
       label: r.label,
       hostId: r.hostId,
       hostName: r.hostName,
@@ -8266,6 +8299,64 @@ async function activate(ctx) {
       return { ok: true };
     })
   );
+  router.post("/sessions/:id/image", async (req, res) => {
+    let userId;
+    try {
+      userId = userOf(req);
+    } catch (error) {
+      return res.status(401).json({ error: error.message });
+    }
+    const session = manager.get(userId, req.params.id);
+    if (!session || session.status !== "live") {
+      return res.status(409).json({
+        error: "This background session is not connected.",
+        code: "IMAGE_TERMINAL_NOT_CONNECTED"
+      });
+    }
+    const pass = ["content-type", "content-length", "authorization", "cookie"];
+    const headers = {};
+    for (const name of pass) {
+      const value = req.headers[name];
+      if (typeof value === "string") headers[name] = value;
+    }
+    const target = manager.backend();
+    await new Promise((done) => {
+      let answered = false;
+      const reply = (status, body) => {
+        if (answered) return;
+        answered = true;
+        res.status(status).json(body);
+        done();
+      };
+      const upstream = http.request(
+        {
+          host: target.host,
+          port: target.port,
+          method: "POST",
+          path: "/plugin-api/ssh-terminal/image-upload",
+          headers,
+          timeout: 12e4
+        },
+        (answer) => {
+          let raw = "";
+          answer.setEncoding("utf8");
+          answer.on("data", (chunk) => raw += chunk);
+          answer.on("end", () => {
+            let body;
+            try {
+              body = JSON.parse(raw);
+            } catch {
+              body = { error: "Image upload failed" };
+            }
+            reply(answer.statusCode ?? 502, body);
+          });
+        }
+      );
+      upstream.on("timeout", () => upstream.destroy(new Error("timed out")));
+      upstream.on("error", () => reply(502, { error: "Image upload failed" }));
+      req.pipe(upstream);
+    });
+  });
   ctx.ws.route("/view", async (connection) => {
     const ws = connection.socket;
     const userId = connection.userId;
@@ -8361,6 +8452,16 @@ async function activate(ctx) {
         case "list":
           sendList();
           break;
+        case "cwd": {
+          const reqId = typeof msg.reqId === "string" ? msg.reqId : "";
+          const session = current;
+          if (!session) {
+            send({ type: "cwd", reqId, path: "/" });
+            break;
+          }
+          void session.cwd().then((path2) => send({ type: "cwd", reqId, path: path2 }));
+          break;
+        }
         case "ping":
           send({ type: "pong" });
           break;

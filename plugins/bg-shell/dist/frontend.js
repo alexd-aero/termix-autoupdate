@@ -229,8 +229,121 @@ var __iconData = {
 __iconData.node;
 var ArrowLeft = createLucideIcon(__iconData);
 
-// node_modules/lucide-react/dist/esm/icons/monitor.mjs
+// node_modules/lucide-react/dist/esm/icons/chevron-down.mjs
 var __iconData2 = {
+  name: "chevron-down",
+  size: 24,
+  node: [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]]
+};
+__iconData2.node;
+var ChevronDown = createLucideIcon(__iconData2);
+
+// node_modules/lucide-react/dist/esm/icons/clipboard-paste.mjs
+var __iconData3 = {
+  name: "clipboard-paste",
+  size: 24,
+  node: [
+    ["path", { d: "M11 14h10", key: "1w8e9d" }],
+    ["path", { d: "M16 4h2a2 2 0 0 1 2 2v1.344", key: "1e62lh" }],
+    ["path", { d: "m17 18 4-4-4-4", key: "z2g111" }],
+    [
+      "path",
+      { d: "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 1.793-1.113", key: "bjbb7m" }
+    ],
+    ["rect", { x: "8", y: "2", width: "8", height: "4", rx: "1", key: "ublpy" }]
+  ]
+};
+__iconData3.node;
+var ClipboardPaste = createLucideIcon(__iconData3);
+
+// node_modules/lucide-react/dist/esm/icons/grip-vertical.mjs
+var __iconData4 = {
+  name: "grip-vertical",
+  size: 24,
+  node: [
+    ["circle", { cx: "9", cy: "12", r: "1", key: "1vctgf" }],
+    ["circle", { cx: "9", cy: "5", r: "1", key: "hp0tcf" }],
+    ["circle", { cx: "9", cy: "19", r: "1", key: "fkjjf6" }],
+    ["circle", { cx: "15", cy: "12", r: "1", key: "1tmaij" }],
+    ["circle", { cx: "15", cy: "5", r: "1", key: "19l28e" }],
+    ["circle", { cx: "15", cy: "19", r: "1", key: "f4zoj3" }]
+  ]
+};
+__iconData4.node;
+var GripVertical = createLucideIcon(__iconData4);
+
+// node_modules/lucide-react/dist/esm/icons/image-plus.mjs
+var __iconData5 = {
+  name: "image-plus",
+  size: 24,
+  node: [
+    ["path", { d: "M16 5h6", key: "1vod17" }],
+    ["path", { d: "M19 2v6", key: "4bpg5p" }],
+    ["path", { d: "M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5", key: "1ue2ih" }],
+    ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }],
+    ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }]
+  ]
+};
+__iconData5.node;
+var ImagePlus = createLucideIcon(__iconData5);
+
+// node_modules/lucide-react/dist/esm/icons/layout-grid.mjs
+var __iconData6 = {
+  name: "layout-grid",
+  size: 24,
+  node: [
+    ["rect", { width: "7", height: "7", x: "3", y: "3", rx: "1", key: "1g98yp" }],
+    ["rect", { width: "7", height: "7", x: "14", y: "3", rx: "1", key: "6d4xhi" }],
+    ["rect", { width: "7", height: "7", x: "14", y: "14", rx: "1", key: "nxv5o0" }],
+    ["rect", { width: "7", height: "7", x: "3", y: "14", rx: "1", key: "1bb6yr" }]
+  ]
+};
+__iconData6.node;
+var LayoutGrid = createLucideIcon(__iconData6);
+
+// node_modules/lucide-react/dist/esm/icons/log-out.mjs
+var __iconData7 = {
+  name: "log-out",
+  size: 24,
+  node: [
+    ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
+    ["path", { d: "M21 12H9", key: "dn1m92" }],
+    ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
+  ]
+};
+__iconData7.node;
+var LogOut = createLucideIcon(__iconData7);
+
+// node_modules/lucide-react/dist/esm/icons/maximize-2.mjs
+var __iconData8 = {
+  name: "maximize-2",
+  size: 24,
+  node: [
+    ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+    ["path", { d: "m21 3-7 7", key: "1l2asr" }],
+    ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
+    ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
+  ]
+};
+__iconData8.node;
+var Maximize2 = createLucideIcon(__iconData8);
+
+// node_modules/lucide-react/dist/esm/icons/minimize-2.mjs
+var __iconData9 = {
+  name: "minimize-2",
+  size: 24,
+  node: [
+    ["path", { d: "m14 10 7-7", key: "oa77jy" }],
+    ["path", { d: "M20 10h-6V4", key: "mjg0md" }],
+    ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
+    ["path", { d: "M4 14h6v6", key: "rmj7iw" }]
+  ]
+};
+__iconData9.node;
+var Minimize2 = createLucideIcon(__iconData9);
+
+// node_modules/lucide-react/dist/esm/icons/monitor.mjs
+var __iconData10 = {
   name: "monitor",
   size: 24,
   node: [
@@ -239,11 +352,11 @@ var __iconData2 = {
     ["line", { x1: "12", x2: "12", y1: "17", y2: "21", key: "vw1qmm" }]
   ]
 };
-__iconData2.node;
-var Monitor = createLucideIcon(__iconData2);
+__iconData10.node;
+var Monitor = createLucideIcon(__iconData10);
 
 // node_modules/lucide-react/dist/esm/icons/pencil.mjs
-var __iconData3 = {
+var __iconData11 = {
   name: "pencil",
   size: 24,
   node: [
@@ -257,11 +370,11 @@ var __iconData3 = {
     ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
   ]
 };
-__iconData3.node;
-var Pencil = createLucideIcon(__iconData3);
+__iconData11.node;
+var Pencil = createLucideIcon(__iconData11);
 
 // node_modules/lucide-react/dist/esm/icons/power.mjs
-var __iconData4 = {
+var __iconData12 = {
   name: "power",
   size: 24,
   node: [
@@ -269,11 +382,11 @@ var __iconData4 = {
     ["path", { d: "M18.4 6.6a9 9 0 1 1-12.77.04", key: "obofu9" }]
   ]
 };
-__iconData4.node;
-var Power = createLucideIcon(__iconData4);
+__iconData12.node;
+var Power = createLucideIcon(__iconData12);
 
 // node_modules/lucide-react/dist/esm/icons/square-chevron-right.mjs
-var __iconData5 = {
+var __iconData13 = {
   name: "square-chevron-right",
   size: 24,
   node: [
@@ -282,11 +395,11 @@ var __iconData5 = {
   ],
   aliases: ["chevron-right-square"]
 };
-__iconData5.node;
-var SquareChevronRight = createLucideIcon(__iconData5);
+__iconData13.node;
+var SquareChevronRight = createLucideIcon(__iconData13);
 
 // node_modules/lucide-react/dist/esm/icons/trash.mjs
-var __iconData6 = {
+var __iconData14 = {
   name: "trash",
   size: 24,
   node: [
@@ -298,11 +411,11 @@ var __iconData6 = {
   ],
   aliases: ["trash-2"]
 };
-__iconData6.node;
-var Trash = createLucideIcon(__iconData6);
+__iconData14.node;
+var Trash = createLucideIcon(__iconData14);
 
 // node_modules/lucide-react/dist/esm/icons/triangle-alert.mjs
-var __iconData7 = {
+var __iconData15 = {
   name: "triangle-alert",
   size: 24,
   node: [
@@ -318,11 +431,11 @@ var __iconData7 = {
   ],
   aliases: ["alert-triangle"]
 };
-__iconData7.node;
-var TriangleAlert = createLucideIcon(__iconData7);
+__iconData15.node;
+var TriangleAlert = createLucideIcon(__iconData15);
 
 // node_modules/lucide-react/dist/esm/icons/wifi-off.mjs
-var __iconData8 = {
+var __iconData16 = {
   name: "wifi-off",
   size: 24,
   node: [
@@ -335,18 +448,30 @@ var __iconData8 = {
     ["path", { d: "m2 2 20 20", key: "1ooewy" }]
   ]
 };
-__iconData8.node;
-var WifiOff = createLucideIcon(__iconData8);
+__iconData16.node;
+var WifiOff = createLucideIcon(__iconData16);
+
+// node_modules/lucide-react/dist/esm/icons/x.mjs
+var __iconData17 = {
+  name: "x",
+  size: 24,
+  node: [
+    ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
+    ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+  ]
+};
+__iconData17.node;
+var X = createLucideIcon(__iconData17);
 
 // src/frontend/BgShellPanel.tsx
-import { useEffect as useEffect3, useMemo as useMemo3, useState as useState3 } from "react";
-import { useTranslation as useTranslation3 } from "@termix/plugin-sdk/frontend";
+import { useEffect as useEffect4, useMemo as useMemo5, useRef as useRef3, useState as useState4 } from "react";
+import { useTranslation as useTranslation4 } from "@termix/plugin-sdk/frontend";
 import { Button as Button2 } from "@termix/plugin-sdk/ui";
 
 // src/frontend/BgShellTab.tsx
-import { useCallback, useEffect as useEffect2, useMemo as useMemo2, useState as useState2 } from "react";
-import { toast } from "sonner";
-import { useTranslation as useTranslation2 } from "@termix/plugin-sdk/frontend";
+import { useCallback as useCallback2, useEffect as useEffect3, useMemo as useMemo4, useState as useState3 } from "react";
+import { toast as toast2 } from "sonner";
+import { useTranslation as useTranslation3 } from "@termix/plugin-sdk/frontend";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -364,11 +489,12 @@ import {
   DialogTitle,
   EmptyState,
   Input,
-  useIsMobile
+  useIsMobile as useIsMobile2
 } from "@termix/plugin-sdk/ui";
 
 // src/frontend/BgTerminal.tsx
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect as useEffect2, useMemo as useMemo3, useRef as useRef2, useState as useState2 } from "react";
+import { toast } from "sonner";
 
 // node_modules/@xterm/xterm/lib/xterm.mjs
 var zs = Object.defineProperty;
@@ -5736,7 +5862,7 @@ var zi = class extends D {
   }
 };
 var B = 3;
-var X = Object.freeze(new De());
+var X2 = Object.freeze(new De());
 var an = 0;
 var Ls = 2;
 var Ze = class s12 {
@@ -6018,7 +6144,7 @@ var $i = class {
     this.tabs = {};
     this.savedY = 0;
     this.savedX = 0;
-    this.savedCurAttrData = X.clone();
+    this.savedCurAttrData = X2.clone();
     this.savedCharset = Je;
     this.markers = [];
     this._nullCell = q.fromCharData([0, ir, 1, 0]);
@@ -6051,7 +6177,7 @@ var $i = class {
   }
   fillViewportRows(t) {
     if (this.lines.length === 0) {
-      t === void 0 && (t = X);
+      t === void 0 && (t = X2);
       let e = this._rows;
       for (; e--; ) this.lines.push(this.getBlankLine(t));
     }
@@ -6060,7 +6186,7 @@ var $i = class {
     this.ydisp = 0, this.ybase = 0, this.y = 0, this.x = 0, this.lines = new zi(this._getCorrectBufferLength(this._rows)), this.scrollTop = 0, this.scrollBottom = this._rows - 1, this.setupTabStops();
   }
   resize(t, e) {
-    let i = this.getNullCell(X), r5 = 0, n = this._getCorrectBufferLength(e);
+    let i = this.getNullCell(X2), r5 = 0, n = this._getCorrectBufferLength(e);
     if (n > this.lines.maxLength && (this.lines.maxLength = n), this.lines.length > 0) {
       if (this._cols < t) for (let l = 0; l < this.lines.length; l++) r5 += +this.lines.get(l).resize(t, i);
       let o2 = 0;
@@ -6090,19 +6216,19 @@ var $i = class {
     this._cols !== t && (t > this._cols ? this._reflowLarger(t, e) : this._reflowSmaller(t, e));
   }
   _reflowLarger(t, e) {
-    let i = this._optionsService.rawOptions.reflowCursorLine, r5 = sl(this.lines, this._cols, t, this.ybase + this.y, this.getNullCell(X), i);
+    let i = this._optionsService.rawOptions.reflowCursorLine, r5 = sl(this.lines, this._cols, t, this.ybase + this.y, this.getNullCell(X2), i);
     if (r5.length > 0) {
       let n = ol(this.lines, r5);
       ll(this.lines, n.layout), this._reflowLargerAdjustViewport(t, e, n.countRemoved);
     }
   }
   _reflowLargerAdjustViewport(t, e, i) {
-    let r5 = this.getNullCell(X), n = i;
+    let r5 = this.getNullCell(X2), n = i;
     for (; n-- > 0; ) this.ybase === 0 ? (this.y > 0 && this.y--, this.lines.length < e && this.lines.push(new Ze(t, r5))) : (this.ydisp === this.ybase && this.ydisp--, this.ybase--);
     this.savedY = Math.max(this.savedY - i, 0);
   }
   _reflowSmaller(t, e) {
-    let i = this._optionsService.rawOptions.reflowCursorLine, r5 = this.getNullCell(X), n = [], o2 = 0;
+    let i = this._optionsService.rawOptions.reflowCursorLine, r5 = this.getNullCell(X2), n = [], o2 = 0;
     for (let l = this.lines.length - 1; l >= 0; l--) {
       let a = this.lines.get(l);
       if (!a || !a.isWrapped && a.getTrimmedLength() <= t) continue;
@@ -6116,7 +6242,7 @@ var $i = class {
       this.ybase === 0 && this.y !== this.lines.length - 1 ? _3 = Math.max(0, this.y - this.lines.maxLength + d) : _3 = Math.max(0, this.lines.length - this.lines.maxLength + d);
       let p = [];
       for (let I2 = 0; I2 < d; I2++) {
-        let k = this.getBlankLine(X, true);
+        let k = this.getBlankLine(X2, true);
         p.push(k);
       }
       p.length > 0 && (n.push({ start: l + u.length + o2, newLines: p }), o2 += p.length), u.push(...p);
@@ -7209,8 +7335,8 @@ var vn = class extends D {
     this._iconName = "";
     this._windowTitleStack = [];
     this._iconNameStack = [];
-    this._curAttrData = X.clone();
-    this._eraseAttrDataInternal = X.clone();
+    this._curAttrData = X2.clone();
+    this._eraseAttrDataInternal = X2.clone();
     this._onRequestBell = this._register(new v());
     this.onRequestBell = this._onRequestBell.event;
     this._onRequestRefreshRows = this._register(new v());
@@ -7509,7 +7635,7 @@ var vn = class extends D {
   }
   scrollDown(e) {
     let i = e.params[0] || 1;
-    for (; i--; ) this._activeBuffer.lines.splice(this._activeBuffer.ybase + this._activeBuffer.scrollBottom, 1), this._activeBuffer.lines.splice(this._activeBuffer.ybase + this._activeBuffer.scrollTop, 0, this._activeBuffer.getBlankLine(X));
+    for (; i--; ) this._activeBuffer.lines.splice(this._activeBuffer.ybase + this._activeBuffer.scrollBottom, 1), this._activeBuffer.lines.splice(this._activeBuffer.ybase + this._activeBuffer.scrollTop, 0, this._activeBuffer.getBlankLine(X2));
     return this._dirtyRowTracker.markRangeDirty(this._activeBuffer.scrollTop, this._activeBuffer.scrollBottom), true;
   }
   scrollLeft(e) {
@@ -7773,12 +7899,12 @@ var vn = class extends D {
     i.extended = i.extended.clone(), (!~e || e > 5) && (e = 1), i.extended.underlineStyle = e, i.fg |= 268435456, e === 0 && (i.fg &= -268435457), i.updateExtended();
   }
   _processSGR0(e) {
-    e.fg = X.fg, e.bg = X.bg, e.extended = e.extended.clone(), e.extended.underlineStyle = 0, e.extended.underlineColor &= -67108864, e.updateExtended();
+    e.fg = X2.fg, e.bg = X2.bg, e.extended = e.extended.clone(), e.extended.underlineStyle = 0, e.extended.underlineColor &= -67108864, e.updateExtended();
   }
   charAttributes(e) {
     if (e.length === 1 && e.params[0] === 0) return this._processSGR0(this._curAttrData), true;
     let i = e.length, r5, n = this._curAttrData;
-    for (let o2 = 0; o2 < i; o2++) r5 = e.params[o2], r5 >= 30 && r5 <= 37 ? (n.fg &= -50331904, n.fg |= 16777216 | r5 - 30) : r5 >= 40 && r5 <= 47 ? (n.bg &= -50331904, n.bg |= 16777216 | r5 - 40) : r5 >= 90 && r5 <= 97 ? (n.fg &= -50331904, n.fg |= 16777216 | r5 - 90 | 8) : r5 >= 100 && r5 <= 107 ? (n.bg &= -50331904, n.bg |= 16777216 | r5 - 100 | 8) : r5 === 0 ? this._processSGR0(n) : r5 === 1 ? n.fg |= 134217728 : r5 === 3 ? n.bg |= 67108864 : r5 === 4 ? (n.fg |= 268435456, this._processUnderline(e.hasSubParams(o2) ? e.getSubParams(o2)[0] : 1, n)) : r5 === 5 ? n.fg |= 536870912 : r5 === 7 ? n.fg |= 67108864 : r5 === 8 ? n.fg |= 1073741824 : r5 === 9 ? n.fg |= 2147483648 : r5 === 2 ? n.bg |= 134217728 : r5 === 21 ? this._processUnderline(2, n) : r5 === 22 ? (n.fg &= -134217729, n.bg &= -134217729) : r5 === 23 ? n.bg &= -67108865 : r5 === 24 ? (n.fg &= -268435457, this._processUnderline(0, n)) : r5 === 25 ? n.fg &= -536870913 : r5 === 27 ? n.fg &= -67108865 : r5 === 28 ? n.fg &= -1073741825 : r5 === 29 ? n.fg &= 2147483647 : r5 === 39 ? (n.fg &= -67108864, n.fg |= X.fg & 16777215) : r5 === 49 ? (n.bg &= -67108864, n.bg |= X.bg & 16777215) : r5 === 38 || r5 === 48 || r5 === 58 ? o2 += this._extractColor(e, o2, n) : r5 === 53 ? n.bg |= 1073741824 : r5 === 55 ? n.bg &= -1073741825 : r5 === 59 ? (n.extended = n.extended.clone(), n.extended.underlineColor = -1, n.updateExtended()) : r5 === 100 ? (n.fg &= -67108864, n.fg |= X.fg & 16777215, n.bg &= -67108864, n.bg |= X.bg & 16777215) : this._logService.debug("Unknown SGR attribute: %d.", r5);
+    for (let o2 = 0; o2 < i; o2++) r5 = e.params[o2], r5 >= 30 && r5 <= 37 ? (n.fg &= -50331904, n.fg |= 16777216 | r5 - 30) : r5 >= 40 && r5 <= 47 ? (n.bg &= -50331904, n.bg |= 16777216 | r5 - 40) : r5 >= 90 && r5 <= 97 ? (n.fg &= -50331904, n.fg |= 16777216 | r5 - 90 | 8) : r5 >= 100 && r5 <= 107 ? (n.bg &= -50331904, n.bg |= 16777216 | r5 - 100 | 8) : r5 === 0 ? this._processSGR0(n) : r5 === 1 ? n.fg |= 134217728 : r5 === 3 ? n.bg |= 67108864 : r5 === 4 ? (n.fg |= 268435456, this._processUnderline(e.hasSubParams(o2) ? e.getSubParams(o2)[0] : 1, n)) : r5 === 5 ? n.fg |= 536870912 : r5 === 7 ? n.fg |= 67108864 : r5 === 8 ? n.fg |= 1073741824 : r5 === 9 ? n.fg |= 2147483648 : r5 === 2 ? n.bg |= 134217728 : r5 === 21 ? this._processUnderline(2, n) : r5 === 22 ? (n.fg &= -134217729, n.bg &= -134217729) : r5 === 23 ? n.bg &= -67108865 : r5 === 24 ? (n.fg &= -268435457, this._processUnderline(0, n)) : r5 === 25 ? n.fg &= -536870913 : r5 === 27 ? n.fg &= -67108865 : r5 === 28 ? n.fg &= -1073741825 : r5 === 29 ? n.fg &= 2147483647 : r5 === 39 ? (n.fg &= -67108864, n.fg |= X2.fg & 16777215) : r5 === 49 ? (n.bg &= -67108864, n.bg |= X2.bg & 16777215) : r5 === 38 || r5 === 48 || r5 === 58 ? o2 += this._extractColor(e, o2, n) : r5 === 53 ? n.bg |= 1073741824 : r5 === 55 ? n.bg &= -1073741825 : r5 === 59 ? (n.extended = n.extended.clone(), n.extended.underlineColor = -1, n.updateExtended()) : r5 === 100 ? (n.fg &= -67108864, n.fg |= X2.fg & 16777215, n.bg &= -67108864, n.bg |= X2.bg & 16777215) : this._logService.debug("Unknown SGR attribute: %d.", r5);
     return true;
   }
   deviceStatus(e) {
@@ -7811,7 +7937,7 @@ var vn = class extends D {
     return true;
   }
   softReset(e) {
-    return this._coreService.isCursorHidden = false, this._onRequestSyncScrollBar.fire(), this._activeBuffer.scrollTop = 0, this._activeBuffer.scrollBottom = this._bufferService.rows - 1, this._curAttrData = X.clone(), this._coreService.reset(), this._charsetService.reset(), this._activeBuffer.savedX = 0, this._activeBuffer.savedY = this._activeBuffer.ybase, this._activeBuffer.savedCurAttrData.fg = this._curAttrData.fg, this._activeBuffer.savedCurAttrData.bg = this._curAttrData.bg, this._activeBuffer.savedCharset = this._charsetService.charset, this._coreService.decPrivateModes.origin = false, true;
+    return this._coreService.isCursorHidden = false, this._onRequestSyncScrollBar.fire(), this._activeBuffer.scrollTop = 0, this._activeBuffer.scrollBottom = this._bufferService.rows - 1, this._curAttrData = X2.clone(), this._coreService.reset(), this._charsetService.reset(), this._activeBuffer.savedX = 0, this._activeBuffer.savedY = this._activeBuffer.ybase, this._activeBuffer.savedCurAttrData.fg = this._curAttrData.fg, this._activeBuffer.savedCurAttrData.bg = this._curAttrData.bg, this._activeBuffer.savedCharset = this._charsetService.charset, this._coreService.decPrivateModes.origin = false, true;
   }
   setCursorStyle(e) {
     let i = e.length === 0 ? 1 : e.params[0];
@@ -7971,7 +8097,7 @@ var vn = class extends D {
     return this._parser.reset(), this._onRequestReset.fire(), true;
   }
   reset() {
-    this._curAttrData = X.clone(), this._eraseAttrDataInternal = X.clone();
+    this._curAttrData = X2.clone(), this._eraseAttrDataInternal = X2.clone();
   }
   _eraseAttrData() {
     return this._eraseAttrDataInternal.bg &= -67108864, this._eraseAttrDataInternal.bg |= this._curAttrData.bg & 67108863, this._eraseAttrDataInternal;
@@ -9092,7 +9218,7 @@ var yn = class extends Sn {
   clear() {
     if (!(this.buffer.ybase === 0 && this.buffer.y === 0)) {
       this.buffer.clearAllMarkers(), this.buffer.lines.set(0, this.buffer.lines.get(this.buffer.ybase + this.buffer.y)), this.buffer.lines.length = 1, this.buffer.ydisp = 0, this.buffer.ybase = 0, this.buffer.y = 0;
-      for (let e = 1; e < this.rows; e++) this.buffer.lines.push(this.buffer.getBlankLine(X));
+      for (let e = 1; e < this.rows; e++) this.buffer.lines.push(this.buffer.getBlankLine(X2));
       this._onScroll.fire({ position: this.buffer.ydisp }), this.refresh(0, this.rows - 1);
     }
   }
@@ -9625,13 +9751,13 @@ function Ye2(r5, e, t = 0, n = r5.length) {
   }
   return o2 - 1;
 }
-var X2 = class X3 {
+var X3 = class X4 {
   constructor(e) {
     this._array = e;
     this._findLastMonotonousLastIdx = 0;
   }
   findLastMonotonous(e) {
-    if (X3.assertInvariants) {
+    if (X4.assertInvariants) {
       if (this._prevFindLastPredicate) {
         for (let n of this._array) if (this._prevFindLastPredicate(n) && !e(n)) throw new Error("MonotonousArray: current predicate must be weaker than (or equal to) the previous predicate.");
       }
@@ -9641,7 +9767,7 @@ var X2 = class X3 {
     return this._findLastMonotonousLastIdx = t + 1, t === -1 ? void 0 : this._array[t];
   }
 };
-X2.assertInvariants = false;
+X3.assertInvariants = false;
 var Be2;
 ((E) => {
   function r5(p) {
@@ -10645,9 +10771,912 @@ var Ke = class {
 };
 
 // src/frontend/BgTerminal.tsx
-import { invokeAction, useTheme, useTranslation } from "@termix/plugin-sdk/frontend";
+import {
+  invokeAction,
+  useHost,
+  useSlotContributions as useSlotContributions2,
+  useTheme,
+  useTranslation as useTranslation2
+} from "@termix/plugin-sdk/frontend";
 import { copyToClipboard, readFromClipboard } from "@termix/plugin-sdk/ui";
-import { jsx } from "react/jsx-runtime";
+
+// src/frontend/runtime.ts
+import { useSyncExternalStore } from "react";
+var current = null;
+function setApp(app2) {
+  current = app2;
+}
+function app() {
+  if (!current) throw new Error("BG Shell is not active");
+  return current;
+}
+var TAB_TYPE = "bg-shell";
+var SELECTED_KEY = "bg-shell:selected";
+function readSelected() {
+  try {
+    return localStorage.getItem(SELECTED_KEY);
+  } catch {
+    return null;
+  }
+}
+function writeSelected(id) {
+  try {
+    if (id) localStorage.setItem(SELECTED_KEY, id);
+    else localStorage.removeItem(SELECTED_KEY);
+  } catch {
+  }
+}
+function errorMessage(error) {
+  const response = error?.response;
+  if (typeof response?.data?.error === "string") return response.data.error;
+  if (error instanceof Error && error.message) return error.message;
+  return "Unknown error";
+}
+var SELECT_EVENT = "bg-shell:select";
+var pendingOpen = null;
+function takePendingOpen() {
+  const id = pendingOpen;
+  pendingOpen = null;
+  return id;
+}
+function requestSelect(id) {
+  writeSelected(id);
+  pendingOpen = id;
+  window.dispatchEvent(new CustomEvent(SELECT_EVENT, { detail: id }));
+}
+function onSelectRequest(listener) {
+  const handler = (event) => {
+    const id = event.detail;
+    if (typeof id === "string") listener(id);
+  };
+  window.addEventListener(SELECT_EVENT, handler);
+  return () => window.removeEventListener(SELECT_EVENT, handler);
+}
+var shownId = readSelected();
+var shownListeners = /* @__PURE__ */ new Set();
+function setShownSession(id) {
+  if (shownId === id) return;
+  shownId = id;
+  for (const listener of [...shownListeners]) listener();
+}
+function useShownSession() {
+  return useSyncExternalStore(
+    (listener) => {
+      shownListeners.add(listener);
+      return () => shownListeners.delete(listener);
+    },
+    () => shownId
+  );
+}
+var panelsShown = 0;
+var panelListeners = /* @__PURE__ */ new Set();
+function notePanelShown() {
+  panelsShown++;
+  for (const listener of [...panelListeners]) listener();
+  let done = false;
+  return () => {
+    if (done) return;
+    done = true;
+    panelsShown--;
+    for (const listener of [...panelListeners]) listener();
+  };
+}
+function usePanelShown() {
+  return useSyncExternalStore(
+    (listener) => {
+      panelListeners.add(listener);
+      return () => panelListeners.delete(listener);
+    },
+    () => panelsShown > 0
+  );
+}
+
+// src/frontend/toolbar/TerminalToolbar.tsx
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo as useMemo2,
+  useRef,
+  useState
+} from "react";
+
+// src/frontend/toolbar/terminal-slots.ts
+var TERMINAL_TOOLBAR_SLOT = "terminal.toolbar";
+var TERMINAL_TOOLBAR_STATUS_SLOT = "terminal.toolbarStatus";
+var TERMINAL_SIDE_PANEL_SLOT = "terminal.sidePanel";
+
+// src/frontend/toolbar/toolbar-geometry.ts
+var TOOLBAR_POSITION_STORAGE_KEY = "termix-terminal-toolbar-position-v2";
+var TOOLBAR_MARGIN = 8;
+var RECOVERY_SIZE = 44;
+function getDefaultToolbarPosition() {
+  return { x: 0, y: 0 };
+}
+function sanitizeToolbarPosition(value) {
+  if (!value || typeof value !== "object") return getDefaultToolbarPosition();
+  const candidate = value;
+  return Number.isFinite(candidate.x) && Number.isFinite(candidate.y) ? { x: Number(candidate.x), y: Number(candidate.y) } : getDefaultToolbarPosition();
+}
+function readStoredPosition(storageKey) {
+  if (typeof window === "undefined") return getDefaultToolbarPosition();
+  try {
+    return sanitizeToolbarPosition(
+      JSON.parse(window.localStorage.getItem(storageKey) ?? "null")
+    );
+  } catch {
+    return getDefaultToolbarPosition();
+  }
+}
+function persistPosition(storageKey, position) {
+  try {
+    window.localStorage.setItem(
+      storageKey,
+      JSON.stringify(sanitizeToolbarPosition(position))
+    );
+  } catch {
+  }
+}
+function toolbarPositionStorageKey(anchor = "bottom") {
+  return anchor === "bottom" ? TOOLBAR_POSITION_STORAGE_KEY : `${TOOLBAR_POSITION_STORAGE_KEY}-${anchor}`;
+}
+function readStoredToolbarPosition(anchor) {
+  return readStoredPosition(toolbarPositionStorageKey(anchor));
+}
+function persistToolbarPosition(position, anchor) {
+  persistPosition(toolbarPositionStorageKey(anchor), position);
+}
+function clampToolbarPosition(position, toolbarRect, hostRect, renderedPosition = position) {
+  if (!toolbarRect.width || !toolbarRect.height || !hostRect.width || !hostRect.height)
+    return sanitizeToolbarPosition(position);
+  const left = hostRect.left + TOOLBAR_MARGIN;
+  const right = hostRect.right - TOOLBAR_MARGIN;
+  const top = hostRect.top + TOOLBAR_MARGIN;
+  const bottom = hostRect.bottom - TOOLBAR_MARGIN;
+  const baseLeft = toolbarRect.left - renderedPosition.x;
+  const baseRight = toolbarRect.right - renderedPosition.x;
+  const baseTop = toolbarRect.top - renderedPosition.y;
+  const baseBottom = toolbarRect.bottom - renderedPosition.y;
+  const clamp = (min, max, value) => Math.min(max, Math.max(min, value));
+  const xMin = toolbarRect.width <= right - left ? left - baseLeft : left + RECOVERY_SIZE - baseRight;
+  const xMax = right - baseRight;
+  const yMin = toolbarRect.height <= bottom - top ? top - baseTop : top + RECOVERY_SIZE - baseBottom;
+  const yMax = bottom - baseBottom;
+  return { x: clamp(xMin, xMax, position.x), y: clamp(yMin, yMax, position.y) };
+}
+function getResponsiveToolbarDensity(selectedDensity, currentDensity, availableInlineSize, requiredInlineSize) {
+  if (selectedDensity === "icon") return "icon";
+  if (!Number.isFinite(availableInlineSize) || availableInlineSize <= 0)
+    return currentDensity;
+  if (!Number.isFinite(requiredInlineSize) || requiredInlineSize <= 0)
+    return currentDensity;
+  if (currentDensity === "icon")
+    return availableInlineSize >= requiredInlineSize * 1.15 ? selectedDensity : currentDensity;
+  return availableInlineSize < requiredInlineSize * 1.1 ? "icon" : selectedDensity;
+}
+
+// src/frontend/toolbar/toolbar-settings.ts
+var TOOLBAR_ANCHORS = [
+  "bottom",
+  "bottom-left",
+  "bottom-right",
+  "top",
+  "top-left",
+  "top-right"
+];
+var DEFAULT_TOOLBAR_SETTINGS = {
+  anchor: "bottom",
+  startCollapsed: false,
+  density: null,
+  showStatus: true,
+  fadeWhenIdle: true
+};
+var DENSITIES = ["icon", "labeled", "expanded"];
+function readToolbarSettings(host) {
+  const values = host?.pluginSettings?.["ssh-terminal"] ?? {};
+  const anchor = values.terminalToolbarPosition;
+  const density = values.terminalToolbarDisplay;
+  const bool = (value, fallback) => typeof value === "boolean" ? value : fallback;
+  return {
+    anchor: TOOLBAR_ANCHORS.includes(anchor) ? anchor : DEFAULT_TOOLBAR_SETTINGS.anchor,
+    startCollapsed: values.terminalToolbarStartState === "collapsed",
+    density: DENSITIES.includes(density) ? density : null,
+    showStatus: bool(
+      values.terminalToolbarShowStatus,
+      DEFAULT_TOOLBAR_SETTINGS.showStatus
+    ),
+    fadeWhenIdle: bool(
+      values.terminalToolbarFade,
+      DEFAULT_TOOLBAR_SETTINGS.fadeWhenIdle
+    )
+  };
+}
+function isLeftAnchor(anchor) {
+  return anchor.endsWith("-left");
+}
+function isTopAnchor(anchor) {
+  return anchor.startsWith("top");
+}
+function toolbarAnchorClasses(anchor) {
+  const vertical = isTopAnchor(anchor) ? "items-start pt-2" : "items-end pb-2";
+  const horizontal = anchor.endsWith("-left") ? "justify-start pl-2" : anchor.endsWith("-right") ? "justify-end pr-2" : "justify-center";
+  return `${vertical} ${horizontal}`;
+}
+
+// src/frontend/toolbar/TerminalToolbar.tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  cn as cn2,
+  ActionSlot,
+  ComponentSlot,
+  useIsMobile
+} from "@termix/plugin-sdk/ui";
+import {
+  usePluginUiPreferences,
+  useHostActions,
+  useTabs,
+  useTranslation,
+  useSlotContributions
+} from "@termix/plugin-sdk/frontend";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+var TOOLBAR_SLOT_ID = TERMINAL_TOOLBAR_SLOT;
+var DENSITY_OPTIONS = [
+  { value: "icon" },
+  { value: "labeled" },
+  { value: "expanded" }
+];
+var DENSITIES2 = DENSITY_OPTIONS.map((option) => option.value);
+var LEGACY_DENSITY_KEY = "termix-terminal-toolbar-density";
+function asDensity(value) {
+  return DENSITIES2.includes(value) ? value : "labeled";
+}
+var CONTROL = "inline-flex min-h-8 min-w-8 items-center justify-center gap-1.5 rounded-sm px-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:translate-y-px active:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-40 data-[state=open]:bg-muted data-[state=open]:text-foreground";
+var SEPARATOR = "mx-0.5 h-5 w-px shrink-0 bg-border";
+var TerminalToolbar = ({
+  host,
+  terminalIdentity,
+  isConnected,
+  isTmuxAttached,
+  onTmuxDetach,
+  isImageUploading,
+  onUploadImage,
+  onPasteImage,
+  isFocused,
+  actionsEnabled = true,
+  slotApi,
+  onOpenFiles
+}) => {
+  const { t } = useTranslation();
+  const allSlotContributions = useSlotContributions(TOOLBAR_SLOT_ID, { host });
+  const statusContributions = useSlotContributions(
+    TERMINAL_TOOLBAR_STATUS_SLOT,
+    { host }
+  );
+  const slotContributions = useMemo2(
+    () => allSlotContributions.filter(
+      (contribution) => contribution.kind !== "component"
+    ),
+    [allSlotContributions]
+  );
+  const hostActions = useHostActions();
+  const tabs = useTabs();
+  const hostLinks = useMemo2(() => {
+    const record = host;
+    return hostActions.filter(
+      (action) => action.kind === "open" && !action.items && (action.run || action.tabType) && action.when(record)
+    );
+  }, [hostActions, host]);
+  const openHostLink = (action) => {
+    const record = host;
+    if (action.tabType === "files" && onOpenFiles) onOpenFiles();
+    else if (action.run) action.run(record, tabs);
+    else if (action.tabType) tabs.openTab(record, action.tabType);
+  };
+  const settings = useMemo2(() => readToolbarSettings(host), [host]);
+  const { anchor } = settings;
+  const rememberDensity = settings.density === null;
+  const { values: uiPrefs, set: setUiPref } = usePluginUiPreferences();
+  const preferredDensity = asDensity(uiPrefs.toolbarDensity);
+  useEffect(() => {
+    try {
+      const legacy = window.localStorage.getItem(LEGACY_DENSITY_KEY);
+      if (legacy === null) return;
+      window.localStorage.removeItem(LEGACY_DENSITY_KEY);
+      if (DENSITIES2.includes(legacy)) {
+        setUiPref("toolbarDensity", legacy);
+      }
+    } catch {
+    }
+  }, []);
+  const [density, setDensity] = useState(
+    () => settings.density ?? preferredDensity
+  );
+  const [responsiveDensity, setResponsiveDensity] = useState(() => density);
+  const [position, setPosition] = useState(
+    () => readStoredToolbarPosition(anchor)
+  );
+  const positionRef = useRef(position);
+  const [collapsed, setCollapsed] = useState(settings.startCollapsed);
+  const [densityOpen, setDensityOpen] = useState(false);
+  const [imageError, setImageError] = useState(null);
+  const [retryImageAction, setRetryImageAction] = useState(
+    null
+  );
+  const fileInputRef = useRef(null);
+  const hideToolbarRef = useRef(null);
+  const pendingExpansionFocusRef = useRef(false);
+  const pendingEdgeRef = useRef(null);
+  const mountedRef = useRef(false);
+  const imageGenerationRef = useRef(0);
+  const hostRef = useRef(null);
+  const toolbarRef = useRef(null);
+  const measurementRef = useRef(null);
+  const dragRef = useRef(null);
+  const capturedPointerIdRef = useRef(null);
+  const dragMovedRef = useRef(false);
+  const densityId = useId();
+  const [desktopViewportReady, setDesktopViewportReady] = useState();
+  const hostIdentity = terminalIdentity ?? `${host.id ?? "unknown"}`;
+  positionRef.current = position;
+  const effectiveDensity = isFocused ? responsiveDensity : "icon";
+  const showStats = settings.showStatus && effectiveDensity === "expanded" && statusContributions.length > 0;
+  const isMobile = useIsMobile();
+  useLayoutEffect(() => {
+    setDesktopViewportReady(
+      typeof window !== "undefined" && window.innerWidth >= 768
+    );
+  }, []);
+  useEffect(() => {
+    if (isMobile === false) setDesktopViewportReady(true);
+  }, [isMobile]);
+  useEffect(() => {
+    if (settings.density) setDensity(settings.density);
+  }, [settings.density]);
+  useEffect(() => {
+    const next = readStoredToolbarPosition(anchor);
+    positionRef.current = next;
+    setPosition(next);
+  }, [anchor]);
+  useEffect(() => {
+    if (!rememberDensity) return;
+    if (desktopViewportReady !== true || isMobile !== false) return;
+    setDensity(preferredDensity);
+  }, [preferredDensity, desktopViewportReady, isMobile, rememberDensity]);
+  useEffect(() => {
+    if (desktopViewportReady !== true || isMobile !== false) return;
+    const measurement = measurementRef.current;
+    const host2 = hostRef.current;
+    if (!measurement || !host2) return;
+    let frameId = null;
+    let remeasurements = 0;
+    const measure = () => {
+      frameId = null;
+      const available = host2.getBoundingClientRect().width;
+      const required = measurement.getBoundingClientRect().width;
+      if (available > 0 && required > 0) {
+        setResponsiveDensity(
+          (current2) => getResponsiveToolbarDensity(density, current2, available, required)
+        );
+        remeasurements = 0;
+      } else if (remeasurements < 2) {
+        remeasurements += 1;
+        frameId = window.requestAnimationFrame(measure);
+      }
+    };
+    const schedule = () => {
+      if (frameId == null) frameId = window.requestAnimationFrame(measure);
+    };
+    schedule();
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(schedule);
+    observer?.observe(host2);
+    observer?.observe(measurement);
+    return () => {
+      if (frameId != null) window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+    };
+  }, [
+    density,
+    desktopViewportReady,
+    isConnected,
+    isMobile,
+    isTmuxAttached,
+    actionsEnabled,
+    slotContributions,
+    hostLinks,
+    t
+  ]);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      imageGenerationRef.current += 1;
+      dragRef.current = null;
+      capturedPointerIdRef.current = null;
+    };
+  }, []);
+  useLayoutEffect(() => {
+    if (desktopViewportReady !== true || isMobile !== false) return;
+    const toolbar = toolbarRef.current;
+    const host2 = hostRef.current;
+    if (!toolbar || !host2 || dragRef.current) return;
+    const hostRect = host2.getBoundingClientRect();
+    const toolbarRect = toolbar.getBoundingClientRect();
+    const extremeOffset = hostRect.width > 0 && hostRect.height > 0 && Math.max(
+      Math.abs(positionRef.current.x),
+      Math.abs(positionRef.current.y)
+    ) > Math.max(hostRect.width, hostRect.height) * 4;
+    if (extremeOffset) {
+      positionRef.current = { x: 0, y: 0 };
+      setPosition({ x: 0, y: 0 });
+      persistToolbarPosition({ x: 0, y: 0 }, anchor);
+      return;
+    }
+    if (toolbarRect.width > 0 && toolbarRect.height > 0) {
+      const pendingEdge = pendingEdgeRef.current;
+      pendingEdgeRef.current = null;
+      const baseEdge = (isLeftAnchor(anchor) ? toolbarRect.left : toolbarRect.right) - positionRef.current.x;
+      const next = clampToolbarPosition(
+        {
+          x: pendingEdge == null ? positionRef.current.x : pendingEdge - baseEdge,
+          y: positionRef.current.y
+        },
+        toolbarRect,
+        hostRect,
+        positionRef.current
+      );
+      if (next.x !== positionRef.current.x || next.y !== positionRef.current.y) {
+        positionRef.current = next;
+        setPosition(next);
+        persistToolbarPosition(next, anchor);
+      }
+    }
+    if (!collapsed && pendingExpansionFocusRef.current) {
+      pendingExpansionFocusRef.current = false;
+      hideToolbarRef.current?.focus();
+    }
+  }, [
+    anchor,
+    collapsed,
+    density,
+    desktopViewportReady,
+    effectiveDensity,
+    isConnected,
+    isMobile,
+    isTmuxAttached,
+    responsiveDensity
+  ]);
+  useEffect(() => {
+    imageGenerationRef.current += 1;
+    setImageError(null);
+    setRetryImageAction(null);
+  }, [isConnected, hostIdentity]);
+  useEffect(() => {
+    if (collapsed || !pendingExpansionFocusRef.current) return;
+    pendingExpansionFocusRef.current = false;
+    hideToolbarRef.current?.focus();
+  }, [collapsed]);
+  if (!isConnected || desktopViewportReady !== true || isMobile !== false)
+    return null;
+  const setAndStoreDensity = (next) => {
+    setDensity(next);
+    if (rememberDensity) setUiPref("toolbarDensity", next);
+  };
+  const reportImageResult = (action, retry) => {
+    const generation = ++imageGenerationRef.current;
+    let result;
+    try {
+      result = action();
+    } catch (error) {
+      result = Promise.reject(error);
+    }
+    void Promise.resolve(result).then(
+      () => {
+        if (!mountedRef.current || generation !== imageGenerationRef.current)
+          return;
+        setImageError(null);
+        setRetryImageAction(null);
+      },
+      (error) => {
+        if (!mountedRef.current || generation !== imageGenerationRef.current)
+          return;
+        setImageError(
+          error instanceof Error ? error.message : t("terminalToolbar.imageActionFailed")
+        );
+        setRetryImageAction(() => retry);
+      }
+    );
+  };
+  const uploadFile = (file) => {
+    setImageError(null);
+    reportImageResult(
+      () => onUploadImage(file),
+      () => uploadFile(file)
+    );
+  };
+  const pasteImage = () => {
+    setImageError(null);
+    reportImageResult(onPasteImage, pasteImage);
+  };
+  const chooseFile = () => fileInputRef.current?.click();
+  const anchoredEdge = () => {
+    const rect = toolbarRef.current?.getBoundingClientRect();
+    if (!rect) return null;
+    return isLeftAnchor(anchor) ? rect.left : rect.right;
+  };
+  const handleGrabPointerDown = (event) => {
+    if (event.button !== 0 || event.pointerType === "touch") return;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    capturedPointerIdRef.current = event.pointerId;
+    dragMovedRef.current = false;
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      basePosition: positionRef.current
+    };
+  };
+  const handleGrabPointerMove = (event) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
+    const toolbar = toolbarRef.current;
+    const host2 = hostRef.current;
+    if (!toolbar || !host2) return;
+    const next = clampToolbarPosition(
+      {
+        x: drag.basePosition.x + deltaX,
+        y: drag.basePosition.y + deltaY
+      },
+      toolbar.getBoundingClientRect(),
+      host2.getBoundingClientRect(),
+      positionRef.current
+    );
+    if (event.clientX !== drag.startX || event.clientY !== drag.startY) {
+      dragMovedRef.current = true;
+    }
+    positionRef.current = next;
+    setPosition(next);
+  };
+  const handleGrabPointerEnd = (event) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    persistToolbarPosition(positionRef.current, anchor);
+    dragRef.current = null;
+    if (capturedPointerIdRef.current === event.pointerId) {
+      capturedPointerIdRef.current = null;
+      if (event.type !== "lostpointercapture") {
+        try {
+          event.currentTarget.releasePointerCapture?.(event.pointerId);
+        } catch {
+        }
+      }
+    }
+  };
+  const densityLabels = {
+    icon: t("terminalToolbar.layoutIcon"),
+    labeled: t("terminalToolbar.layoutLabeled"),
+    expanded: t("terminalToolbar.layoutExpanded")
+  };
+  const densitySelect = /* @__PURE__ */ jsxs(
+    Select,
+    {
+      value: density,
+      open: densityOpen,
+      onOpenChange: setDensityOpen,
+      onValueChange: (value) => setAndStoreDensity(value),
+      children: [
+        /* @__PURE__ */ jsx(
+          SelectTrigger,
+          {
+            id: densityId,
+            size: "sm",
+            "aria-label": t("terminalToolbar.layout"),
+            title: t("terminalToolbar.layout"),
+            className: cn2(
+              CONTROL,
+              "h-8 border-0 bg-transparent px-2 shadow-none dark:bg-transparent dark:hover:bg-muted"
+            ),
+            children: /* @__PURE__ */ jsx(LayoutGrid, { className: "size-4 shrink-0" })
+          }
+        ),
+        /* @__PURE__ */ jsx(SelectContent, { children: DENSITY_OPTIONS.map((option) => /* @__PURE__ */ jsx(SelectItem, { value: option.value, children: densityLabels[option.value] }, option.value)) })
+      ]
+    }
+  );
+  const imageButtons = /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs(
+      "button",
+      {
+        type: "button",
+        className: CONTROL,
+        "aria-label": t("terminalToolbar.uploadImage"),
+        title: t("terminalToolbar.uploadImage"),
+        disabled: isImageUploading,
+        onClick: chooseFile,
+        children: [
+          /* @__PURE__ */ jsx(ImagePlus, { className: "size-4 shrink-0" }),
+          effectiveDensity !== "icon" && t("terminalToolbar.upload")
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxs(
+      "button",
+      {
+        type: "button",
+        className: CONTROL,
+        "aria-label": t("terminalToolbar.pasteImage"),
+        title: t("terminalToolbar.pasteImage"),
+        disabled: isImageUploading,
+        onClick: pasteImage,
+        children: [
+          /* @__PURE__ */ jsx(ClipboardPaste, { className: "size-4 shrink-0" }),
+          effectiveDensity !== "icon" && t("terminalToolbar.paste")
+        ]
+      }
+    )
+  ] });
+  const expandButton = /* @__PURE__ */ jsxs(
+    "button",
+    {
+      type: "button",
+      className: CONTROL,
+      "aria-label": t("terminalToolbar.showToolbar"),
+      title: t("terminalToolbar.showToolbar"),
+      onClick: () => {
+        pendingEdgeRef.current = anchoredEdge();
+        pendingExpansionFocusRef.current = true;
+        setCollapsed(false);
+      },
+      children: [
+        /* @__PURE__ */ jsx(Maximize2, { className: "size-4" }),
+        /* @__PURE__ */ jsx("span", { className: "sr-only", children: t("terminalToolbar.showToolbar") })
+      ]
+    }
+  );
+  const grabButton = () => /* @__PURE__ */ jsx(
+    "button",
+    {
+      type: "button",
+      className: cn2(CONTROL, "cursor-grab active:cursor-grabbing"),
+      "aria-label": t("terminalToolbar.moveToolbar"),
+      title: t("terminalToolbar.moveToolbarHint"),
+      onPointerDown: handleGrabPointerDown,
+      onPointerMove: handleGrabPointerMove,
+      onPointerUp: handleGrabPointerEnd,
+      onPointerCancel: handleGrabPointerEnd,
+      onLostPointerCapture: handleGrabPointerEnd,
+      children: /* @__PURE__ */ jsx(GripVertical, { className: "size-4" })
+    }
+  );
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs(
+    "div",
+    {
+      ref: hostRef,
+      "data-terminal-toolbar-host": true,
+      "data-anchor": anchor,
+      className: cn2(
+        "pointer-events-none @container absolute inset-0 z-[110] flex",
+        toolbarAnchorClasses(anchor)
+      ),
+      children: [
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            ref: fileInputRef,
+            type: "file",
+            accept: "image/*",
+            className: "sr-only",
+            tabIndex: -1,
+            disabled: isImageUploading,
+            "aria-hidden": "true",
+            onChange: (event) => {
+              const file = event.target.files?.[0];
+              event.target.value = "";
+              if (file) uploadFile(file);
+            }
+          }
+        ),
+        /* @__PURE__ */ jsx("span", { role: "status", "aria-live": "polite", className: "sr-only", children: isImageUploading ? t("terminalToolbar.uploadingImage") : "" }),
+        imageError && /* @__PURE__ */ jsxs(
+          "div",
+          {
+            role: "alert",
+            className: "pointer-events-auto absolute bottom-full mb-2 flex min-h-11 max-w-sm items-center gap-2 rounded-sm border border-destructive bg-background p-2 text-xs text-destructive shadow-lg",
+            children: [
+              /* @__PURE__ */ jsx("span", { children: imageError }),
+              retryImageAction && /* @__PURE__ */ jsx(
+                "button",
+                {
+                  type: "button",
+                  className: cn2(CONTROL, "text-foreground"),
+                  title: t("terminalToolbar.retry"),
+                  disabled: isImageUploading,
+                  onClick: retryImageAction,
+                  children: t("terminalToolbar.retry")
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "button",
+                {
+                  type: "button",
+                  className: cn2(CONTROL, "px-2"),
+                  "aria-label": t("terminalToolbar.dismissError"),
+                  title: t("terminalToolbar.dismissError"),
+                  onClick: () => {
+                    setImageError(null);
+                    setRetryImageAction(null);
+                  },
+                  children: /* @__PURE__ */ jsx(X, { className: "size-4" })
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs(
+          "div",
+          {
+            ref: measurementRef,
+            "aria-hidden": "true",
+            className: "pointer-events-none invisible absolute left-0 top-0 flex whitespace-nowrap",
+            children: [
+              isTmuxAttached && /* @__PURE__ */ jsxs("span", { className: CONTROL, children: [
+                /* @__PURE__ */ jsx(LogOut, { className: "size-4" }),
+                density !== "icon" && t("terminalToolbar.detachTmux")
+              ] }),
+              /* @__PURE__ */ jsxs("span", { className: CONTROL, children: [
+                /* @__PURE__ */ jsx(ImagePlus, { className: "size-4" }),
+                density !== "icon" && t("terminalToolbar.upload")
+              ] }),
+              /* @__PURE__ */ jsxs("span", { className: CONTROL, children: [
+                /* @__PURE__ */ jsx(ClipboardPaste, { className: "size-4" }),
+                density !== "icon" && t("terminalToolbar.paste")
+              ] }),
+              actionsEnabled && slotContributions.map((contribution) => /* @__PURE__ */ jsxs("span", { className: CONTROL, children: [
+                contribution.icon && /* @__PURE__ */ jsx(contribution.icon, { className: "size-4" }),
+                density !== "icon" && t(contribution.titleKey)
+              ] }, contribution.actionId)),
+              actionsEnabled && hostLinks.map((action) => /* @__PURE__ */ jsxs("span", { className: CONTROL, children: [
+                /* @__PURE__ */ jsx(action.icon, { className: "size-4" }),
+                density !== "icon" && t(action.titleKey)
+              ] }, action.id)),
+              /* @__PURE__ */ jsxs("span", { className: cn2(CONTROL, "h-8 px-2"), children: [
+                /* @__PURE__ */ jsx(LayoutGrid, { className: "size-4" }),
+                /* @__PURE__ */ jsx(ChevronDown, { className: "size-4" })
+              ] }),
+              /* @__PURE__ */ jsx("span", { className: CONTROL, children: /* @__PURE__ */ jsx(Minimize2, { className: "size-4" }) }),
+              /* @__PURE__ */ jsx("span", { className: CONTROL, children: /* @__PURE__ */ jsx(GripVertical, { className: "size-4" }) })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            ref: toolbarRef,
+            "data-terminal-toolbar-wide": true,
+            className: cn2(
+              "pointer-events-auto transition-opacity duration-300 hover:duration-0 focus-within:duration-0 hover:opacity-100 focus-within:opacity-100",
+              collapsed || densityOpen || !settings.fadeWhenIdle ? "opacity-100" : "opacity-30"
+            ),
+            style: {
+              transform: `translate(${position.x}px, ${position.y}px)`
+            },
+            children: collapsed ? /* @__PURE__ */ jsxs(
+              "div",
+              {
+                "data-toolbar-collapsed": true,
+                className: "relative flex rounded-sm border border-border bg-background/90 p-0.5 shadow-lg backdrop-blur-sm",
+                children: [
+                  expandButton,
+                  grabButton()
+                ]
+              }
+            ) : /* @__PURE__ */ jsxs("div", { className: "flex flex-col overflow-hidden rounded-sm border border-border bg-background/90 shadow-lg backdrop-blur-sm", children: [
+              showStats && /* @__PURE__ */ jsx("div", { className: "flex flex-wrap items-center justify-center gap-x-1 border-b border-border px-1.5 py-0.5", children: /* @__PURE__ */ jsx(
+                ComponentSlot,
+                {
+                  slotId: TERMINAL_TOOLBAR_STATUS_SLOT,
+                  when: { host },
+                  props: {
+                    host,
+                    isConnected,
+                    active: isConnected && desktopViewportReady === true && isMobile === false
+                  }
+                }
+              ) }),
+              /* @__PURE__ */ jsxs("div", { className: cn2("flex gap-0.5 p-0.5", "items-center"), children: [
+                isTmuxAttached && /* @__PURE__ */ jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    className: CONTROL,
+                    "aria-label": t("terminalToolbar.detachTmuxDescription"),
+                    title: t("terminalToolbar.detachTmuxDescription"),
+                    onClick: onTmuxDetach,
+                    children: [
+                      /* @__PURE__ */ jsx(LogOut, { className: "size-4" }),
+                      effectiveDensity !== "icon" && t("terminalToolbar.detachTmux")
+                    ]
+                  }
+                ),
+                isTmuxAttached && /* @__PURE__ */ jsx("div", { className: SEPARATOR }),
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    role: "group",
+                    "aria-label": t("terminalToolbar.image"),
+                    className: "flex items-center gap-0.5",
+                    children: imageButtons
+                  }
+                ),
+                actionsEnabled && slotContributions.length > 0 && /* @__PURE__ */ jsxs(Fragment, { children: [
+                  /* @__PURE__ */ jsx("div", { className: SEPARATOR }),
+                  /* @__PURE__ */ jsx(
+                    ActionSlot,
+                    {
+                      slotId: TOOLBAR_SLOT_ID,
+                      className: CONTROL,
+                      enabled: actionsEnabled,
+                      hideLabels: effectiveDensity === "icon",
+                      when: { host },
+                      context: () => [slotApi]
+                    }
+                  )
+                ] }),
+                actionsEnabled && hostLinks.length > 0 && /* @__PURE__ */ jsxs(Fragment, { children: [
+                  /* @__PURE__ */ jsx("div", { className: SEPARATOR }),
+                  hostLinks.map((action) => /* @__PURE__ */ jsxs(
+                    "button",
+                    {
+                      type: "button",
+                      className: CONTROL,
+                      "aria-label": t(action.titleKey),
+                      title: t(action.titleKey),
+                      onClick: () => openHostLink(action),
+                      children: [
+                        /* @__PURE__ */ jsx(action.icon, { className: "size-4" }),
+                        effectiveDensity !== "icon" && t(action.titleKey)
+                      ]
+                    },
+                    action.id
+                  ))
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: SEPARATOR }),
+                densitySelect,
+                /* @__PURE__ */ jsxs(
+                  "button",
+                  {
+                    ref: hideToolbarRef,
+                    type: "button",
+                    className: CONTROL,
+                    "aria-label": t("terminalToolbar.hideToolbar"),
+                    title: t("terminalToolbar.hideToolbar"),
+                    onClick: () => {
+                      pendingEdgeRef.current = anchoredEdge();
+                      setCollapsed(true);
+                    },
+                    children: [
+                      /* @__PURE__ */ jsx(Minimize2, { className: "size-4" }),
+                      /* @__PURE__ */ jsx("span", { className: "sr-only", children: t("terminalToolbar.hideToolbar") })
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ jsx("div", { className: SEPARATOR }),
+                grabButton()
+              ] })
+            ] })
+          }
+        )
+      ]
+    }
+  ) });
+};
+
+// src/frontend/BgTerminal.tsx
+import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var FALLBACK_COLORS = {
   background: "#0c0d0b",
   foreground: "#fafafa",
@@ -10655,24 +11684,42 @@ var FALLBACK_COLORS = {
   cursorAccent: "#0c0d0b"
 };
 var FALLBACK_FONT = '"SF Mono", Consolas, "Liberation Mono", monospace';
+function quotePath(value) {
+  return `'${value.replace(/'/g, `'\\''`)}'`;
+}
+function uploadError(error) {
+  const data = error?.response?.data;
+  const message = data?.error || data?.message;
+  if (message) return data?.code ? `${message} (${data.code})` : message;
+  return error instanceof Error && error.message ? error.message : "";
+}
 function BgTerminal({
   sessionId,
   hostId,
+  backendSessionId,
+  tabInstanceId,
   ended,
+  live,
   socket,
   isVisible,
   onSizeMismatch
 }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation2();
   const { theme: appTheme } = useTheme();
-  const containerRef = useRef(null);
-  const termRef = useRef(null);
-  const fitRef = useRef(null);
-  const ptySize = useRef(null);
-  const endedRef = useRef(ended);
+  const containerRef = useRef2(null);
+  const termRef = useRef2(null);
+  const fitRef = useRef2(null);
+  const ptySize = useRef2(null);
+  const endedRef = useRef2(ended);
   endedRef.current = ended;
-  const [look, setLook] = useState(null);
-  useEffect(() => {
+  const [look, setLook] = useState2(null);
+  const host = useHost(hostId);
+  const [uploading, setUploading] = useState2(false);
+  const [dock, setDock] = useState2(null);
+  const dockContributions = useSlotContributions2(TERMINAL_SIDE_PANEL_SLOT, {
+    host
+  });
+  useEffect2(() => {
     let active = true;
     void invokeAction("terminal.resolveTheme", { appTheme, hostId }).then((resolved) => {
       if (active && resolved) setLook(resolved);
@@ -10682,7 +11729,7 @@ function BgTerminal({
       active = false;
     };
   }, [appTheme, hostId]);
-  useEffect(() => {
+  useEffect2(() => {
     const term = termRef.current;
     if (!term) return;
     term.options.theme = look ? { ...look.colors } : { ...FALLBACK_COLORS };
@@ -10693,7 +11740,7 @@ function BgTerminal({
     } catch {
     }
   }, [look]);
-  useEffect(() => {
+  useEffect2(() => {
     const container = containerRef.current;
     if (!container) return;
     const term = new Dl({
@@ -10838,7 +11885,7 @@ function BgTerminal({
       term.dispose();
     };
   }, [sessionId, socket]);
-  useEffect(() => {
+  useEffect2(() => {
     if (!isVisible) return;
     const handle = setTimeout(() => {
       try {
@@ -10849,69 +11896,159 @@ function BgTerminal({
     }, 50);
     return () => clearTimeout(handle);
   }, [isVisible, sessionId]);
-  return /* @__PURE__ */ jsx(
+  const typeIn = useCallback(
+    (data) => {
+      if (!endedRef.current) socket.send({ type: "input", data });
+    },
+    [socket]
+  );
+  const runCommand = useCallback(
+    (command) => {
+      const trimmed = command.trim();
+      if (!trimmed) return;
+      typeIn(`${trimmed}\r`);
+      setTimeout(() => termRef.current?.focus(), 50);
+    },
+    [typeIn]
+  );
+  const slotApi = useMemo3(
+    () => ({
+      host: host ?? void 0,
+      getBufferText: () => {
+        const term = termRef.current;
+        if (!term) return "";
+        const buffer = term.buffer.active;
+        const lines = [];
+        for (let i = 0; i < buffer.length; i++) {
+          lines.push(buffer.getLine(i)?.translateToString(true) ?? "");
+        }
+        return lines.join("\n").trimEnd();
+      },
+      sessionId: () => backendSessionId,
+      openSidePanel: (panelId, props) => setDock({ id: panelId, props: props ?? {} }),
+      runCommand,
+      getShareTarget: () => live ? {
+        hostId,
+        sessionId: backendSessionId,
+        protocol: "ssh",
+        ...tabInstanceId ? { tabInstanceId } : {},
+        origin: "local"
+      } : null
+    }),
+    [host, backendSessionId, runCommand, live, hostId, tabInstanceId]
+  );
+  const uploadImage = async (file, source) => {
+    if (file.type && !file.type.startsWith("image/")) {
+      toast.error(t("bgShell.imageChooseFile"));
+      return;
+    }
+    setUploading(true);
+    try {
+      const form = new FormData();
+      form.append("image", file);
+      form.append("instanceId", tabInstanceId ?? "");
+      form.append("source", source);
+      form.append("clientUploadTimestamp", (/* @__PURE__ */ new Date()).toISOString());
+      const response = await app().api.post(
+        `/sessions/${encodeURIComponent(sessionId)}/image`,
+        form,
+        { headers: { "Content-Type": void 0 } }
+      );
+      const { shellPath } = response.data;
+      if (socket.send({ type: "input", data: quotePath(shellPath) })) {
+        toast.success(t("bgShell.imageUploaded", { path: shellPath }));
+      } else {
+        toast.warning(t("bgShell.imageNotPasted", { path: shellPath }));
+      }
+    } catch (error) {
+      toast.error(uploadError(error) || t("bgShell.imageUploadFailed"));
+    } finally {
+      setUploading(false);
+    }
+  };
+  const pasteImage = async () => {
+    if (!navigator.clipboard?.read) {
+      toast.error(t("bgShell.imageClipboardUnavailable"));
+      return;
+    }
+    try {
+      for (const item of await navigator.clipboard.read()) {
+        const type = item.types.find((candidate) => candidate.startsWith("image/"));
+        if (!type) continue;
+        const blob = await item.getType(type);
+        await uploadImage(new File([blob], "clipboard-image.png", { type }), "clipboard");
+        return;
+      }
+      toast.error(t("bgShell.imageClipboardEmpty"));
+    } catch (error) {
+      toast.error(uploadError(error) || t("bgShell.imageClipboardUnavailable"));
+    }
+  };
+  const openFiles = () => {
+    if (!host) return;
+    const reqId = Math.random().toString(36).slice(2);
+    let settled = false;
+    const finish = (path) => {
+      if (settled) return;
+      settled = true;
+      off();
+      clearTimeout(timer);
+      void invokeAction("files.openHost", host, path).catch(() => {
+      });
+    };
+    const off = socket.onMessage((message) => {
+      if (message.type === "cwd" && message.reqId === reqId) {
+        finish(typeof message.path === "string" ? message.path : "/");
+      }
+    });
+    const timer = setTimeout(() => finish("/"), 1e4);
+    if (!socket.send({ type: "cwd", reqId })) finish("/");
+  };
+  const DockPanel = dock ? dockContributions.find((item) => item.actionId === dock.id)?.component : void 0;
+  return /* @__PURE__ */ jsxs2(
     "div",
     {
-      className: "h-full w-full overflow-hidden p-1",
+      className: "relative h-full w-full overflow-hidden p-1",
       style: {
         backgroundColor: look?.colors.background ?? FALLBACK_COLORS.background
       },
       "aria-label": t("bgShell.title"),
-      children: /* @__PURE__ */ jsx("div", { ref: containerRef, className: "h-full w-full" })
+      children: [
+        /* @__PURE__ */ jsx2("div", { ref: containerRef, className: "h-full w-full" }),
+        host && /* @__PURE__ */ jsx2(
+          TerminalToolbar,
+          {
+            host,
+            terminalIdentity: sessionId,
+            isConnected: live && !ended,
+            isTmuxAttached: false,
+            onTmuxDetach: () => {
+            },
+            isImageUploading: uploading,
+            onUploadImage: (file) => uploadImage(file, "file"),
+            onPasteImage: () => pasteImage(),
+            isFocused: isVisible,
+            slotApi,
+            onOpenFiles: openFiles
+          }
+        ),
+        dock && DockPanel && /* @__PURE__ */ jsx2(
+          DockPanel,
+          {
+            host: host ?? void 0,
+            hostId,
+            hostLabel: host ? `${host.username ?? ""}@${host.name || host.ip}` : "",
+            panelProps: dock.props,
+            onClose: () => {
+              setDock(null);
+              setTimeout(() => termRef.current?.focus(), 50);
+            },
+            onRunInTerminal: runCommand
+          }
+        )
+      ]
     }
   );
-}
-
-// src/frontend/runtime.ts
-var current = null;
-function setApp(app2) {
-  current = app2;
-}
-function app() {
-  if (!current) throw new Error("BG Shell is not active");
-  return current;
-}
-var TAB_TYPE = "bg-shell";
-var SELECTED_KEY = "bg-shell:selected";
-function readSelected() {
-  try {
-    return localStorage.getItem(SELECTED_KEY);
-  } catch {
-    return null;
-  }
-}
-function writeSelected(id) {
-  try {
-    if (id) localStorage.setItem(SELECTED_KEY, id);
-    else localStorage.removeItem(SELECTED_KEY);
-  } catch {
-  }
-}
-function errorMessage(error) {
-  const response = error?.response;
-  if (typeof response?.data?.error === "string") return response.data.error;
-  if (error instanceof Error && error.message) return error.message;
-  return "Unknown error";
-}
-var SELECT_EVENT = "bg-shell:select";
-var pendingOpen = null;
-function takePendingOpen() {
-  const id = pendingOpen;
-  pendingOpen = null;
-  return id;
-}
-function requestSelect(id) {
-  writeSelected(id);
-  pendingOpen = id;
-  window.dispatchEvent(new CustomEvent(SELECT_EVENT, { detail: id }));
-}
-function onSelectRequest(listener) {
-  const handler = (event) => {
-    const id = event.detail;
-    if (typeof id === "string") listener(id);
-  };
-  window.addEventListener(SELECT_EVENT, handler);
-  return () => window.removeEventListener(SELECT_EVENT, handler);
 }
 
 // src/frontend/socket.ts
@@ -11052,7 +12189,7 @@ var ViewSocket = class {
 };
 
 // src/frontend/BgShellTab.tsx
-import { Fragment, jsx as jsx2, jsxs } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function ago(t, at3) {
   if (!at3) return "";
   const minutes = Math.floor((Date.now() - at3) / 6e4);
@@ -11083,31 +12220,32 @@ function statusDot(status) {
   }
 }
 function useNow() {
-  const [now, setNow] = useState2(() => Date.now());
-  useEffect2(() => {
+  const [now, setNow] = useState3(() => Date.now());
+  useEffect3(() => {
     const handle = setInterval(() => setNow(Date.now()), 3e4);
     return () => clearInterval(handle);
   }, []);
   return now;
 }
 function BgShellTab({ isVisible }) {
-  const { t } = useTranslation2();
-  const isMobile = useIsMobile();
+  const { t } = useTranslation3();
+  const isMobile = useIsMobile2();
+  const panelShown = usePanelShown();
   useNow();
-  const socket = useMemo2(() => new ViewSocket(), []);
-  useEffect2(() => () => socket.close(), [socket]);
-  const [sessions, setSessions] = useState2(null);
-  const [connected, setConnected] = useState2(socket.open);
-  const [initialOpen] = useState2(() => takePendingOpen());
-  const [selectedId, setSelectedId] = useState2(
+  const socket = useMemo4(() => new ViewSocket(), []);
+  useEffect3(() => () => socket.close(), [socket]);
+  const [sessions, setSessions] = useState3(null);
+  const [connected, setConnected] = useState3(socket.open);
+  const [initialOpen] = useState3(() => takePendingOpen());
+  const [selectedId, setSelectedId] = useState3(
     () => initialOpen ?? readSelected()
   );
-  const [mobileShowsTerminal, setMobileShowsTerminal] = useState2(!!initialOpen);
-  const [sizeMismatch, setSizeMismatch] = useState2(false);
-  const [renaming, setRenaming] = useState2(null);
-  const [renameValue, setRenameValue] = useState2("");
-  const [terminating, setTerminating] = useState2(null);
-  useEffect2(() => {
+  const [mobileShowsTerminal, setMobileShowsTerminal] = useState3(!!initialOpen);
+  const [sizeMismatch, setSizeMismatch] = useState3(false);
+  const [renaming, setRenaming] = useState3(null);
+  const [renameValue, setRenameValue] = useState3("");
+  const [terminating, setTerminating] = useState3(null);
+  useEffect3(() => {
     const offState = socket.onState(setConnected);
     const offMessage = socket.onMessage((message) => {
       if (message.type === "sessions" && Array.isArray(message.sessions)) {
@@ -11119,7 +12257,7 @@ function BgShellTab({ isVisible }) {
       offMessage();
     };
   }, [socket]);
-  useEffect2(() => {
+  useEffect3(() => {
     const onVisible = () => {
       if (document.visibilityState === "visible") socket.wake();
     };
@@ -11130,7 +12268,7 @@ function BgShellTab({ isVisible }) {
       window.removeEventListener("online", onVisible);
     };
   }, [socket]);
-  useEffect2(
+  useEffect3(
     () => onSelectRequest((id) => {
       takePendingOpen();
       setSelectedId(id);
@@ -11138,18 +12276,20 @@ function BgShellTab({ isVisible }) {
     }),
     []
   );
-  useEffect2(() => {
+  useEffect3(() => {
     if (!sessions) return;
     if (selectedId && sessions.some((s15) => s15.id === selectedId)) return;
     const next = sessions.find((s15) => s15.status !== "ended") ?? sessions[0] ?? null;
     setSelectedId(next?.id ?? null);
   }, [sessions, selectedId]);
-  useEffect2(() => {
+  useEffect3(() => {
     if (selectedId) writeSelected(selectedId);
+    setShownSession(selectedId);
   }, [selectedId]);
+  useEffect3(() => () => setShownSession(null), []);
   const selected = sessions?.find((s15) => s15.id === selectedId) ?? null;
   const running = sessions?.filter((s15) => s15.status !== "ended").length ?? 0;
-  const select = useCallback((id) => {
+  const select = useCallback2((id) => {
     setSelectedId(id);
     setMobileShowsTerminal(true);
   }, []);
@@ -11161,7 +12301,7 @@ function BgShellTab({ isVisible }) {
       });
       setRenaming(null);
     } catch (error) {
-      toast.error(errorMessage(error));
+      toast2.error(errorMessage(error));
     }
   };
   const confirmTerminate = async () => {
@@ -11170,74 +12310,74 @@ function BgShellTab({ isVisible }) {
     if (!target) return;
     try {
       await app().api.post(`/sessions/${encodeURIComponent(target.id)}/terminate`);
-      toast.success(t("bgShell.terminated", { label: target.label }));
+      toast2.success(t("bgShell.terminated", { label: target.label }));
     } catch (error) {
-      toast.error(errorMessage(error));
+      toast2.error(errorMessage(error));
     }
   };
   const dismiss = async (target) => {
     try {
       await app().api.delete(`/sessions/${encodeURIComponent(target.id)}`);
-      toast.success(t("bgShell.dismissed", { label: target.label }));
+      toast2.success(t("bgShell.dismissed", { label: target.label }));
     } catch (error) {
-      toast.error(errorMessage(error));
+      toast2.error(errorMessage(error));
     }
   };
-  const showList = !isMobile || !mobileShowsTerminal || !selected;
+  const showList = isMobile ? !mobileShowsTerminal || !selected : !panelShown;
   const showTerminal = !isMobile || mobileShowsTerminal && !!selected;
-  const list = /* @__PURE__ */ jsxs(
+  const list = /* @__PURE__ */ jsxs3(
     "div",
     {
       className: `relative flex shrink-0 flex-col border-border bg-card ${isMobile ? "w-full flex-1" : "w-72 border-r"}`,
       children: [
-        /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 border-b border-border px-3 py-2", children: [
-          /* @__PURE__ */ jsx2(SquareChevronRight, { className: "size-4" }),
-          /* @__PURE__ */ jsx2("span", { className: "text-sm font-semibold", children: t("bgShell.title") }),
-          /* @__PURE__ */ jsx2("span", { className: "ml-auto text-xs text-muted-foreground", children: t("bgShell.count", { count: running }) })
+        /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border px-3 py-2", children: [
+          /* @__PURE__ */ jsx3(SquareChevronRight, { className: "size-4" }),
+          /* @__PURE__ */ jsx3("span", { className: "text-sm font-semibold", children: t("bgShell.title") }),
+          /* @__PURE__ */ jsx3("span", { className: "ml-auto text-xs text-muted-foreground", children: t("bgShell.count", { count: running }) })
         ] }),
-        !connected && /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground", children: [
-          /* @__PURE__ */ jsx2(WifiOff, { className: "size-3.5 shrink-0" }),
-          /* @__PURE__ */ jsx2("span", { className: "truncate", children: t("bgShell.connectionLost") })
+        !connected && /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground", children: [
+          /* @__PURE__ */ jsx3(WifiOff, { className: "size-3.5 shrink-0" }),
+          /* @__PURE__ */ jsx3("span", { className: "truncate", children: t("bgShell.connectionLost") })
         ] }),
-        /* @__PURE__ */ jsx2("div", { className: "min-h-0 flex-1 overflow-y-auto py-1", children: sessions?.map((session) => {
+        /* @__PURE__ */ jsx3("div", { className: "min-h-0 flex-1 overflow-y-auto py-1", children: sessions?.map((session) => {
           const active = session.id === selectedId;
           const ended = session.status === "ended";
-          return /* @__PURE__ */ jsxs(
+          return /* @__PURE__ */ jsxs3(
             "button",
             {
               type: "button",
               onClick: () => select(session.id),
               className: `group flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-muted/40 ${active ? "bg-accent-brand/10" : ""}`,
               children: [
-                /* @__PURE__ */ jsx2(
+                /* @__PURE__ */ jsx3(
                   "span",
                   {
                     className: `size-2 shrink-0 rounded-full ${statusDot(session.status)}`,
                     "aria-hidden": true
                   }
                 ),
-                /* @__PURE__ */ jsxs("span", { className: "flex min-w-0 flex-1 flex-col", children: [
-                  /* @__PURE__ */ jsx2(
+                /* @__PURE__ */ jsxs3("span", { className: "flex min-w-0 flex-1 flex-col", children: [
+                  /* @__PURE__ */ jsx3(
                     "span",
                     {
                       className: `truncate text-sm font-medium ${ended ? "text-muted-foreground" : ""}`,
                       children: session.label
                     }
                   ),
-                  /* @__PURE__ */ jsxs("span", { className: "truncate text-xs text-muted-foreground", children: [
+                  /* @__PURE__ */ jsxs3("span", { className: "truncate text-xs text-muted-foreground", children: [
                     session.hostName,
                     " \xB7",
                     " ",
                     ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t("bgShell.movedAt", { time: ago(t, session.movedAt) })
                   ] })
                 ] }),
-                session.viewers > 0 && !ended && /* @__PURE__ */ jsxs(
+                session.viewers > 0 && !ended && /* @__PURE__ */ jsxs3(
                   "span",
                   {
                     className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground",
                     title: t("bgShell.viewerCount", { count: session.viewers }),
                     children: [
-                      /* @__PURE__ */ jsx2(Monitor, { className: "size-3" }),
+                      /* @__PURE__ */ jsx3(Monitor, { className: "size-3" }),
                       session.viewers
                     ]
                   }
@@ -11250,38 +12390,38 @@ function BgShellTab({ isVisible }) {
       ]
     }
   );
-  const viewer = selected ? /* @__PURE__ */ jsxs("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [
-    /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 border-b border-border bg-card px-3 py-1.5 text-xs text-muted-foreground", children: [
-      isMobile && /* @__PURE__ */ jsx2(
+  const viewer = selected ? /* @__PURE__ */ jsxs3("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [
+    /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border bg-card px-3 py-1.5 text-xs text-muted-foreground", children: [
+      isMobile && /* @__PURE__ */ jsx3(
         "button",
         {
           type: "button",
           className: "-ml-1 mr-1 flex items-center gap-1 text-muted-foreground hover:text-foreground",
           onClick: () => setMobileShowsTerminal(false),
-          children: /* @__PURE__ */ jsx2(ArrowLeft, { className: "size-4" })
+          children: /* @__PURE__ */ jsx3(ArrowLeft, { className: "size-4" })
         }
       ),
-      /* @__PURE__ */ jsx2(
+      /* @__PURE__ */ jsx3(
         "span",
         {
           className: `size-2 shrink-0 rounded-full ${statusDot(selected.status)}`,
           "aria-hidden": true
         }
       ),
-      /* @__PURE__ */ jsx2("span", { className: "truncate text-sm font-medium text-foreground", children: selected.label }),
-      /* @__PURE__ */ jsx2("span", { className: "hidden truncate sm:inline", children: selected.hostName }),
-      /* @__PURE__ */ jsxs("span", { className: "shrink-0", children: [
+      /* @__PURE__ */ jsx3("span", { className: "truncate text-sm font-medium text-foreground", children: selected.label }),
+      /* @__PURE__ */ jsx3("span", { className: "hidden truncate sm:inline", children: selected.hostName }),
+      /* @__PURE__ */ jsxs3("span", { className: "shrink-0", children: [
         "\xB7 ",
         t(STATUS_KEY[selected.status])
       ] }),
-      selected.status !== "ended" && /* @__PURE__ */ jsxs("span", { className: "hidden shrink-0 sm:inline", children: [
+      selected.status !== "ended" && /* @__PURE__ */ jsxs3("span", { className: "hidden shrink-0 sm:inline", children: [
         "\xB7 ",
         selected.cols,
         "\xD7",
         selected.rows
       ] }),
-      /* @__PURE__ */ jsxs("span", { className: "ml-auto flex shrink-0 items-center gap-2", children: [
-        /* @__PURE__ */ jsx2(
+      /* @__PURE__ */ jsxs3("span", { className: "ml-auto flex shrink-0 items-center gap-2", children: [
+        /* @__PURE__ */ jsx3(
           "button",
           {
             type: "button",
@@ -11292,10 +12432,10 @@ function BgShellTab({ isVisible }) {
               setRenameValue(selected.label);
               setRenaming(selected);
             },
-            children: /* @__PURE__ */ jsx2(Pencil, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx3(Pencil, { className: "size-3.5" })
           }
         ),
-        selected.status === "ended" ? /* @__PURE__ */ jsx2(
+        selected.status === "ended" ? /* @__PURE__ */ jsx3(
           "button",
           {
             type: "button",
@@ -11303,9 +12443,9 @@ function BgShellTab({ isVisible }) {
             title: t("bgShell.dismiss"),
             "aria-label": t("bgShell.dismiss"),
             onClick: () => void dismiss(selected),
-            children: /* @__PURE__ */ jsx2(Trash, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx3(Trash, { className: "size-3.5" })
           }
-        ) : /* @__PURE__ */ jsx2(
+        ) : /* @__PURE__ */ jsx3(
           "button",
           {
             type: "button",
@@ -11313,21 +12453,24 @@ function BgShellTab({ isVisible }) {
             title: t("bgShell.terminate"),
             "aria-label": t("bgShell.terminate"),
             onClick: () => setTerminating(selected),
-            children: /* @__PURE__ */ jsx2(Power, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx3(Power, { className: "size-3.5" })
           }
         )
       ] })
     ] }),
-    (selected.status === "ended" || selected.status === "away" || selected.status === "needs-auth" || sizeMismatch && selected.status === "live") && /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 border-b border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground", children: [
-      /* @__PURE__ */ jsx2(TriangleAlert, { className: "size-3.5 shrink-0" }),
-      /* @__PURE__ */ jsx2("span", { className: "min-w-0", children: selected.status === "ended" ? `${t("bgShell.endedHint")}${selected.endReason ? ` ${selected.endReason}` : ""}` : selected.status === "away" ? t("bgShell.awayHint") : selected.status === "needs-auth" ? t("bgShell.needsAuthHint") : t("bgShell.resizeHint") })
+    (selected.status === "ended" || selected.status === "away" || selected.status === "needs-auth" || sizeMismatch && selected.status === "live") && /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground", children: [
+      /* @__PURE__ */ jsx3(TriangleAlert, { className: "size-3.5 shrink-0" }),
+      /* @__PURE__ */ jsx3("span", { className: "min-w-0", children: selected.status === "ended" ? `${t("bgShell.endedHint")}${selected.endReason ? ` ${selected.endReason}` : ""}` : selected.status === "away" ? t("bgShell.awayHint") : selected.status === "needs-auth" ? t("bgShell.needsAuthHint") : t("bgShell.resizeHint") })
     ] }),
-    /* @__PURE__ */ jsx2("div", { className: "relative min-h-0 flex-1", children: /* @__PURE__ */ jsx2(
+    /* @__PURE__ */ jsx3("div", { className: "relative min-h-0 flex-1", children: /* @__PURE__ */ jsx3(
       BgTerminal,
       {
         sessionId: selected.id,
         hostId: selected.hostId,
+        backendSessionId: selected.sessionId,
+        tabInstanceId: selected.tabInstanceId,
         ended: selected.status === "ended",
+        live: selected.status === "live",
         socket,
         isVisible: isVisible && showTerminal,
         onSizeMismatch: setSizeMismatch
@@ -11335,21 +12478,21 @@ function BgShellTab({ isVisible }) {
       selected.id
     ) })
   ] }) : null;
-  return /* @__PURE__ */ jsxs("div", { className: "flex h-full w-full bg-background text-foreground", children: [
-    sessions && sessions.length === 0 ? /* @__PURE__ */ jsx2("div", { className: "flex flex-1 items-center justify-center p-6", children: /* @__PURE__ */ jsx2(
+  return /* @__PURE__ */ jsxs3("div", { className: "flex h-full w-full bg-background text-foreground", children: [
+    sessions && sessions.length === 0 ? /* @__PURE__ */ jsx3("div", { className: "flex flex-1 items-center justify-center p-6", children: /* @__PURE__ */ jsx3(
       EmptyState,
       {
         icon: SquareChevronRight,
         title: t("bgShell.emptyTitle"),
         hint: t("bgShell.emptyBody")
       }
-    ) }) : /* @__PURE__ */ jsxs(Fragment, { children: [
+    ) }) : /* @__PURE__ */ jsxs3(Fragment2, { children: [
       showList && list,
-      showTerminal && (viewer ?? /* @__PURE__ */ jsx2("div", { className: "flex flex-1 items-center justify-center text-sm text-muted-foreground", children: sessions ? t("bgShell.selectSession") : null }))
+      showTerminal && (viewer ?? /* @__PURE__ */ jsx3("div", { className: "flex flex-1 items-center justify-center text-sm text-muted-foreground", children: sessions ? t("bgShell.selectSession") : null }))
     ] }),
-    /* @__PURE__ */ jsx2(Dialog, { open: !!renaming, onOpenChange: (open) => !open && setRenaming(null), children: /* @__PURE__ */ jsxs(DialogContent, { children: [
-      /* @__PURE__ */ jsx2(DialogHeader, { children: /* @__PURE__ */ jsx2(DialogTitle, { children: t("bgShell.rename") }) }),
-      /* @__PURE__ */ jsx2(
+    /* @__PURE__ */ jsx3(Dialog, { open: !!renaming, onOpenChange: (open) => !open && setRenaming(null), children: /* @__PURE__ */ jsxs3(DialogContent, { children: [
+      /* @__PURE__ */ jsx3(DialogHeader, { children: /* @__PURE__ */ jsx3(DialogTitle, { children: t("bgShell.rename") }) }),
+      /* @__PURE__ */ jsx3(
         Input,
         {
           autoFocus: true,
@@ -11362,24 +12505,24 @@ function BgShellTab({ isVisible }) {
           }
         }
       ),
-      /* @__PURE__ */ jsxs(DialogFooter, { children: [
-        /* @__PURE__ */ jsx2(Button, { variant: "outline", onClick: () => setRenaming(null), children: t("bgShell.cancel") }),
-        /* @__PURE__ */ jsx2(Button, { onClick: () => void submitRename(), disabled: !renameValue.trim(), children: t("bgShell.save") })
+      /* @__PURE__ */ jsxs3(DialogFooter, { children: [
+        /* @__PURE__ */ jsx3(Button, { variant: "outline", onClick: () => setRenaming(null), children: t("bgShell.cancel") }),
+        /* @__PURE__ */ jsx3(Button, { onClick: () => void submitRename(), disabled: !renameValue.trim(), children: t("bgShell.save") })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsx2(
+    /* @__PURE__ */ jsx3(
       AlertDialog,
       {
         open: !!terminating,
         onOpenChange: (open) => !open && setTerminating(null),
-        children: /* @__PURE__ */ jsxs(AlertDialogContent, { children: [
-          /* @__PURE__ */ jsxs(AlertDialogHeader, { children: [
-            /* @__PURE__ */ jsx2(AlertDialogTitle, { children: t("bgShell.terminateTitle", { label: terminating?.label ?? "" }) }),
-            /* @__PURE__ */ jsx2(AlertDialogDescription, { children: t("bgShell.terminateBody") })
+        children: /* @__PURE__ */ jsxs3(AlertDialogContent, { children: [
+          /* @__PURE__ */ jsxs3(AlertDialogHeader, { children: [
+            /* @__PURE__ */ jsx3(AlertDialogTitle, { children: t("bgShell.terminateTitle", { label: terminating?.label ?? "" }) }),
+            /* @__PURE__ */ jsx3(AlertDialogDescription, { children: t("bgShell.terminateBody") })
           ] }),
-          /* @__PURE__ */ jsxs(AlertDialogFooter, { children: [
-            /* @__PURE__ */ jsx2(AlertDialogCancel, { children: t("bgShell.cancel") }),
-            /* @__PURE__ */ jsx2(
+          /* @__PURE__ */ jsxs3(AlertDialogFooter, { children: [
+            /* @__PURE__ */ jsx3(AlertDialogCancel, { children: t("bgShell.cancel") }),
+            /* @__PURE__ */ jsx3(
               AlertDialogAction,
               {
                 className: "bg-destructive text-white hover:bg-destructive/90",
@@ -11395,14 +12538,36 @@ function BgShellTab({ isVisible }) {
 }
 
 // src/frontend/BgShellPanel.tsx
-import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
-function BgShellPanel({ shell, active }) {
-  const { t } = useTranslation3();
+import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
+function BgShellPanel({ shell, active, placement }) {
+  const { t } = useTranslation4();
   useNow();
-  const [sessions, setSessions] = useState3(null);
-  const [connected, setConnected] = useState3(true);
-  const socket = useMemo3(() => active ? new ViewSocket() : null, [active]);
-  useEffect3(() => {
+  const rootRef = useRef3(null);
+  const shownId2 = useShownSession();
+  useEffect4(() => {
+    const root = rootRef.current;
+    if (!active || placement === "tab" || !root) return;
+    let unmark = null;
+    const update = () => {
+      const visible = root.offsetWidth > 0 && root.offsetHeight > 0;
+      if (visible && !unmark) unmark = notePanelShown();
+      else if (!visible && unmark) {
+        unmark();
+        unmark = null;
+      }
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(root);
+    return () => {
+      observer.disconnect();
+      unmark?.();
+    };
+  }, [active, placement]);
+  const [sessions, setSessions] = useState4(null);
+  const [connected, setConnected] = useState4(true);
+  const socket = useMemo5(() => active ? new ViewSocket() : null, [active]);
+  useEffect4(() => {
     if (!socket) return;
     const offState = socket.onState(setConnected);
     const offMessage = socket.onMessage((message) => {
@@ -11421,51 +12586,51 @@ function BgShellPanel({ shell, active }) {
     shell.openTab(null, TAB_TYPE);
   };
   const running = sessions?.filter((s15) => s15.status !== "ended").length ?? 0;
-  return /* @__PURE__ */ jsxs2("div", { className: "flex h-full flex-col", children: [
-    /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-2 px-3 py-2 text-xs text-muted-foreground", children: [
-      /* @__PURE__ */ jsx3("span", { children: t("bgShell.count", { count: running }) }),
-      !connected && /* @__PURE__ */ jsx3(WifiOff, { className: "size-3.5" }),
-      /* @__PURE__ */ jsx3(Button2, { size: "xs", variant: "outline", className: "ml-auto", onClick: () => open(), children: t("bgShell.openFull") })
+  return /* @__PURE__ */ jsxs4("div", { ref: rootRef, className: "flex h-full flex-col", children: [
+    /* @__PURE__ */ jsxs4("div", { className: "flex items-center gap-2 px-3 py-2 text-xs text-muted-foreground", children: [
+      /* @__PURE__ */ jsx4("span", { children: t("bgShell.count", { count: running }) }),
+      !connected && /* @__PURE__ */ jsx4(WifiOff, { className: "size-3.5" }),
+      /* @__PURE__ */ jsx4(Button2, { size: "xs", variant: "outline", className: "ml-auto", onClick: () => open(), children: t("bgShell.openFull") })
     ] }),
-    /* @__PURE__ */ jsxs2("div", { className: "min-h-0 flex-1 overflow-y-auto", children: [
-      sessions && sessions.length === 0 && /* @__PURE__ */ jsxs2("div", { className: "flex flex-col items-center gap-2 px-6 py-10 text-center", children: [
-        /* @__PURE__ */ jsx3(SquareChevronRight, { className: "size-5 text-muted-foreground/50" }),
-        /* @__PURE__ */ jsx3("span", { className: "text-sm font-semibold text-muted-foreground", children: t("bgShell.emptyTitle") }),
-        /* @__PURE__ */ jsx3("span", { className: "text-xs text-muted-foreground", children: t("bgShell.panelHint") })
+    /* @__PURE__ */ jsxs4("div", { className: "min-h-0 flex-1 overflow-y-auto", children: [
+      sessions && sessions.length === 0 && /* @__PURE__ */ jsxs4("div", { className: "flex flex-col items-center gap-2 px-6 py-10 text-center", children: [
+        /* @__PURE__ */ jsx4(SquareChevronRight, { className: "size-5 text-muted-foreground/50" }),
+        /* @__PURE__ */ jsx4("span", { className: "text-sm font-semibold text-muted-foreground", children: t("bgShell.emptyTitle") }),
+        /* @__PURE__ */ jsx4("span", { className: "text-xs text-muted-foreground", children: t("bgShell.panelHint") })
       ] }),
       sessions?.map((session) => {
         const ended = session.status === "ended";
-        return /* @__PURE__ */ jsxs2(
+        return /* @__PURE__ */ jsxs4(
           "button",
           {
             type: "button",
             onClick: () => open(session.id),
-            className: "flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left hover:bg-muted/40",
+            className: `flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left hover:bg-muted/40 ${session.id === shownId2 ? "bg-accent-brand/10" : ""}`,
             children: [
-              /* @__PURE__ */ jsx3(
+              /* @__PURE__ */ jsx4(
                 "span",
                 {
                   className: `size-2 shrink-0 rounded-full ${statusDot(session.status)}`,
                   "aria-hidden": true
                 }
               ),
-              /* @__PURE__ */ jsxs2("span", { className: "flex min-w-0 flex-1 flex-col", children: [
-                /* @__PURE__ */ jsx3(
+              /* @__PURE__ */ jsxs4("span", { className: "flex min-w-0 flex-1 flex-col", children: [
+                /* @__PURE__ */ jsx4(
                   "span",
                   {
                     className: `truncate text-sm font-medium ${ended ? "text-muted-foreground" : ""}`,
                     children: session.label
                   }
                 ),
-                /* @__PURE__ */ jsxs2("span", { className: "truncate text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsxs4("span", { className: "truncate text-xs text-muted-foreground", children: [
                   session.hostName,
                   " \xB7",
                   " ",
                   ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t("bgShell.movedAt", { time: ago(t, session.movedAt) })
                 ] })
               ] }),
-              session.viewers > 0 && !ended && /* @__PURE__ */ jsxs2("span", { className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground", children: [
-                /* @__PURE__ */ jsx3(Monitor, { className: "size-3" }),
+              session.viewers > 0 && !ended && /* @__PURE__ */ jsxs4("span", { className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsx4(Monitor, { className: "size-3" }),
                 session.viewers
               ] })
             ]
@@ -11478,7 +12643,7 @@ function BgShellPanel({ shell, active }) {
 }
 
 // src/frontend/move.ts
-import { toast as toast2 } from "sonner";
+import { toast as toast3 } from "sonner";
 var SSH_TERMINAL_SOCKET = "/plugin-ws/ssh-terminal/";
 function isDisconnectMessage(data) {
   if (typeof data !== "string" || !data.includes("disconnect")) return false;
@@ -11532,12 +12697,12 @@ async function moveToBgShell(handle, tab) {
   const { t, api } = app();
   if (!tab || moving) return;
   if (!canMove(tab, handle)) {
-    toast2.error(t("bgShell.notConnected"));
+    toast3.error(t("bgShell.notConnected"));
     return;
   }
   moving = true;
   const label = tab.label || "Terminal";
-  const toastId = toast2.loading(t("bgShell.moving", { label }));
+  const toastId = toast3.loading(t("bgShell.moving", { label }));
   try {
     let moveId;
     try {
@@ -11548,7 +12713,7 @@ async function moveToBgShell(handle, tab) {
       });
       moveId = data.moveId;
     } catch (error) {
-      toast2.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
+      toast3.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
         id: toastId
       });
       return;
@@ -11556,7 +12721,7 @@ async function moveToBgShell(handle, tab) {
     closeTabKeepingSession(tab.id, handle ?? null);
     try {
       await api.post("/move/commit", { moveId });
-      toast2.success(t("bgShell.moved", { label }), {
+      toast3.success(t("bgShell.moved", { label }), {
         id: toastId,
         description: t("bgShell.movedDescription"),
         action: {
@@ -11565,7 +12730,7 @@ async function moveToBgShell(handle, tab) {
         }
       });
     } catch (error) {
-      toast2.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
+      toast3.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
         id: toastId,
         description: t("bgShell.moveFailedDetached")
       });
@@ -11640,6 +12805,14 @@ lucide-react/dist/esm/context.mjs:
 lucide-react/dist/esm/Icon.mjs:
 lucide-react/dist/esm/createLucideIcon.mjs:
 lucide-react/dist/esm/icons/arrow-left.mjs:
+lucide-react/dist/esm/icons/chevron-down.mjs:
+lucide-react/dist/esm/icons/clipboard-paste.mjs:
+lucide-react/dist/esm/icons/grip-vertical.mjs:
+lucide-react/dist/esm/icons/image-plus.mjs:
+lucide-react/dist/esm/icons/layout-grid.mjs:
+lucide-react/dist/esm/icons/log-out.mjs:
+lucide-react/dist/esm/icons/maximize-2.mjs:
+lucide-react/dist/esm/icons/minimize-2.mjs:
 lucide-react/dist/esm/icons/monitor.mjs:
 lucide-react/dist/esm/icons/pencil.mjs:
 lucide-react/dist/esm/icons/power.mjs:
@@ -11647,6 +12820,7 @@ lucide-react/dist/esm/icons/square-chevron-right.mjs:
 lucide-react/dist/esm/icons/trash.mjs:
 lucide-react/dist/esm/icons/triangle-alert.mjs:
 lucide-react/dist/esm/icons/wifi-off.mjs:
+lucide-react/dist/esm/icons/x.mjs:
 lucide-react/dist/esm/lucide-react.mjs:
   (**
    * @license lucide-react v1.52.0 - ISC

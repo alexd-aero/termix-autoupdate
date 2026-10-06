@@ -1,7 +1,7 @@
 {
   "id": "bg-shell",
   "name": "BG Shell",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Keep SSH terminal sessions running in the background. Move a terminal tab to BG Shell and pick it up again after a refresh, a reboot or from another device.",
   "author": {
     "name": "adatskov"
@@ -58,7 +58,8 @@
       }
     ],
     "uses": [
-      "terminal.resolveTheme"
+      "terminal.resolveTheme",
+      "files.openHost"
     ],
     "panels": [
       {

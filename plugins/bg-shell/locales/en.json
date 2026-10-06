@@ -58,6 +58,33 @@
     "daysAgo": "{{count}} d ago",
     "errorGeneric": "Something went wrong",
     "openFull": "Open BG Shell",
-    "panelHint": "Right-click a terminal tab and choose \"Move to BG Shell\" to keep it running here."
+    "panelHint": "Right-click a terminal tab and choose \"Move to BG Shell\" to keep it running here.",
+    "imageChooseFile": "Choose an image file",
+    "imageUploaded": "Image uploaded: {{path}}",
+    "imageClipboardUnavailable": "This browser cannot read images from the clipboard",
+    "imageClipboardEmpty": "No image found in the clipboard",
+    "imageUploadFailed": "Image upload failed",
+    "imageNotPasted": "Image uploaded, but the session was not available to paste it: {{path}}"
+  },
+  "terminalToolbar": {
+    "detachTmux": "Detach tmux",
+    "detachTmuxDescription": "Detach tmux session",
+    "dismissError": "Dismiss image error",
+    "hideToolbar": "Hide toolbar",
+    "image": "Image actions (images only)",
+    "imageActionFailed": "Image action failed",
+    "layout": "Toolbar display mode",
+    "layoutExpanded": "Expanded with metrics",
+    "layoutIcon": "Icon only",
+    "layoutLabeled": "Icons and labels",
+    "moveToolbar": "Move toolbar",
+    "moveToolbarHint": "Drag to reposition the toolbar",
+    "paste": "Paste image",
+    "pasteImage": "Paste image from clipboard (images only)",
+    "retry": "Retry",
+    "showToolbar": "Expand toolbar",
+    "upload": "Upload image",
+    "uploadImage": "Upload an image to the host",
+    "uploadingImage": "Uploading..."
   }
 }

@@ -15,7 +15,7 @@
 #   5. This script itself: the timer fetches the newest version before each run.
 #
 # Options: --check (report only)  --no-auto (no timer)  --uninstall-auto
-#          --termix-only  --aegis-only
+#          --termix (Termix + plugins only, with the timer)  --termix-only  --aegis-only
 # Env:     TERMIX_CONTAINERS=name[,name]  only these containers
 #          TERMIX_ADMIN_USER / TERMIX_ADMIN_PASS  one-time setup without a prompt
 set -uo pipefail
@@ -28,12 +28,13 @@ ETC="/etc/termix-autoupdate"
 KEEP_BACKUPS=5
 
 args=("$@")
-auto=1; do_termix=1; do_aegis=1; check=0; service=0
+auto=1; do_termix=1; do_aegis=1; check=0; service=0; scope=""
 for arg in "$@"; do
   case "$arg" in
     --no-auto) auto=0 ;;
     --check) check=1; auto=0 ;;
     --termix-only) do_aegis=0; auto=0 ;;
+    --termix) do_aegis=0; scope=--termix ;;  # Termix and plugins, timer included (install.sh)
     --aegis-only) do_termix=0; auto=0 ;;
     --service) service=1; auto=0 ;;
     --uninstall-auto) ;;
@@ -90,8 +91,23 @@ fetch_repo() {  # plugins + updater.py, once per run
 
 # ------------------------------------------------------------------ Termix
 docker_ready() { command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; }
-termix_containers() { [ -n "${TERMIX_CONTAINERS:-}" ] && { tr ', ' '\n\n' <<<"$TERMIX_CONTAINERS" | sed '/^$/d'; return; }
-  docker ps -a --format '{{.Names}}\t{{.Image}}' | awk -F'\t' 'tolower($2) ~ /lukegus\/termix|termix-ssh\/termix/ && $2 !~ /rollback/ {print $1}'; }
+# Termix is found by what it is, not what its image is called: the official
+# image names, the image's source label (mirrors, retags), and finally any
+# other running container that carries Termix's own /app/package.json.
+is_termix() { [ "$(docker exec "$1" node -p "require('/app/package.json').name" 2>/dev/null)" = termix ]; }
+termix_containers() {
+  [ -n "${TERMIX_CONTAINERS:-}" ] && { tr ', ' '\n\n' <<<"$TERMIX_CONTAINERS" | sed '/^$/d'; return; }
+  local name image src state env
+  while IFS=$'\t' read -r name image src state; do
+    [[ "$image" == *rollback-* ]] && continue
+    if [[ "${image,,}" =~ (lukegus|termix-ssh)/termix ]] || [[ "${src,,}" == *github.com/termix-ssh/termix* ]]; then
+      echo "$name"; continue
+    fi
+    [ "$state" = running ] || continue
+    env="$(docker inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$name" 2>/dev/null)"
+    grep -q '^DATA_DIR=' <<<"$env" && is_termix "$name" && echo "$name"
+  done < <(docker ps -a --format '{{.Names}}\t{{.Image}}\t{{.Label "org.opencontainers.image.source"}}\t{{.State}}')
+}
 termix_version() { docker exec "$1" node -p "require('/app/package.json').version" 2>/dev/null || echo "?"; }
 wait_termix() {  # until the backend answers inside the container
   local _
@@ -101,15 +117,26 @@ wait_termix() {  # until the backend answers inside the container
   done
   return 1
 }
-data_owner() { docker exec "$1" node -e "const s=require('fs').statSync('/app/data');console.log(s.uid+':'+s.gid)"; }
-data_host_path() {  # where /app/data lives on the host
-  docker inspect -f '{{range .Mounts}}{{if eq .Destination "/app/data"}}{{.Source}}{{end}}{{end}}' "$1"
+declare -A DATA_DIRS=()
+data_dir() {  # Termix's data folder inside the container (DATA_DIR, normally /app/data)
+  if [ -z "${DATA_DIRS[$1]:-}" ]; then
+    DATA_DIRS[$1]="$(docker inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$1" | sed -n 's/^DATA_DIR=//p' | tail -1)"
+    DATA_DIRS[$1]="${DATA_DIRS[$1]:-/app/data}"
+  fi
+  echo "${DATA_DIRS[$1]}"
+}
+data_owner() { docker exec -e D="$(data_dir "$1")" "$1" node -e "const s=require('fs').statSync(process.env.D);console.log(s.uid+':'+s.gid)"; }
+data_mount() {  # $1 container, $2 Go template for the mount whose Destination is the data folder
+  docker inspect -f "{{range .Mounts}}{{if eq .Destination \"$(data_dir "$1")\"}}$2{{end}}{{end}}" "$1"
+}
+data_host_path() {  # where the data folder lives on the host
+  data_mount "$1" '{{.Source}}'
 }
 
 backup_termix() {
   local src out
-  src="$(docker inspect -f '{{range .Mounts}}{{if eq .Destination "/app/data"}}{{if eq .Type "volume"}}{{.Name}}{{else}}{{.Source}}{{end}}{{end}}{{end}}' "$1")"
-  [ -n "$src" ] || { warn "no /app/data mount found, skipping the backup"; return 0; }
+  src="$(data_mount "$1" '{{if eq .Type "volume"}}{{.Name}}{{else}}{{.Source}}{{end}}')"
+  [ -n "$src" ] || { warn "no mounted data folder found, skipping the backup"; return 0; }
   mkdir -p "$BACKUP_DIR"; out="termix-$1-$(date +%Y%m%d-%H%M%S).tgz"
   docker run --rm --entrypoint tar -v "$src":/data:ro -v "$BACKUP_DIR":/backup \
     "$(docker inspect -f '{{.Image}}' "$1")" czf "/backup/$out" -C / --exclude='data/host-updater' data >/dev/null 2>&1
@@ -148,7 +175,7 @@ update_termix_image() {  # $1 container
   old_ver="$(termix_version "$c")"
   info "$c: Termix $old_ver ($image)"
   [ "$check" = 1 ] && { info "$c: --check, not pulling"; return 0; }
-  docker pull -q "$image" >/dev/null 2>&1 || { fail "$c: could not pull $image"; return 1; }
+  docker pull -q "$image" >/dev/null 2>&1 || { warn "$c: could not pull $image (a local build?), leaving the image as it is"; return 1; }
   after="$(docker image inspect -f '{{.Id}}' "$image")"
   [ "$before" = "$after" ] && { ok "$c: Termix is up to date"; return 0; }
   backup_termix "$c"
@@ -225,20 +252,20 @@ ensure_api_key() {  # one-time: log in as an admin, create an API key, keep only
 }
 
 install_plugins() {  # $1 container
-  local c="$1" p id new cur changed=() fresh=() owner
+  local c="$1" p id new cur changed=() fresh=() owner pd
   fetch_repo || { fail "could not download the plugins"; return 1; }
-  owner="$(data_owner "$c")"
+  owner="$(data_owner "$c")"; pd="$(data_dir "$c")/plugins"
   for p in "$WORK/repo/plugins"/*/; do
     id="$(basename "$p")"
     new="$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$p/manifest.json" | head -1)"
-    cur="$(docker exec "$c" sh -c "sed -n 's/.*\"version\": *\"\\([^\"]*\\)\".*/\\1/p' /app/data/plugins/$id/manifest.json 2>/dev/null | head -1")"
-    if [ -n "$cur" ] && [ "$cur" = "$new" ] && [ "$(docker exec "$c" sh -c "cat /app/data/plugins/$id/dist/*.js" 2>/dev/null | sha256sum)" = "$(cat "$p"dist/*.js | sha256sum)" ]; then
+    cur="$(docker exec "$c" sh -c "sed -n 's/.*\"version\": *\"\\([^\"]*\\)\".*/\\1/p' $pd/$id/manifest.json 2>/dev/null | head -1")"
+    if [ -n "$cur" ] && [ "$cur" = "$new" ] && [ "$(docker exec "$c" sh -c "cat $pd/$id/dist/*.js" 2>/dev/null | sha256sum)" = "$(cat "$p"dist/*.js | sha256sum)" ]; then
       ok "plugin $id $cur is current"; continue
     fi
     [ "$check" = 1 ] && { warn "plugin $id: ${cur:-not installed} → $new"; continue; }
-    docker exec -u 0 "$c" sh -c "rm -rf /app/data/plugins/.$id.new && mkdir -p /app/data/plugins/.$id.new" &&
-    docker cp "$p." "$c:/app/data/plugins/.$id.new" >/dev/null &&
-    docker exec -u 0 "$c" sh -c "chown -R $owner /app/data/plugins/.$id.new /app/data/plugins && rm -rf /app/data/plugins/$id && mv /app/data/plugins/.$id.new /app/data/plugins/$id" \
+    docker exec -u 0 "$c" sh -c "rm -rf $pd/.$id.new && mkdir -p $pd/.$id.new" &&
+    docker cp "$p." "$c:$pd/.$id.new" >/dev/null &&
+    docker exec -u 0 "$c" sh -c "chown -R $owner $pd/.$id.new $pd && rm -rf $pd/$id && mv $pd/.$id.new $pd/$id" \
       || { fail "could not install plugin $id"; continue; }
     if [ -z "$cur" ]; then fresh+=("$id"); ok "plugin $id $new installed"; else changed+=("$id"); ok "plugin $id $cur → $new"; fi
   done
@@ -313,10 +340,17 @@ WantedBy=multi-user.target"
 
 update_termix() {
   echo; echo "  Termix"
-  docker_ready || { warn "Docker is not available here, skipping Termix"; return 0; }
-  local cs c; cs="$(termix_containers)"
+  if ! docker_ready; then
+    if command -v podman >/dev/null 2>&1; then warn "only Podman here; this needs Docker, skipping Termix"
+    else warn "Docker is not available here, skipping Termix"; fi
+    return 0
+  fi
+  local cs c ports where; cs="$(termix_containers)"
   [ -n "$cs" ] || { info "no Termix container found"; return 0; }
   for c in $cs; do
+    ports="$(docker port "$c" 2>/dev/null | sed 's/.*://' | sort -un | paste -sd ' ')"
+    where="$(data_mount "$c" '{{if eq .Type "volume"}}volume {{.Name}}{{else}}{{.Source}}{{end}}')"
+    ok "found Termix: container $c${ports:+, port $ports}${where:+, data in $where}"
     update_termix_image "$c"
     docker ps --format '{{.Names}}' | grep -qx "$c" || { warn "$c is not running; skipping its plugins"; continue; }
     install_plugins "$c"
@@ -377,10 +411,14 @@ update_aegis() {
 # ------------------------------------------------------------------ the daily timer
 install_timer() {
   fetch_repo || return 1
+  # install.sh's timer leaves Aegis alone, unless a full timer was already set up
+  local timer_scope="${scope:+ $scope}"
+  if [ -n "$timer_scope" ] && [ -f /etc/systemd/system/termix-autoupdate.service ] \
+    && ! grep -q -- '--termix' /etc/systemd/system/termix-autoupdate.service; then timer_scope=""; fi
   install -d "$LIB"; install -m 755 "$WORK/repo/update.sh" "$LIB/update.sh"
   cat > /etc/systemd/system/termix-autoupdate.service <<EOF
 [Unit]
-Description=Update Termix, its plugins and Aegis × Burrow
+Description=Update Termix and its plugins (and Aegis × Burrow when present)
 After=network-online.target docker.service
 Wants=network-online.target
 
@@ -388,11 +426,11 @@ Wants=network-online.target
 Type=oneshot
 Environment=INVOKING_USER=$INVOKING_USER
 Environment=INVOKING_HOME=$INVOKING_HOME
-ExecStart=/bin/bash $LIB/update.sh --service
+ExecStart=/bin/bash $LIB/update.sh --service$timer_scope
 EOF
   cat > /etc/systemd/system/termix-autoupdate.timer <<'EOF'
 [Unit]
-Description=Daily Termix + Aegis × Burrow update
+Description=Daily Termix auto-update
 
 [Timer]
 OnCalendar=*-*-* 04:17
@@ -410,7 +448,7 @@ EOF
   fi
 }
 
-echo; echo "  Termix + Aegis × Burrow updater"
+if [ "$do_aegis" = 1 ]; then echo; echo "  Termix + Aegis × Burrow updater"; else echo; echo "  Termix plugins + auto-update"; fi
 [ "$do_termix" = 1 ] && update_termix
 [ "$do_aegis" = 1 ] && update_aegis
 if [ "$auto" = 1 ]; then echo; install_timer; fi
