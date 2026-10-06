@@ -7308,6 +7308,16 @@ var SNAPSHOT_SCROLLBACK = 2e3;
 var SNAPSHOT_INTERVAL_MS = 15e3;
 var AWAY_POLL_MS = 4e3;
 var RECONNECT_DELAYS_MS = [500, 1e3, 2e3, 5e3, 1e4, 3e4];
+var OPEN_TIMEOUT_MS = 45e3;
+var NEEDS_A_PERSON = /* @__PURE__ */ new Set([
+  "password_required",
+  "totp_required",
+  "totp_retry",
+  "passphrase_required",
+  "auth_method_not_available",
+  "host_key_verification_required",
+  "host_key_changed"
+]);
 function clampDimension(value, max) {
   const n = Math.floor(Number(value));
   if (!Number.isFinite(n) || n < 2) return null;
@@ -7346,6 +7356,8 @@ var BgSession = class {
   disposed = false;
   /** Set once an attach succeeded on the current keeper socket. */
   attachedOnSocket = false;
+  /** Set while a brand-new session is being opened on its host. */
+  opening = null;
   /** Callers waiting on a "cwd" answer, oldest first. */
   cwdWaiters = [];
   lastActivityAt = Date.now();
@@ -7359,6 +7371,65 @@ var BgSession = class {
   start() {
     if (this.disposed || this.record.state === "ended") return;
     this.connectKeeper();
+  }
+  /**
+   * Opens a new SSH session on the host, the way a terminal tab does, with
+   * this keeper as its owner from the first byte. ssh-terminal fills in the
+   * saved credentials from the host id. Anything that needs a person (a
+   * password, a 2FA code, a new host key) ends the attempt instead.
+   */
+  open(hostConfig) {
+    return new Promise((resolve) => {
+      const timer = setTimeout(
+        () => this.failOpen("The host did not answer in time.", false),
+        OPEN_TIMEOUT_MS
+      );
+      this.opening = { hostConfig, settle: resolve, timer };
+      this.connectKeeper();
+    });
+  }
+  failOpen(reason, needsPerson) {
+    const opening = this.opening;
+    if (!opening) return;
+    this.opening = null;
+    clearTimeout(opening.timer);
+    const ws = this.keeper;
+    this.keeper = null;
+    if (ws) {
+      try {
+        ws.close(1e3, "BG Shell gave up opening");
+      } catch {
+        ws.terminate();
+      }
+    }
+    opening.settle({ ok: false, reason, needsPerson });
+  }
+  /** Handles the keeper's messages while a new session opens; true if consumed. */
+  onOpeningMessage(msg) {
+    const type = msg.type ?? "";
+    if (type === "sessionCreated" && typeof msg.sessionId === "string") {
+      this.record.sessionId = msg.sessionId;
+      this.deps.onChange(this);
+      return true;
+    }
+    if (type === "connected") {
+      const opening = this.opening;
+      this.opening = null;
+      clearTimeout(opening.timer);
+      this.onAttached();
+      opening.settle({ ok: true });
+      return true;
+    }
+    if (NEEDS_A_PERSON.has(type)) {
+      this.failOpen("This host needs you to sign in.", true);
+      return true;
+    }
+    if (type === "error" || type === "disconnected") {
+      const message = typeof msg.message === "string" && msg.message ? msg.message : "Could not connect to the host.";
+      this.failOpen(message, false);
+      return true;
+    }
+    return false;
   }
   /** A fresh token arrived for this user; retry right away if we were stuck. */
   kick() {
@@ -7376,6 +7447,10 @@ var BgSession = class {
     if (this.disposed || this.keeper || this.record.state === "ended") return;
     const token = this.deps.getToken(this.record.userId);
     if (!token) {
+      if (this.opening) {
+        this.failOpen("Sign-in token unavailable. Reload the page.", false);
+        return;
+      }
       this.setStatus("needs-auth");
       return;
     }
@@ -7400,7 +7475,8 @@ var BgSession = class {
     this.attachedOnSocket = false;
     ws.on("open", () => {
       if (this.keeper !== ws) return;
-      this.sendAttach();
+      if (this.opening) this.sendConnect(this.opening.hostConfig);
+      else this.sendAttach();
     });
     ws.on("message", (raw) => {
       if (this.keeper !== ws) return;
@@ -7418,6 +7494,10 @@ var BgSession = class {
     });
     ws.on("close", () => {
       if (this.keeper !== ws) return;
+      if (this.opening) {
+        this.failOpen("The connection closed before the session started.", false);
+        return;
+      }
       this.keeper = null;
       this.attachedOnSocket = false;
       this.stopAwayPoll();
@@ -7450,6 +7530,17 @@ var BgSession = class {
       return false;
     }
   }
+  sendConnect(hostConfig) {
+    this.setStatus("attaching");
+    this.sendKeeper({
+      type: "connectToHost",
+      data: {
+        cols: this.record.cols,
+        rows: this.record.rows,
+        hostConfig: { ...hostConfig, instanceId: this.record.tabInstanceId }
+      }
+    });
+  }
   sendAttach() {
     this.replaying = true;
     for (const viewer of this.viewers) this.pendingViewers.add(viewer);
@@ -7477,6 +7568,7 @@ var BgSession = class {
     } catch {
       return;
     }
+    if (this.opening && this.onOpeningMessage(msg)) return;
     switch (msg.type) {
       case "data":
         if (typeof msg.data === "string") this.onOutput(msg.data);
@@ -8058,6 +8150,7 @@ var BgShellManager = class {
       hostName: r.hostName,
       sessionCreatedAt: r.sessionCreatedAt,
       movedAt: r.movedAt,
+      startedHere: !!r.startedHere,
       endedAt: r.endedAt ?? null,
       endReason: r.endReason ?? null,
       cols: r.cols,
@@ -8157,6 +8250,57 @@ var BgShellManager = class {
     }
     return { ...this.describe(session), settled: outcome };
   }
+  /**
+   * Starts a brand-new background session on one of the user's hosts, with
+   * no terminal tab involved. `host` is the host record as the browser has
+   * it; ssh-terminal re-reads the address and credentials by its id.
+   */
+  async openOnHost(userId, input) {
+    const host = input.host;
+    const hostId = Number(host?.id);
+    const ip = typeof host?.ip === "string" ? host.ip : "";
+    const username = typeof host?.username === "string" ? host.username : "";
+    const port = Number(host?.sshPort ?? host?.port) || 22;
+    if (!host || !Number.isFinite(hostId) || !ip) {
+      throw new MoveError("Pick a saved host.");
+    }
+    if (!this.getToken(userId)) {
+      throw new MoveError("Sign-in token unavailable. Reload the page.", 401);
+    }
+    const cols = Math.min(Math.max(Math.floor(Number(input.cols)) || 120, 20), 500);
+    const rows = Math.min(Math.max(Math.floor(Number(input.rows)) || 32, 5), 300);
+    const now = Date.now();
+    const record = {
+      id: randomUUID(),
+      userId,
+      sessionId: "",
+      tabInstanceId: `bg-shell-${randomUUID()}`,
+      hostId,
+      hostName: `${username || "?"}@${ip}:${port}`,
+      label: typeof host.name === "string" && host.name.trim().slice(0, 120) || `${username}@${ip}`,
+      sessionCreatedAt: now,
+      movedAt: now,
+      cols,
+      rows,
+      state: "live",
+      processStart: PROCESS_START,
+      startedHere: true
+    };
+    const session = this.createSession(record);
+    this.emit(userId);
+    const outcome = await session.open({ ...host, id: hostId, port, sshPort: port });
+    if (!outcome.ok) {
+      session.release();
+      this.sessions.delete(record.id);
+      this.store.remove(record.id);
+      this.emit(userId);
+      throw new MoveError(outcome.reason, outcome.needsPerson ? 428 : 502);
+    }
+    this.store.upsert(record);
+    await this.store.flush();
+    this.emit(userId);
+    return this.describe(session);
+  }
   waitForHold(session) {
     return new Promise((resolve) => {
       const started = Date.now();
@@ -8207,12 +8351,11 @@ var BgShellManager = class {
     }
     session.end("Terminated from BG Shell.");
   }
-  dismiss(userId, id) {
+  /** Removes a session from BG Shell, ending it first if it still runs. */
+  async remove(userId, id) {
     const session = this.get(userId, id);
     if (!session) throw new MoveError("Not found.", 404);
-    if (session.record.state !== "ended") {
-      throw new MoveError("Terminate the session before removing it.", 409);
-    }
+    if (session.record.state !== "ended") await this.terminate(userId, id);
     session.release();
     this.sessions.delete(id);
     this.store.remove(id);
@@ -8281,6 +8424,10 @@ async function activate(ctx) {
       return { ok: true };
     })
   );
+  router.post(
+    "/sessions",
+    wrap((req, userId) => manager.openOnHost(userId, req.body ?? {}))
+  );
   router.patch(
     "/sessions/:id",
     wrap((req, userId) => manager.rename(userId, req.params.id, req.body?.label))
@@ -8294,8 +8441,8 @@ async function activate(ctx) {
   );
   router.delete(
     "/sessions/:id",
-    wrap((req, userId) => {
-      manager.dismiss(userId, req.params.id);
+    wrap(async (req, userId) => {
+      await manager.remove(userId, req.params.id);
       return { ok: true };
     })
   );

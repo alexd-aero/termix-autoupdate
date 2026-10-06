@@ -10,7 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/alexd-aero/termix-autoupdate/main/i
 
 Finds every Termix on the machine by what it is, not what it is called: the official image names, the image's source label (mirrors and retags), or Termix's own package inside a renamed or self-built image. It prints where each one runs (container, port, data folder), installs the plugins into that Termix's plugin manager (its real `DATA_DIR`), grants their permissions and enables them, adds the dashboard's "Update now" button, and sets up the daily auto-update for Termix and the plugins. Aegis × Burrow is left alone. Add `bash -s -- --check` to only look.
 
-- **BG Shell:** right-click a terminal tab → *Move to BG Shell*; it keeps running and opens from any device, with the terminal's own toolbar (image upload/paste, Share, Files, host tools).
+- **BG Shell:** right-click a terminal tab → *Move to BG Shell*, or start one straight from a saved host with *New session*; it keeps running and opens from any device, with the terminal's own toolbar (image upload/paste, Share, Files, host tools). The X on a session deletes it; Terminate asks twice, then ends and deletes it.
 - **Termix Updater:** an "Update now" card on the dashboard and a notice when a new Termix is out.
 
 ## Termix + Aegis × Burrow

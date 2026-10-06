@@ -301,8 +301,18 @@ var __iconData6 = {
 __iconData6.node;
 var LayoutGrid = createLucideIcon(__iconData6);
 
-// node_modules/lucide-react/dist/esm/icons/log-out.mjs
+// node_modules/lucide-react/dist/esm/icons/loader-circle.mjs
 var __iconData7 = {
+  name: "loader-circle",
+  size: 24,
+  node: [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]],
+  aliases: ["loader-2"]
+};
+__iconData7.node;
+var LoaderCircle = createLucideIcon(__iconData7);
+
+// node_modules/lucide-react/dist/esm/icons/log-out.mjs
+var __iconData8 = {
   name: "log-out",
   size: 24,
   node: [
@@ -311,11 +321,11 @@ var __iconData7 = {
     ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
   ]
 };
-__iconData7.node;
-var LogOut = createLucideIcon(__iconData7);
+__iconData8.node;
+var LogOut = createLucideIcon(__iconData8);
 
 // node_modules/lucide-react/dist/esm/icons/maximize-2.mjs
-var __iconData8 = {
+var __iconData9 = {
   name: "maximize-2",
   size: 24,
   node: [
@@ -325,11 +335,11 @@ var __iconData8 = {
     ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
   ]
 };
-__iconData8.node;
-var Maximize2 = createLucideIcon(__iconData8);
+__iconData9.node;
+var Maximize2 = createLucideIcon(__iconData9);
 
 // node_modules/lucide-react/dist/esm/icons/minimize-2.mjs
-var __iconData9 = {
+var __iconData10 = {
   name: "minimize-2",
   size: 24,
   node: [
@@ -339,11 +349,11 @@ var __iconData9 = {
     ["path", { d: "M4 14h6v6", key: "rmj7iw" }]
   ]
 };
-__iconData9.node;
-var Minimize2 = createLucideIcon(__iconData9);
+__iconData10.node;
+var Minimize2 = createLucideIcon(__iconData10);
 
 // node_modules/lucide-react/dist/esm/icons/monitor.mjs
-var __iconData10 = {
+var __iconData11 = {
   name: "monitor",
   size: 24,
   node: [
@@ -352,11 +362,11 @@ var __iconData10 = {
     ["line", { x1: "12", x2: "12", y1: "17", y2: "21", key: "vw1qmm" }]
   ]
 };
-__iconData10.node;
-var Monitor = createLucideIcon(__iconData10);
+__iconData11.node;
+var Monitor = createLucideIcon(__iconData11);
 
 // node_modules/lucide-react/dist/esm/icons/pencil.mjs
-var __iconData11 = {
+var __iconData12 = {
   name: "pencil",
   size: 24,
   node: [
@@ -370,11 +380,23 @@ var __iconData11 = {
     ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
   ]
 };
-__iconData11.node;
-var Pencil = createLucideIcon(__iconData11);
+__iconData12.node;
+var Pencil = createLucideIcon(__iconData12);
+
+// node_modules/lucide-react/dist/esm/icons/plus.mjs
+var __iconData13 = {
+  name: "plus",
+  size: 24,
+  node: [
+    ["path", { d: "M5 12h14", key: "1ays0h" }],
+    ["path", { d: "M12 5v14", key: "s699le" }]
+  ]
+};
+__iconData13.node;
+var Plus = createLucideIcon(__iconData13);
 
 // node_modules/lucide-react/dist/esm/icons/power.mjs
-var __iconData12 = {
+var __iconData14 = {
   name: "power",
   size: 24,
   node: [
@@ -382,11 +404,37 @@ var __iconData12 = {
     ["path", { d: "M18.4 6.6a9 9 0 1 1-12.77.04", key: "obofu9" }]
   ]
 };
-__iconData12.node;
-var Power = createLucideIcon(__iconData12);
+__iconData14.node;
+var Power = createLucideIcon(__iconData14);
+
+// node_modules/lucide-react/dist/esm/icons/search.mjs
+var __iconData15 = {
+  name: "search",
+  size: 24,
+  node: [
+    ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
+    ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
+  ]
+};
+__iconData15.node;
+var Search = createLucideIcon(__iconData15);
+
+// node_modules/lucide-react/dist/esm/icons/server.mjs
+var __iconData16 = {
+  name: "server",
+  size: 24,
+  node: [
+    ["rect", { width: "20", height: "8", x: "2", y: "2", rx: "2", ry: "2", key: "ngkwjq" }],
+    ["rect", { width: "20", height: "8", x: "2", y: "14", rx: "2", ry: "2", key: "iecqi9" }],
+    ["line", { x1: "6", x2: "6.01", y1: "6", y2: "6", key: "16zg32" }],
+    ["line", { x1: "6", x2: "6.01", y1: "18", y2: "18", key: "nzw8ys" }]
+  ]
+};
+__iconData16.node;
+var Server = createLucideIcon(__iconData16);
 
 // node_modules/lucide-react/dist/esm/icons/square-chevron-right.mjs
-var __iconData13 = {
+var __iconData17 = {
   name: "square-chevron-right",
   size: 24,
   node: [
@@ -395,11 +443,11 @@ var __iconData13 = {
   ],
   aliases: ["chevron-right-square"]
 };
-__iconData13.node;
-var SquareChevronRight = createLucideIcon(__iconData13);
+__iconData17.node;
+var SquareChevronRight = createLucideIcon(__iconData17);
 
 // node_modules/lucide-react/dist/esm/icons/trash.mjs
-var __iconData14 = {
+var __iconData18 = {
   name: "trash",
   size: 24,
   node: [
@@ -411,11 +459,11 @@ var __iconData14 = {
   ],
   aliases: ["trash-2"]
 };
-__iconData14.node;
-var Trash = createLucideIcon(__iconData14);
+__iconData18.node;
+var Trash = createLucideIcon(__iconData18);
 
 // node_modules/lucide-react/dist/esm/icons/triangle-alert.mjs
-var __iconData15 = {
+var __iconData19 = {
   name: "triangle-alert",
   size: 24,
   node: [
@@ -431,11 +479,11 @@ var __iconData15 = {
   ],
   aliases: ["alert-triangle"]
 };
-__iconData15.node;
-var TriangleAlert = createLucideIcon(__iconData15);
+__iconData19.node;
+var TriangleAlert = createLucideIcon(__iconData19);
 
 // node_modules/lucide-react/dist/esm/icons/wifi-off.mjs
-var __iconData16 = {
+var __iconData20 = {
   name: "wifi-off",
   size: 24,
   node: [
@@ -448,11 +496,11 @@ var __iconData16 = {
     ["path", { d: "m2 2 20 20", key: "1ooewy" }]
   ]
 };
-__iconData16.node;
-var WifiOff = createLucideIcon(__iconData16);
+__iconData20.node;
+var WifiOff = createLucideIcon(__iconData20);
 
 // node_modules/lucide-react/dist/esm/icons/x.mjs
-var __iconData17 = {
+var __iconData21 = {
   name: "x",
   size: 24,
   node: [
@@ -460,35 +508,35 @@ var __iconData17 = {
     ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
   ]
 };
-__iconData17.node;
-var X = createLucideIcon(__iconData17);
+__iconData21.node;
+var X = createLucideIcon(__iconData21);
 
 // src/frontend/BgShellPanel.tsx
-import { useEffect as useEffect4, useMemo as useMemo5, useRef as useRef3, useState as useState4 } from "react";
-import { useTranslation as useTranslation4 } from "@termix/plugin-sdk/frontend";
+import { useEffect as useEffect4, useMemo as useMemo6, useRef as useRef3, useState as useState5 } from "react";
+import { useTranslation as useTranslation6 } from "@termix/plugin-sdk/frontend";
 import { Button as Button2 } from "@termix/plugin-sdk/ui";
 
 // src/frontend/BgShellTab.tsx
-import { useCallback as useCallback2, useEffect as useEffect3, useMemo as useMemo4, useState as useState3 } from "react";
-import { toast as toast2 } from "sonner";
-import { useTranslation as useTranslation3 } from "@termix/plugin-sdk/frontend";
+import { useCallback as useCallback2, useEffect as useEffect3, useMemo as useMemo5, useState as useState4 } from "react";
+import { toast as toast4 } from "sonner";
+import { useTranslation as useTranslation5 } from "@termix/plugin-sdk/frontend";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
+  AlertDialog as AlertDialog2,
+  AlertDialogAction as AlertDialogAction2,
+  AlertDialogCancel as AlertDialogCancel2,
+  AlertDialogContent as AlertDialogContent2,
+  AlertDialogDescription as AlertDialogDescription2,
+  AlertDialogFooter as AlertDialogFooter2,
+  AlertDialogHeader as AlertDialogHeader2,
+  AlertDialogTitle as AlertDialogTitle2,
   Button,
-  Dialog,
-  DialogContent,
+  Dialog as Dialog2,
+  DialogContent as DialogContent2,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  DialogHeader as DialogHeader2,
+  DialogTitle as DialogTitle2,
   EmptyState,
-  Input,
+  Input as Input2,
   useIsMobile as useIsMobile2
 } from "@termix/plugin-sdk/ui";
 
@@ -12051,6 +12099,175 @@ function BgTerminal({
   );
 }
 
+// src/frontend/DeleteSessionDialog.tsx
+import { toast as toast2 } from "sonner";
+import { useTranslation as useTranslation3 } from "@termix/plugin-sdk/frontend";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@termix/plugin-sdk/ui";
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+async function deleteSession(id) {
+  try {
+    await app().api.delete(`/sessions/${encodeURIComponent(id)}`);
+    return true;
+  } catch (error) {
+    toast2.error(errorMessage(error));
+    return false;
+  }
+}
+function DeleteSessionDialog({
+  target,
+  onClose
+}) {
+  const { t } = useTranslation3();
+  const running = !!target && target.status !== "ended";
+  const confirm2 = async () => {
+    const victim = target;
+    onClose();
+    if (victim && await deleteSession(victim.id)) {
+      toast2.success(t("bgShell.deleted", { label: victim.label }));
+    }
+  };
+  return /* @__PURE__ */ jsx3(AlertDialog, { open: !!target, onOpenChange: (open) => !open && onClose(), children: /* @__PURE__ */ jsxs3(AlertDialogContent, { children: [
+    /* @__PURE__ */ jsxs3(AlertDialogHeader, { children: [
+      /* @__PURE__ */ jsx3(AlertDialogTitle, { children: t("bgShell.deleteTitle", { label: target?.label ?? "" }) }),
+      /* @__PURE__ */ jsx3(AlertDialogDescription, { children: t(running ? "bgShell.deleteBodyRunning" : "bgShell.deleteBodyEnded") })
+    ] }),
+    /* @__PURE__ */ jsxs3(AlertDialogFooter, { children: [
+      /* @__PURE__ */ jsx3(AlertDialogCancel, { children: t("bgShell.cancel") }),
+      /* @__PURE__ */ jsx3(
+        AlertDialogAction,
+        {
+          className: "bg-destructive text-white hover:bg-destructive/90",
+          onClick: () => void confirm2(),
+          children: t("bgShell.delete")
+        }
+      )
+    ] })
+  ] }) });
+}
+
+// src/frontend/NewSessionDialog.tsx
+import { useMemo as useMemo4, useState as useState3 } from "react";
+import { toast as toast3 } from "sonner";
+import { useHosts, useTranslation as useTranslation4 } from "@termix/plugin-sdk/frontend";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  Input
+} from "@termix/plugin-sdk/ui";
+import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
+function isSshHost(host) {
+  if (host.enableSsh === false) return false;
+  return !host.connectionType || host.connectionType === "ssh";
+}
+function NewSessionDialog({
+  open,
+  onOpenChange
+}) {
+  const { t } = useTranslation4();
+  const { hosts, loaded } = useHosts();
+  const [query, setQuery] = useState3("");
+  const [starting, setStarting] = useState3(null);
+  const sshHosts = useMemo4(() => {
+    const q2 = query.trim().toLowerCase();
+    return hosts.filter(isSshHost).filter(
+      (host) => !q2 || [host.name, host.ip, host.username, host.folder, ...host.tags ?? []].filter(Boolean).some((value) => String(value).toLowerCase().includes(q2))
+    ).sort((a, b2) => Number(!!b2.pin) - Number(!!a.pin) || a.name.localeCompare(b2.name));
+  }, [hosts, query]);
+  const start = async (host) => {
+    if (starting) return;
+    setStarting(String(host.id));
+    const label = host.name || `${host.username ?? ""}@${host.ip}`;
+    try {
+      const { data } = await app().api.post("/sessions", {
+        host,
+        cols: 120,
+        rows: 32
+      });
+      onOpenChange(false);
+      setQuery("");
+      requestSelect(data.id);
+      app().tabs.openTab(null, TAB_TYPE);
+      toast3.success(t("bgShell.started", { label }));
+    } catch (error) {
+      const status = error?.response?.status;
+      if (status === 428) {
+        onOpenChange(false);
+        app().tabs.connectHost(host, "terminal");
+        toast3.info(t("bgShell.needsSignIn", { label }), {
+          description: t("bgShell.needsSignInBody"),
+          duration: 1e4
+        });
+      } else {
+        toast3.error(t("bgShell.startFailed", { error: errorMessage(error) }));
+      }
+    } finally {
+      setStarting(null);
+    }
+  };
+  return /* @__PURE__ */ jsx4(Dialog, { open, onOpenChange: (next) => !starting && onOpenChange(next), children: /* @__PURE__ */ jsxs4(DialogContent, { className: "sm:max-w-md", children: [
+    /* @__PURE__ */ jsxs4(DialogHeader, { children: [
+      /* @__PURE__ */ jsx4(DialogTitle, { children: t("bgShell.newSessionTitle") }),
+      /* @__PURE__ */ jsx4(DialogDescription, { children: t("bgShell.newSessionHint") })
+    ] }),
+    /* @__PURE__ */ jsxs4("div", { className: "relative", children: [
+      /* @__PURE__ */ jsx4(Search, { className: "pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" }),
+      /* @__PURE__ */ jsx4(
+        Input,
+        {
+          autoFocus: true,
+          value: query,
+          className: "pl-8",
+          placeholder: t("bgShell.searchHosts"),
+          onChange: (event) => setQuery(event.target.value)
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxs4("div", { className: "-mx-1 max-h-80 min-h-24 overflow-y-auto", children: [
+      loaded && sshHosts.length === 0 && /* @__PURE__ */ jsx4("div", { className: "px-3 py-8 text-center text-sm text-muted-foreground", children: t(hosts.some(isSshHost) ? "bgShell.noMatch" : "bgShell.noHosts") }),
+      sshHosts.map((host) => {
+        const busy = starting === String(host.id);
+        return /* @__PURE__ */ jsxs4(
+          "button",
+          {
+            type: "button",
+            disabled: !!starting,
+            onClick: () => void start(host),
+            className: "flex w-full items-center gap-3 rounded-sm px-3 py-2 text-left hover:bg-muted/40 disabled:opacity-60",
+            children: [
+              /* @__PURE__ */ jsx4(Server, { className: "size-4 shrink-0 text-muted-foreground" }),
+              /* @__PURE__ */ jsxs4("span", { className: "flex min-w-0 flex-1 flex-col", children: [
+                /* @__PURE__ */ jsx4("span", { className: "truncate text-sm font-medium", children: host.name }),
+                /* @__PURE__ */ jsxs4("span", { className: "truncate text-xs text-muted-foreground", children: [
+                  host.username ? `${host.username}@` : "",
+                  host.ip,
+                  host.sshPort ?? host.port ? `:${host.sshPort ?? host.port}` : ""
+                ] })
+              ] }),
+              busy && /* @__PURE__ */ jsxs4("span", { className: "flex shrink-0 items-center gap-1.5 text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsx4(LoaderCircle, { className: "size-3.5 animate-spin" }),
+                t("bgShell.starting")
+              ] })
+            ]
+          },
+          host.id
+        );
+      })
+    ] })
+  ] }) });
+}
+
 // src/frontend/socket.ts
 var RECONNECT_DELAYS_MS = [500, 1e3, 2e3, 4e3, 8e3, 1e4];
 var PING_MS = 25e3;
@@ -12189,7 +12406,7 @@ var ViewSocket = class {
 };
 
 // src/frontend/BgShellTab.tsx
-import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx5, jsxs as jsxs5 } from "react/jsx-runtime";
 function ago(t, at3) {
   if (!at3) return "";
   const minutes = Math.floor((Date.now() - at3) / 6e4);
@@ -12220,7 +12437,7 @@ function statusDot(status) {
   }
 }
 function useNow() {
-  const [now, setNow] = useState3(() => Date.now());
+  const [now, setNow] = useState4(() => Date.now());
   useEffect3(() => {
     const handle = setInterval(() => setNow(Date.now()), 3e4);
     return () => clearInterval(handle);
@@ -12228,23 +12445,26 @@ function useNow() {
   return now;
 }
 function BgShellTab({ isVisible }) {
-  const { t } = useTranslation3();
+  const { t } = useTranslation5();
   const isMobile = useIsMobile2();
   const panelShown = usePanelShown();
   useNow();
-  const socket = useMemo4(() => new ViewSocket(), []);
+  const socket = useMemo5(() => new ViewSocket(), []);
   useEffect3(() => () => socket.close(), [socket]);
-  const [sessions, setSessions] = useState3(null);
-  const [connected, setConnected] = useState3(socket.open);
-  const [initialOpen] = useState3(() => takePendingOpen());
-  const [selectedId, setSelectedId] = useState3(
+  const [sessions, setSessions] = useState4(null);
+  const [connected, setConnected] = useState4(socket.open);
+  const [initialOpen] = useState4(() => takePendingOpen());
+  const [selectedId, setSelectedId] = useState4(
     () => initialOpen ?? readSelected()
   );
-  const [mobileShowsTerminal, setMobileShowsTerminal] = useState3(!!initialOpen);
-  const [sizeMismatch, setSizeMismatch] = useState3(false);
-  const [renaming, setRenaming] = useState3(null);
-  const [renameValue, setRenameValue] = useState3("");
-  const [terminating, setTerminating] = useState3(null);
+  const [mobileShowsTerminal, setMobileShowsTerminal] = useState4(!!initialOpen);
+  const [sizeMismatch, setSizeMismatch] = useState4(false);
+  const [renaming, setRenaming] = useState4(null);
+  const [renameValue, setRenameValue] = useState4("");
+  const [terminating, setTerminating] = useState4(null);
+  const [confirmingTerminate, setConfirmingTerminate] = useState4(null);
+  const [deleting, setDeleting] = useState4(null);
+  const [picking, setPicking] = useState4(false);
   useEffect3(() => {
     const offState = socket.onState(setConnected);
     const offMessage = socket.onMessage((message) => {
@@ -12301,85 +12521,115 @@ function BgShellTab({ isVisible }) {
       });
       setRenaming(null);
     } catch (error) {
-      toast2.error(errorMessage(error));
+      toast4.error(errorMessage(error));
     }
   };
   const confirmTerminate = async () => {
-    const target = terminating;
-    setTerminating(null);
-    if (!target) return;
-    try {
-      await app().api.post(`/sessions/${encodeURIComponent(target.id)}/terminate`);
-      toast2.success(t("bgShell.terminated", { label: target.label }));
-    } catch (error) {
-      toast2.error(errorMessage(error));
+    const target = confirmingTerminate;
+    setConfirmingTerminate(null);
+    if (target && await deleteSession(target.id)) {
+      toast4.success(t("bgShell.terminated", { label: target.label }));
     }
   };
   const dismiss = async (target) => {
     try {
       await app().api.delete(`/sessions/${encodeURIComponent(target.id)}`);
-      toast2.success(t("bgShell.dismissed", { label: target.label }));
+      toast4.success(t("bgShell.dismissed", { label: target.label }));
     } catch (error) {
-      toast2.error(errorMessage(error));
+      toast4.error(errorMessage(error));
     }
   };
   const showList = isMobile ? !mobileShowsTerminal || !selected : !panelShown;
   const showTerminal = !isMobile || mobileShowsTerminal && !!selected;
-  const list = /* @__PURE__ */ jsxs3(
+  const list = /* @__PURE__ */ jsxs5(
     "div",
     {
       className: `relative flex shrink-0 flex-col border-border bg-card ${isMobile ? "w-full flex-1" : "w-72 border-r"}`,
       children: [
-        /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border px-3 py-2", children: [
-          /* @__PURE__ */ jsx3(SquareChevronRight, { className: "size-4" }),
-          /* @__PURE__ */ jsx3("span", { className: "text-sm font-semibold", children: t("bgShell.title") }),
-          /* @__PURE__ */ jsx3("span", { className: "ml-auto text-xs text-muted-foreground", children: t("bgShell.count", { count: running }) })
-        ] }),
-        !connected && /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground", children: [
-          /* @__PURE__ */ jsx3(WifiOff, { className: "size-3.5 shrink-0" }),
-          /* @__PURE__ */ jsx3("span", { className: "truncate", children: t("bgShell.connectionLost") })
-        ] }),
-        /* @__PURE__ */ jsx3("div", { className: "min-h-0 flex-1 overflow-y-auto py-1", children: sessions?.map((session) => {
-          const active = session.id === selectedId;
-          const ended = session.status === "ended";
-          return /* @__PURE__ */ jsxs3(
+        /* @__PURE__ */ jsxs5("div", { className: "flex items-center gap-2 border-b border-border px-3 py-2", children: [
+          /* @__PURE__ */ jsx5(SquareChevronRight, { className: "size-4" }),
+          /* @__PURE__ */ jsx5("span", { className: "text-sm font-semibold", children: t("bgShell.title") }),
+          /* @__PURE__ */ jsx5("span", { className: "ml-auto text-xs text-muted-foreground", children: t("bgShell.count", { count: running }) }),
+          /* @__PURE__ */ jsx5(
             "button",
             {
               type: "button",
+              className: "-mr-1 rounded-sm p-1 text-muted-foreground hover:bg-muted hover:text-foreground",
+              title: t("bgShell.newSession"),
+              "aria-label": t("bgShell.newSession"),
+              onClick: () => setPicking(true),
+              children: /* @__PURE__ */ jsx5(Plus, { className: "size-4" })
+            }
+          )
+        ] }),
+        !connected && /* @__PURE__ */ jsxs5("div", { className: "flex items-center gap-2 border-b border-border px-3 py-1.5 text-xs text-muted-foreground", children: [
+          /* @__PURE__ */ jsx5(WifiOff, { className: "size-3.5 shrink-0" }),
+          /* @__PURE__ */ jsx5("span", { className: "truncate", children: t("bgShell.connectionLost") })
+        ] }),
+        /* @__PURE__ */ jsx5("div", { className: "min-h-0 flex-1 overflow-y-auto py-1", children: sessions?.map((session) => {
+          const active = session.id === selectedId;
+          const ended = session.status === "ended";
+          return /* @__PURE__ */ jsxs5(
+            "div",
+            {
+              role: "button",
+              tabIndex: 0,
               onClick: () => select(session.id),
-              className: `group flex w-full items-center gap-2 px-3 py-2 text-left hover:bg-muted/40 ${active ? "bg-accent-brand/10" : ""}`,
+              onKeyDown: (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  select(session.id);
+                }
+              },
+              className: `group flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left hover:bg-muted/40 ${active ? "bg-accent-brand/10" : ""}`,
               children: [
-                /* @__PURE__ */ jsx3(
+                /* @__PURE__ */ jsx5(
                   "span",
                   {
                     className: `size-2 shrink-0 rounded-full ${statusDot(session.status)}`,
                     "aria-hidden": true
                   }
                 ),
-                /* @__PURE__ */ jsxs3("span", { className: "flex min-w-0 flex-1 flex-col", children: [
-                  /* @__PURE__ */ jsx3(
+                /* @__PURE__ */ jsxs5("span", { className: "flex min-w-0 flex-1 flex-col", children: [
+                  /* @__PURE__ */ jsx5(
                     "span",
                     {
                       className: `truncate text-sm font-medium ${ended ? "text-muted-foreground" : ""}`,
                       children: session.label
                     }
                   ),
-                  /* @__PURE__ */ jsxs3("span", { className: "truncate text-xs text-muted-foreground", children: [
+                  /* @__PURE__ */ jsxs5("span", { className: "truncate text-xs text-muted-foreground", children: [
                     session.hostName,
                     " \xB7",
                     " ",
-                    ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t("bgShell.movedAt", { time: ago(t, session.movedAt) })
+                    ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t(session.startedHere ? "bgShell.startedAt" : "bgShell.movedAt", {
+                      time: ago(t, session.movedAt)
+                    })
                   ] })
                 ] }),
-                session.viewers > 0 && !ended && /* @__PURE__ */ jsxs3(
+                session.viewers > 0 && !ended && /* @__PURE__ */ jsxs5(
                   "span",
                   {
                     className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground",
                     title: t("bgShell.viewerCount", { count: session.viewers }),
                     children: [
-                      /* @__PURE__ */ jsx3(Monitor, { className: "size-3" }),
+                      /* @__PURE__ */ jsx5(Monitor, { className: "size-3" }),
                       session.viewers
                     ]
+                  }
+                ),
+                /* @__PURE__ */ jsx5(
+                  "button",
+                  {
+                    type: "button",
+                    className: "-mr-1 shrink-0 rounded-sm p-1 text-muted-foreground hover:bg-muted hover:text-destructive",
+                    title: t("bgShell.deleteSession"),
+                    "aria-label": t("bgShell.deleteSession"),
+                    onClick: (event) => {
+                      event.stopPropagation();
+                      setDeleting(session);
+                    },
+                    children: /* @__PURE__ */ jsx5(X, { className: "size-3.5" })
                   }
                 )
               ]
@@ -12390,38 +12640,38 @@ function BgShellTab({ isVisible }) {
       ]
     }
   );
-  const viewer = selected ? /* @__PURE__ */ jsxs3("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [
-    /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border bg-card px-3 py-1.5 text-xs text-muted-foreground", children: [
-      isMobile && /* @__PURE__ */ jsx3(
+  const viewer = selected ? /* @__PURE__ */ jsxs5("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [
+    /* @__PURE__ */ jsxs5("div", { className: "flex items-center gap-2 border-b border-border bg-card px-3 py-1.5 text-xs text-muted-foreground", children: [
+      isMobile && /* @__PURE__ */ jsx5(
         "button",
         {
           type: "button",
           className: "-ml-1 mr-1 flex items-center gap-1 text-muted-foreground hover:text-foreground",
           onClick: () => setMobileShowsTerminal(false),
-          children: /* @__PURE__ */ jsx3(ArrowLeft, { className: "size-4" })
+          children: /* @__PURE__ */ jsx5(ArrowLeft, { className: "size-4" })
         }
       ),
-      /* @__PURE__ */ jsx3(
+      /* @__PURE__ */ jsx5(
         "span",
         {
           className: `size-2 shrink-0 rounded-full ${statusDot(selected.status)}`,
           "aria-hidden": true
         }
       ),
-      /* @__PURE__ */ jsx3("span", { className: "truncate text-sm font-medium text-foreground", children: selected.label }),
-      /* @__PURE__ */ jsx3("span", { className: "hidden truncate sm:inline", children: selected.hostName }),
-      /* @__PURE__ */ jsxs3("span", { className: "shrink-0", children: [
+      /* @__PURE__ */ jsx5("span", { className: "truncate text-sm font-medium text-foreground", children: selected.label }),
+      /* @__PURE__ */ jsx5("span", { className: "hidden truncate sm:inline", children: selected.hostName }),
+      /* @__PURE__ */ jsxs5("span", { className: "shrink-0", children: [
         "\xB7 ",
         t(STATUS_KEY[selected.status])
       ] }),
-      selected.status !== "ended" && /* @__PURE__ */ jsxs3("span", { className: "hidden shrink-0 sm:inline", children: [
+      selected.status !== "ended" && /* @__PURE__ */ jsxs5("span", { className: "hidden shrink-0 sm:inline", children: [
         "\xB7 ",
         selected.cols,
         "\xD7",
         selected.rows
       ] }),
-      /* @__PURE__ */ jsxs3("span", { className: "ml-auto flex shrink-0 items-center gap-2", children: [
-        /* @__PURE__ */ jsx3(
+      /* @__PURE__ */ jsxs5("span", { className: "ml-auto flex shrink-0 items-center gap-2", children: [
+        /* @__PURE__ */ jsx5(
           "button",
           {
             type: "button",
@@ -12432,10 +12682,10 @@ function BgShellTab({ isVisible }) {
               setRenameValue(selected.label);
               setRenaming(selected);
             },
-            children: /* @__PURE__ */ jsx3(Pencil, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx5(Pencil, { className: "size-3.5" })
           }
         ),
-        selected.status === "ended" ? /* @__PURE__ */ jsx3(
+        selected.status === "ended" ? /* @__PURE__ */ jsx5(
           "button",
           {
             type: "button",
@@ -12443,9 +12693,9 @@ function BgShellTab({ isVisible }) {
             title: t("bgShell.dismiss"),
             "aria-label": t("bgShell.dismiss"),
             onClick: () => void dismiss(selected),
-            children: /* @__PURE__ */ jsx3(Trash, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx5(Trash, { className: "size-3.5" })
           }
-        ) : /* @__PURE__ */ jsx3(
+        ) : /* @__PURE__ */ jsx5(
           "button",
           {
             type: "button",
@@ -12453,16 +12703,16 @@ function BgShellTab({ isVisible }) {
             title: t("bgShell.terminate"),
             "aria-label": t("bgShell.terminate"),
             onClick: () => setTerminating(selected),
-            children: /* @__PURE__ */ jsx3(Power, { className: "size-3.5" })
+            children: /* @__PURE__ */ jsx5(Power, { className: "size-3.5" })
           }
         )
       ] })
     ] }),
-    (selected.status === "ended" || selected.status === "away" || selected.status === "needs-auth" || sizeMismatch && selected.status === "live") && /* @__PURE__ */ jsxs3("div", { className: "flex items-center gap-2 border-b border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground", children: [
-      /* @__PURE__ */ jsx3(TriangleAlert, { className: "size-3.5 shrink-0" }),
-      /* @__PURE__ */ jsx3("span", { className: "min-w-0", children: selected.status === "ended" ? `${t("bgShell.endedHint")}${selected.endReason ? ` ${selected.endReason}` : ""}` : selected.status === "away" ? t("bgShell.awayHint") : selected.status === "needs-auth" ? t("bgShell.needsAuthHint") : t("bgShell.resizeHint") })
+    (selected.status === "ended" || selected.status === "away" || selected.status === "needs-auth" || sizeMismatch && selected.status === "live") && /* @__PURE__ */ jsxs5("div", { className: "flex items-center gap-2 border-b border-border bg-muted/30 px-3 py-1.5 text-xs text-muted-foreground", children: [
+      /* @__PURE__ */ jsx5(TriangleAlert, { className: "size-3.5 shrink-0" }),
+      /* @__PURE__ */ jsx5("span", { className: "min-w-0", children: selected.status === "ended" ? `${t("bgShell.endedHint")}${selected.endReason ? ` ${selected.endReason}` : ""}` : selected.status === "away" ? t("bgShell.awayHint") : selected.status === "needs-auth" ? t("bgShell.needsAuthHint") : t("bgShell.resizeHint") })
     ] }),
-    /* @__PURE__ */ jsx3("div", { className: "relative min-h-0 flex-1", children: /* @__PURE__ */ jsx3(
+    /* @__PURE__ */ jsx5("div", { className: "relative min-h-0 flex-1", children: /* @__PURE__ */ jsx5(
       BgTerminal,
       {
         sessionId: selected.id,
@@ -12478,22 +12728,28 @@ function BgShellTab({ isVisible }) {
       selected.id
     ) })
   ] }) : null;
-  return /* @__PURE__ */ jsxs3("div", { className: "flex h-full w-full bg-background text-foreground", children: [
-    sessions && sessions.length === 0 ? /* @__PURE__ */ jsx3("div", { className: "flex flex-1 items-center justify-center p-6", children: /* @__PURE__ */ jsx3(
-      EmptyState,
-      {
-        icon: SquareChevronRight,
-        title: t("bgShell.emptyTitle"),
-        hint: t("bgShell.emptyBody")
-      }
-    ) }) : /* @__PURE__ */ jsxs3(Fragment2, { children: [
+  return /* @__PURE__ */ jsxs5("div", { className: "flex h-full w-full bg-background text-foreground", children: [
+    sessions && sessions.length === 0 ? /* @__PURE__ */ jsx5("div", { className: "flex flex-1 items-center justify-center p-6", children: /* @__PURE__ */ jsxs5("div", { className: "flex flex-col items-center gap-4", children: [
+      /* @__PURE__ */ jsx5(
+        EmptyState,
+        {
+          icon: SquareChevronRight,
+          title: t("bgShell.emptyTitle"),
+          hint: t("bgShell.emptyBody")
+        }
+      ),
+      /* @__PURE__ */ jsxs5(Button, { size: "sm", variant: "outline", onClick: () => setPicking(true), children: [
+        /* @__PURE__ */ jsx5(Plus, { className: "size-4" }),
+        t("bgShell.newSession")
+      ] })
+    ] }) }) : /* @__PURE__ */ jsxs5(Fragment2, { children: [
       showList && list,
-      showTerminal && (viewer ?? /* @__PURE__ */ jsx3("div", { className: "flex flex-1 items-center justify-center text-sm text-muted-foreground", children: sessions ? t("bgShell.selectSession") : null }))
+      showTerminal && (viewer ?? /* @__PURE__ */ jsx5("div", { className: "flex flex-1 items-center justify-center text-sm text-muted-foreground", children: sessions ? t("bgShell.selectSession") : null }))
     ] }),
-    /* @__PURE__ */ jsx3(Dialog, { open: !!renaming, onOpenChange: (open) => !open && setRenaming(null), children: /* @__PURE__ */ jsxs3(DialogContent, { children: [
-      /* @__PURE__ */ jsx3(DialogHeader, { children: /* @__PURE__ */ jsx3(DialogTitle, { children: t("bgShell.rename") }) }),
-      /* @__PURE__ */ jsx3(
-        Input,
+    /* @__PURE__ */ jsx5(Dialog2, { open: !!renaming, onOpenChange: (open) => !open && setRenaming(null), children: /* @__PURE__ */ jsxs5(DialogContent2, { children: [
+      /* @__PURE__ */ jsx5(DialogHeader2, { children: /* @__PURE__ */ jsx5(DialogTitle2, { children: t("bgShell.rename") }) }),
+      /* @__PURE__ */ jsx5(
+        Input2,
         {
           autoFocus: true,
           value: renameValue,
@@ -12505,42 +12761,73 @@ function BgShellTab({ isVisible }) {
           }
         }
       ),
-      /* @__PURE__ */ jsxs3(DialogFooter, { children: [
-        /* @__PURE__ */ jsx3(Button, { variant: "outline", onClick: () => setRenaming(null), children: t("bgShell.cancel") }),
-        /* @__PURE__ */ jsx3(Button, { onClick: () => void submitRename(), disabled: !renameValue.trim(), children: t("bgShell.save") })
+      /* @__PURE__ */ jsxs5(DialogFooter, { children: [
+        /* @__PURE__ */ jsx5(Button, { variant: "outline", onClick: () => setRenaming(null), children: t("bgShell.cancel") }),
+        /* @__PURE__ */ jsx5(Button, { onClick: () => void submitRename(), disabled: !renameValue.trim(), children: t("bgShell.save") })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsx3(
-      AlertDialog,
+    /* @__PURE__ */ jsx5(
+      AlertDialog2,
       {
         open: !!terminating,
         onOpenChange: (open) => !open && setTerminating(null),
-        children: /* @__PURE__ */ jsxs3(AlertDialogContent, { children: [
-          /* @__PURE__ */ jsxs3(AlertDialogHeader, { children: [
-            /* @__PURE__ */ jsx3(AlertDialogTitle, { children: t("bgShell.terminateTitle", { label: terminating?.label ?? "" }) }),
-            /* @__PURE__ */ jsx3(AlertDialogDescription, { children: t("bgShell.terminateBody") })
+        children: /* @__PURE__ */ jsxs5(AlertDialogContent2, { children: [
+          /* @__PURE__ */ jsxs5(AlertDialogHeader2, { children: [
+            /* @__PURE__ */ jsx5(AlertDialogTitle2, { children: t("bgShell.terminateTitle", { label: terminating?.label ?? "" }) }),
+            /* @__PURE__ */ jsx5(AlertDialogDescription2, { children: t("bgShell.terminateBody") })
           ] }),
-          /* @__PURE__ */ jsxs3(AlertDialogFooter, { children: [
-            /* @__PURE__ */ jsx3(AlertDialogCancel, { children: t("bgShell.cancel") }),
-            /* @__PURE__ */ jsx3(
-              AlertDialogAction,
+          /* @__PURE__ */ jsxs5(AlertDialogFooter2, { children: [
+            /* @__PURE__ */ jsx5(AlertDialogCancel2, { children: t("bgShell.cancel") }),
+            /* @__PURE__ */ jsx5(
+              AlertDialogAction2,
               {
                 className: "bg-destructive text-white hover:bg-destructive/90",
-                onClick: () => void confirmTerminate(),
+                onClick: () => {
+                  setConfirmingTerminate(terminating);
+                  setTerminating(null);
+                },
                 children: t("bgShell.terminate")
               }
             )
           ] })
         ] })
       }
-    )
+    ),
+    /* @__PURE__ */ jsx5(
+      AlertDialog2,
+      {
+        open: !!confirmingTerminate,
+        onOpenChange: (open) => !open && setConfirmingTerminate(null),
+        children: /* @__PURE__ */ jsxs5(AlertDialogContent2, { children: [
+          /* @__PURE__ */ jsxs5(AlertDialogHeader2, { children: [
+            /* @__PURE__ */ jsx5(AlertDialogTitle2, { children: t("bgShell.confirmTitle") }),
+            /* @__PURE__ */ jsx5(AlertDialogDescription2, { children: t("bgShell.confirmTerminateBody", {
+              label: confirmingTerminate?.label ?? ""
+            }) })
+          ] }),
+          /* @__PURE__ */ jsxs5(AlertDialogFooter2, { children: [
+            /* @__PURE__ */ jsx5(AlertDialogCancel2, { children: t("bgShell.cancel") }),
+            /* @__PURE__ */ jsx5(
+              AlertDialogAction2,
+              {
+                className: "bg-destructive text-white hover:bg-destructive/90",
+                onClick: () => void confirmTerminate(),
+                children: t("bgShell.confirmTerminate")
+              }
+            )
+          ] })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsx5(DeleteSessionDialog, { target: deleting, onClose: () => setDeleting(null) }),
+    /* @__PURE__ */ jsx5(NewSessionDialog, { open: picking, onOpenChange: setPicking })
   ] });
 }
 
 // src/frontend/BgShellPanel.tsx
-import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 function BgShellPanel({ shell, active, placement }) {
-  const { t } = useTranslation4();
+  const { t } = useTranslation6();
   useNow();
   const rootRef = useRef3(null);
   const shownId2 = useShownSession();
@@ -12564,9 +12851,11 @@ function BgShellPanel({ shell, active, placement }) {
       unmark?.();
     };
   }, [active, placement]);
-  const [sessions, setSessions] = useState4(null);
-  const [connected, setConnected] = useState4(true);
-  const socket = useMemo5(() => active ? new ViewSocket() : null, [active]);
+  const [sessions, setSessions] = useState5(null);
+  const [connected, setConnected] = useState5(true);
+  const [deleting, setDeleting] = useState5(null);
+  const [picking, setPicking] = useState5(false);
+  const socket = useMemo6(() => active ? new ViewSocket() : null, [active]);
   useEffect4(() => {
     if (!socket) return;
     const offState = socket.onState(setConnected);
@@ -12586,64 +12875,92 @@ function BgShellPanel({ shell, active, placement }) {
     shell.openTab(null, TAB_TYPE);
   };
   const running = sessions?.filter((s15) => s15.status !== "ended").length ?? 0;
-  return /* @__PURE__ */ jsxs4("div", { ref: rootRef, className: "flex h-full flex-col", children: [
-    /* @__PURE__ */ jsxs4("div", { className: "flex items-center gap-2 px-3 py-2 text-xs text-muted-foreground", children: [
-      /* @__PURE__ */ jsx4("span", { children: t("bgShell.count", { count: running }) }),
-      !connected && /* @__PURE__ */ jsx4(WifiOff, { className: "size-3.5" }),
-      /* @__PURE__ */ jsx4(Button2, { size: "xs", variant: "outline", className: "ml-auto", onClick: () => open(), children: t("bgShell.openFull") })
+  return /* @__PURE__ */ jsxs6("div", { ref: rootRef, className: "flex h-full flex-col", children: [
+    /* @__PURE__ */ jsxs6("div", { className: "flex items-center gap-2 px-3 py-2 text-xs text-muted-foreground", children: [
+      /* @__PURE__ */ jsx6("span", { children: t("bgShell.count", { count: running }) }),
+      !connected && /* @__PURE__ */ jsx6(WifiOff, { className: "size-3.5" }),
+      /* @__PURE__ */ jsxs6(Button2, { size: "xs", variant: "outline", className: "ml-auto", onClick: () => setPicking(true), children: [
+        /* @__PURE__ */ jsx6(Plus, { className: "size-3.5" }),
+        t("bgShell.newSession")
+      ] })
     ] }),
-    /* @__PURE__ */ jsxs4("div", { className: "min-h-0 flex-1 overflow-y-auto", children: [
-      sessions && sessions.length === 0 && /* @__PURE__ */ jsxs4("div", { className: "flex flex-col items-center gap-2 px-6 py-10 text-center", children: [
-        /* @__PURE__ */ jsx4(SquareChevronRight, { className: "size-5 text-muted-foreground/50" }),
-        /* @__PURE__ */ jsx4("span", { className: "text-sm font-semibold text-muted-foreground", children: t("bgShell.emptyTitle") }),
-        /* @__PURE__ */ jsx4("span", { className: "text-xs text-muted-foreground", children: t("bgShell.panelHint") })
+    /* @__PURE__ */ jsxs6("div", { className: "min-h-0 flex-1 overflow-y-auto", children: [
+      sessions && sessions.length === 0 && /* @__PURE__ */ jsxs6("div", { className: "flex flex-col items-center gap-2 px-6 py-10 text-center", children: [
+        /* @__PURE__ */ jsx6(SquareChevronRight, { className: "size-5 text-muted-foreground/50" }),
+        /* @__PURE__ */ jsx6("span", { className: "text-sm font-semibold text-muted-foreground", children: t("bgShell.emptyTitle") }),
+        /* @__PURE__ */ jsx6("span", { className: "text-xs text-muted-foreground", children: t("bgShell.panelHint") })
       ] }),
       sessions?.map((session) => {
         const ended = session.status === "ended";
-        return /* @__PURE__ */ jsxs4(
-          "button",
+        return /* @__PURE__ */ jsxs6(
+          "div",
           {
-            type: "button",
+            role: "button",
+            tabIndex: 0,
             onClick: () => open(session.id),
-            className: `flex w-full items-center gap-2 border-b border-border px-3 py-2 text-left hover:bg-muted/40 ${session.id === shownId2 ? "bg-accent-brand/10" : ""}`,
+            onKeyDown: (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                open(session.id);
+              }
+            },
+            className: `flex w-full cursor-pointer items-center gap-2 border-b border-border px-3 py-2 text-left hover:bg-muted/40 ${session.id === shownId2 ? "bg-accent-brand/10" : ""}`,
             children: [
-              /* @__PURE__ */ jsx4(
+              /* @__PURE__ */ jsx6(
                 "span",
                 {
                   className: `size-2 shrink-0 rounded-full ${statusDot(session.status)}`,
                   "aria-hidden": true
                 }
               ),
-              /* @__PURE__ */ jsxs4("span", { className: "flex min-w-0 flex-1 flex-col", children: [
-                /* @__PURE__ */ jsx4(
+              /* @__PURE__ */ jsxs6("span", { className: "flex min-w-0 flex-1 flex-col", children: [
+                /* @__PURE__ */ jsx6(
                   "span",
                   {
                     className: `truncate text-sm font-medium ${ended ? "text-muted-foreground" : ""}`,
                     children: session.label
                   }
                 ),
-                /* @__PURE__ */ jsxs4("span", { className: "truncate text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsxs6("span", { className: "truncate text-xs text-muted-foreground", children: [
                   session.hostName,
                   " \xB7",
                   " ",
-                  ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t("bgShell.movedAt", { time: ago(t, session.movedAt) })
+                  ended ? t("bgShell.endedAt", { time: ago(t, session.endedAt) }) : t(session.startedHere ? "bgShell.startedAt" : "bgShell.movedAt", {
+                    time: ago(t, session.movedAt)
+                  })
                 ] })
               ] }),
-              session.viewers > 0 && !ended && /* @__PURE__ */ jsxs4("span", { className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground", children: [
-                /* @__PURE__ */ jsx4(Monitor, { className: "size-3" }),
+              session.viewers > 0 && !ended && /* @__PURE__ */ jsxs6("span", { className: "flex shrink-0 items-center gap-1 text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsx6(Monitor, { className: "size-3" }),
                 session.viewers
-              ] })
+              ] }),
+              /* @__PURE__ */ jsx6(
+                "button",
+                {
+                  type: "button",
+                  className: "-mr-1 shrink-0 rounded-sm p-1 text-muted-foreground hover:bg-muted hover:text-destructive",
+                  title: t("bgShell.deleteSession"),
+                  "aria-label": t("bgShell.deleteSession"),
+                  onClick: (event) => {
+                    event.stopPropagation();
+                    setDeleting(session);
+                  },
+                  children: /* @__PURE__ */ jsx6(X, { className: "size-3.5" })
+                }
+              )
             ]
           },
           session.id
         );
       })
-    ] })
+    ] }),
+    /* @__PURE__ */ jsx6(DeleteSessionDialog, { target: deleting, onClose: () => setDeleting(null) }),
+    /* @__PURE__ */ jsx6(NewSessionDialog, { open: picking, onOpenChange: setPicking })
   ] });
 }
 
 // src/frontend/move.ts
-import { toast as toast3 } from "sonner";
+import { toast as toast5 } from "sonner";
 var SSH_TERMINAL_SOCKET = "/plugin-ws/ssh-terminal/";
 function isDisconnectMessage(data) {
   if (typeof data !== "string" || !data.includes("disconnect")) return false;
@@ -12697,12 +13014,12 @@ async function moveToBgShell(handle, tab) {
   const { t, api } = app();
   if (!tab || moving) return;
   if (!canMove(tab, handle)) {
-    toast3.error(t("bgShell.notConnected"));
+    toast5.error(t("bgShell.notConnected"));
     return;
   }
   moving = true;
   const label = tab.label || "Terminal";
-  const toastId = toast3.loading(t("bgShell.moving", { label }));
+  const toastId = toast5.loading(t("bgShell.moving", { label }));
   try {
     let moveId;
     try {
@@ -12713,7 +13030,7 @@ async function moveToBgShell(handle, tab) {
       });
       moveId = data.moveId;
     } catch (error) {
-      toast3.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
+      toast5.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
         id: toastId
       });
       return;
@@ -12721,7 +13038,7 @@ async function moveToBgShell(handle, tab) {
     closeTabKeepingSession(tab.id, handle ?? null);
     try {
       await api.post("/move/commit", { moveId });
-      toast3.success(t("bgShell.moved", { label }), {
+      toast5.success(t("bgShell.moved", { label }), {
         id: toastId,
         description: t("bgShell.movedDescription"),
         action: {
@@ -12730,7 +13047,7 @@ async function moveToBgShell(handle, tab) {
         }
       });
     } catch (error) {
-      toast3.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
+      toast5.error(t("bgShell.moveFailed", { error: errorMessage(error) }), {
         id: toastId,
         description: t("bgShell.moveFailedDetached")
       });
@@ -12810,12 +13127,16 @@ lucide-react/dist/esm/icons/clipboard-paste.mjs:
 lucide-react/dist/esm/icons/grip-vertical.mjs:
 lucide-react/dist/esm/icons/image-plus.mjs:
 lucide-react/dist/esm/icons/layout-grid.mjs:
+lucide-react/dist/esm/icons/loader-circle.mjs:
 lucide-react/dist/esm/icons/log-out.mjs:
 lucide-react/dist/esm/icons/maximize-2.mjs:
 lucide-react/dist/esm/icons/minimize-2.mjs:
 lucide-react/dist/esm/icons/monitor.mjs:
 lucide-react/dist/esm/icons/pencil.mjs:
+lucide-react/dist/esm/icons/plus.mjs:
 lucide-react/dist/esm/icons/power.mjs:
+lucide-react/dist/esm/icons/search.mjs:
+lucide-react/dist/esm/icons/server.mjs:
 lucide-react/dist/esm/icons/square-chevron-right.mjs:
 lucide-react/dist/esm/icons/trash.mjs:
 lucide-react/dist/esm/icons/triangle-alert.mjs:
