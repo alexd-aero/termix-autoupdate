@@ -1,206 +1,417 @@
 #!/usr/bin/env bash
-# Update Termix (Docker) and Aegis × Burrow, and keep them updated.
+# Keep Termix (Docker), its BG Shell + Termix Updater plugins, and
+# Aegis × Burrow up to date, by themselves.
 #
 #   curl -fsSL https://raw.githubusercontent.com/alexd-aero/termix-autoupdate/main/update.sh | bash
 #
-# What it does:
-#   1. Termix: backs up the data folder, pulls the newest image and recreates
-#      the container only when the image changed. The old image is kept as
-#      <repo>:rollback-<version>. Works for docker compose and docker run.
-#   2. Aegis × Burrow: upgrades to the newest GitHub version (config and data
-#      are kept) and turns on its own auto-update.
-#   3. Installs a daily cron job (04:17) that runs this again.
+# The first run asks for sudo, and once for a Termix admin login (used only to
+# create an API key named "termix-autoupdate"; the password is not stored).
+# After that a daily systemd timer runs everything with no one involved:
+#   1. Termix: back up the data folder, pull the newest image, recreate the
+#      container only when the image changed (old image kept as …:rollback-<v>).
+#   2. Plugins: install / update BG Shell and Termix Updater, grant and enable them.
+#   3. The host service behind the Termix Updater "Update now" button.
+#   4. Aegis × Burrow: upgrade to the newest version, built-in auto-update on.
+#   5. This script itself: the timer fetches the newest version before each run.
 #
-# Options: --check (report only)  --no-auto (skip the cron job)  --uninstall-auto
+# Options: --check (report only)  --no-auto (no timer)  --uninstall-auto
 #          --termix-only  --aegis-only
+# Env:     TERMIX_CONTAINERS=name[,name]  only these containers
+#          TERMIX_ADMIN_USER / TERMIX_ADMIN_PASS  one-time setup without a prompt
 set -uo pipefail
 
-SCRIPT_URL="https://raw.githubusercontent.com/alexd-aero/termix-autoupdate/main/update.sh"
+REPO="alexd-aero/termix-autoupdate"
+SCRIPT_URL="https://raw.githubusercontent.com/$REPO/main/update.sh"
 AEGIS_REPO="alexd-aero/aegis-burrow"
-LOCAL_COPY="$HOME/.local/bin/termix-aegis-update"
-LOG_DIR="$HOME/.local/state/termix-aegis-update"
-BACKUP_DIR="$HOME/termix-backups"
+LIB="/usr/local/lib/termix-autoupdate"
+ETC="/etc/termix-autoupdate"
 KEEP_BACKUPS=5
 
-auto=1; do_termix=1; do_aegis=1; cron_run=0; check=0
+args=("$@")
+auto=1; do_termix=1; do_aegis=1; check=0; service=0
 for arg in "$@"; do
   case "$arg" in
     --no-auto) auto=0 ;;
     --check) check=1; auto=0 ;;
-    --uninstall-auto) crontab -l 2>/dev/null | grep -v "termix-aegis-update" | crontab -; echo "auto-update removed"; exit 0 ;;
-    --termix-only) do_aegis=0 ;;
-    --aegis-only) do_termix=0 ;;
-    --cron) cron_run=1; auto=0 ;;
+    --termix-only) do_aegis=0; auto=0 ;;
+    --aegis-only) do_termix=0; auto=0 ;;
+    --service) service=1; auto=0 ;;
+    --uninstall-auto) ;;
     *) echo "unknown option: $arg"; exit 2 ;;
   esac
 done
 
-if [ -t 1 ]; then G=$'\e[32m'; Y=$'\e[33m'; R=$'\e[31m'; D=$'\e[2m'; N=$'\e[0m'; else G=; Y=; R=; D=; N=; fi
+if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then G=$'\e[32m'; Y=$'\e[33m'; R=$'\e[31m'; D=$'\e[2m'; N=$'\e[0m'; else G=; Y=; R=; D=; N=; fi
 ok()   { echo "  ${G}✓${N} $*"; }
 info() { echo "  ${D}·${N} $*"; }
 warn() { echo "  ${Y}!${N} $*"; }
 fail() { echo "  ${R}✗${N} $*"; }
-[ "$cron_run" = 1 ] && echo "=== $(date -u '+%F %T UTC')"
 
-# sudo only when needed (and never prompt from cron)
-SUDO=""
-if [ "$(id -u)" != 0 ] && command -v sudo >/dev/null 2>&1; then
-  if [ "$cron_run" = 1 ]; then SUDO="sudo -n"; else SUDO="sudo"; fi
+# ------------------------------------------------------------------ run as root
+# Docker, systemd and the plugin files all need it. From `curl | bash` there is
+# no file to re-run, so the script is fetched again for sudo.
+if [ "$(id -u)" != 0 ]; then
+  command -v sudo >/dev/null 2>&1 || { fail "please run as root"; exit 1; }
+  self="$(mktemp)"
+  if [ -f "${BASH_SOURCE[0]:-}" ]; then cp "${BASH_SOURCE[0]}" "$self"; else curl -fsSL "$SCRIPT_URL" -o "$self" || { fail "download failed"; exit 1; }; fi
+  echo "  ${D}·${N} asking for sudo…"
+  sudo INVOKING_USER="$(id -un)" INVOKING_HOME="$HOME" bash "$self" ${args[@]+"${args[@]}"}
+  code=$?; rm -f "$self"; exit $code
+fi
+INVOKING_USER="${INVOKING_USER:-${SUDO_USER:-root}}"
+INVOKING_HOME="${INVOKING_HOME:-$(getent passwd "$INVOKING_USER" | cut -d: -f6)}"
+BACKUP_DIR="${INVOKING_HOME:-/root}/termix-backups"
+
+if [[ " ${args[*]:-} " == *" --uninstall-auto "* ]]; then
+  systemctl disable --now termix-autoupdate.timer 2>/dev/null
+  for u in /etc/systemd/system/termix-autoupdate-updater-*.service; do [ -e "$u" ] && systemctl disable --now "$(basename "$u")" 2>/dev/null; done
+  rm -f /etc/systemd/system/termix-autoupdate.{timer,service} /etc/systemd/system/termix-autoupdate-updater-*.service
+  systemctl daemon-reload; echo "  auto-update removed (plugins stay installed)"; exit 0
 fi
 
-# ------------------------------------------------------------------ Termix
-DOCKER="docker"
-docker_ready() {
-  command -v docker >/dev/null 2>&1 || return 1
-  docker info >/dev/null 2>&1 && return 0
-  $SUDO docker info >/dev/null 2>&1 && DOCKER="$SUDO docker" && return 0
-  return 1
+# The timer runs the newest published script, not whatever was saved last time.
+if [ "$service" = 1 ] && [ -z "${TAU_FRESH:-}" ]; then
+  fresh="$(mktemp)"
+  if curl -fsSL "$SCRIPT_URL" -o "$fresh" 2>/dev/null && bash -n "$fresh" 2>/dev/null; then
+    if ! cmp -s "$fresh" "$LIB/update.sh"; then install -m 755 "$fresh" "$LIB/update.sh"; fi
+    rm -f "$fresh"; TAU_FRESH=1 exec bash "$LIB/update.sh" ${args[@]+"${args[@]}"}
+  fi
+  rm -f "$fresh"
+fi
+[ "$service" = 1 ] && echo "=== $(date -u '+%F %T UTC')"
+
+WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT
+fetch_repo() {  # plugins + updater.py, once per run
+  [ -d "$WORK/repo" ] && return 0
+  mkdir -p "$WORK/repo"
+  if [ -n "${TAU_SOURCE_DIR:-}" ]; then cp -r "$TAU_SOURCE_DIR"/. "$WORK/repo/"; return; fi  # testing a checkout
+  curl -fsSL "https://codeload.github.com/$REPO/tar.gz/refs/heads/main" | tar -xz -C "$WORK/repo" --strip-components=1
 }
 
-termix_version() { $DOCKER exec "$1" node -p "require('/app/package.json').version" 2>/dev/null || echo "?"; }
+# ------------------------------------------------------------------ Termix
+docker_ready() { command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; }
+termix_containers() { [ -n "${TERMIX_CONTAINERS:-}" ] && { tr ', ' '\n\n' <<<"$TERMIX_CONTAINERS" | sed '/^$/d'; return; }
+  docker ps -a --format '{{.Names}}\t{{.Image}}' | awk -F'\t' 'tolower($2) ~ /lukegus\/termix|termix-ssh\/termix/ && $2 !~ /rollback/ {print $1}'; }
+termix_version() { docker exec "$1" node -p "require('/app/package.json').version" 2>/dev/null || echo "?"; }
+wait_termix() {  # until the backend answers inside the container
+  local _
+  for _ in $(seq 1 90); do
+    docker exec "$1" node -e "fetch('http://127.0.0.1:30001/').then(()=>process.exit(0)).catch(()=>process.exit(1))" >/dev/null 2>&1 && return 0
+    sleep 2
+  done
+  return 1
+}
+data_owner() { docker exec "$1" node -e "const s=require('fs').statSync('/app/data');console.log(s.uid+':'+s.gid)"; }
+data_host_path() {  # where /app/data lives on the host
+  docker inspect -f '{{range .Mounts}}{{if eq .Destination "/app/data"}}{{.Source}}{{end}}{{end}}' "$1"
+}
 
-backup_termix() {  # $1 container
-  local src vol stamp out
-  src="$($DOCKER inspect -f '{{range .Mounts}}{{if eq .Destination "/app/data"}}{{.Type}}|{{.Source}}|{{.Name}}{{end}}{{end}}' "$1")"
+backup_termix() {
+  local src out
+  src="$(docker inspect -f '{{range .Mounts}}{{if eq .Destination "/app/data"}}{{if eq .Type "volume"}}{{.Name}}{{else}}{{.Source}}{{end}}{{end}}{{end}}' "$1")"
   [ -n "$src" ] || { warn "no /app/data mount found, skipping the backup"; return 0; }
-  mkdir -p "$BACKUP_DIR"; stamp="$(date +%Y%m%d-%H%M%S)"; out="$BACKUP_DIR/termix-$1-$stamp.tgz"
-  local type="${src%%|*}" rest="${src#*|}"; local path="${rest%%|*}" name="${rest#*|}"
-  vol="$path"; [ "$type" = volume ] && vol="$name"
-  # tar from inside a container: works for bind mounts and named volumes, no root needed on the host
-  if $DOCKER run --rm --entrypoint tar -v "$vol":/data:ro -v "$BACKUP_DIR":/backup \
-       "$($DOCKER inspect -f '{{.Image}}' "$1")" czf "/backup/$(basename "$out")" -C / data >/dev/null 2>&1; then
-    ok "backup: $out"
-  else
-    warn "backup failed; continuing without one"
-  fi
+  mkdir -p "$BACKUP_DIR"; out="termix-$1-$(date +%Y%m%d-%H%M%S).tgz"
+  docker run --rm --entrypoint tar -v "$src":/data:ro -v "$BACKUP_DIR":/backup \
+    "$(docker inspect -f '{{.Image}}' "$1")" czf "/backup/$out" -C / --exclude='data/host-updater' data >/dev/null 2>&1
+  local code=$?
+  chown "$INVOKING_USER": "$BACKUP_DIR" "$BACKUP_DIR/$out" 2>/dev/null
+  # tar exits 1 when a file changed while it was read (Termix was running): still a full archive
+  if [ "$code" -le 1 ] && [ -s "$BACKUP_DIR/$out" ]; then ok "backup: $BACKUP_DIR/$out"
+  else rm -f "$BACKUP_DIR/$out"; warn "backup failed; continuing without one"; fi
   ls -1t "$BACKUP_DIR"/termix-"$1"-*.tgz 2>/dev/null | tail -n +$((KEEP_BACKUPS + 1)) | xargs -r rm -f
 }
 
-recreate_plain() {  # docker run install: rebuild the same container on the new image
-  local c="$1" image="$2" args=() line
-  local old_image_env; old_image_env="$($DOCKER image inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$($DOCKER inspect -f '{{.Image}}' "$c")")"
-  while IFS= read -r line; do [ -n "$line" ] && ! grep -qxF "$line" <<<"$old_image_env" && args+=(-e "$line"); done \
-    < <($DOCKER inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$c")
+recreate_plain() {  # a `docker run` install: the same container on the new image
+  local c="$1" image="$2" args=() line old_env
+  old_env="$(docker image inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$(docker inspect -f '{{.Image}}' "$c")")"
+  while IFS= read -r line; do [ -n "$line" ] && ! grep -qxF "$line" <<<"$old_env" && args+=(-e "$line"); done \
+    < <(docker inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$c")
   while IFS= read -r line; do [ -n "$line" ] && args+=(-p "$line"); done \
-    < <($DOCKER inspect -f '{{range $p, $b := .HostConfig.PortBindings}}{{range $b}}{{if .HostIp}}{{.HostIp}}:{{end}}{{.HostPort}}:{{$p}}{{println}}{{end}}{{end}}' "$c")
+    < <(docker inspect -f '{{range $p, $b := .HostConfig.PortBindings}}{{range $b}}{{if .HostIp}}{{.HostIp}}:{{end}}{{.HostPort}}:{{$p}}{{println}}{{end}}{{end}}' "$c")
   while IFS= read -r line; do [ -n "$line" ] && args+=(-v "$line"); done \
-    < <($DOCKER inspect -f '{{range .Mounts}}{{if eq .Type "volume"}}{{.Name}}{{else}}{{.Source}}{{end}}:{{.Destination}}{{if not .RW}}:ro{{end}}{{println}}{{end}}' "$c")
+    < <(docker inspect -f '{{range .Mounts}}{{if eq .Type "volume"}}{{.Name}}{{else}}{{.Source}}{{end}}:{{.Destination}}{{if not .RW}}:ro{{end}}{{println}}{{end}}' "$c")
   local restart net
-  restart="$($DOCKER inspect -f '{{.HostConfig.RestartPolicy.Name}}' "$c")"; [ -n "$restart" ] && [ "$restart" != no ] && args+=(--restart "$restart")
-  net="$($DOCKER inspect -f '{{.HostConfig.NetworkMode}}' "$c")"; [ -n "$net" ] && [ "$net" != default ] && args+=(--network "$net")
-  $DOCKER rename "$c" "$c-old" >/dev/null && $DOCKER stop "$c-old" >/dev/null || return 1
-  if $DOCKER run -d --name "$c" "${args[@]}" "$image" >/dev/null; then
-    $DOCKER rm "$c-old" >/dev/null; return 0
-  fi
+  restart="$(docker inspect -f '{{.HostConfig.RestartPolicy.Name}}' "$c")"; [ -n "$restart" ] && [ "$restart" != no ] && args+=(--restart "$restart")
+  net="$(docker inspect -f '{{.HostConfig.NetworkMode}}' "$c")"; [ -n "$net" ] && [ "$net" != default ] && args+=(--network "$net")
+  docker rename "$c" "$c-old" >/dev/null && docker stop "$c-old" >/dev/null || return 1
+  if docker run -d --name "$c" "${args[@]}" "$image" >/dev/null; then docker rm "$c-old" >/dev/null; return 0; fi
   fail "could not start the new container; restoring the old one"
-  $DOCKER rm -f "$c" >/dev/null 2>&1; $DOCKER rename "$c-old" "$c" && $DOCKER start "$c" >/dev/null
+  docker rm -f "$c" >/dev/null 2>&1; docker rename "$c-old" "$c" && docker start "$c" >/dev/null
   return 1
+}
+
+declare -A RECREATED=()
+update_termix_image() {  # $1 container
+  local c="$1" image before after old_ver new_ver wd files service
+  image="$(docker inspect -f '{{.Config.Image}}' "$c")"
+  before="$(docker inspect -f '{{.Image}}' "$c")"
+  old_ver="$(termix_version "$c")"
+  info "$c: Termix $old_ver ($image)"
+  [ "$check" = 1 ] && { info "$c: --check, not pulling"; return 0; }
+  docker pull -q "$image" >/dev/null 2>&1 || { fail "$c: could not pull $image"; return 1; }
+  after="$(docker image inspect -f '{{.Id}}' "$image")"
+  [ "$before" = "$after" ] && { ok "$c: Termix is up to date"; return 0; }
+  backup_termix "$c"
+  docker tag "$before" "${image%:*}:rollback-$old_ver" >/dev/null 2>&1 && info "old image kept as ${image%:*}:rollback-$old_ver"
+  wd="$(docker inspect -f '{{index .Config.Labels "com.docker.compose.project.working_dir"}}' "$c" 2>/dev/null)"
+  files="$(docker inspect -f '{{index .Config.Labels "com.docker.compose.project.config_files"}}' "$c" 2>/dev/null)"
+  service="$(docker inspect -f '{{index .Config.Labels "com.docker.compose.service"}}' "$c" 2>/dev/null)"
+  if [ -n "$wd" ] && [ -n "$files" ] && [ -n "$service" ] && [ -f "${files%%,*}" ]; then
+    local fargs=() fl f; IFS=',' read -ra fl <<<"$files"; for f in "${fl[@]}"; do fargs+=(-f "$f"); done
+    docker compose --project-directory "$wd" "${fargs[@]}" up -d "$service" >/dev/null 2>&1 || { fail "$c: docker compose up failed"; return 1; }
+  else
+    recreate_plain "$c" "$image" || return 1
+  fi
+  RECREATED[$c]=1
+  wait_termix "$c"; new_ver="$(termix_version "$c")"
+  ok "$c: Termix $old_ver → $new_ver"
+}
+
+# ---- Termix admin API, called from inside the container (no URL/TLS guessing)
+api() {  # $1 container, $2 method, $3 path, [$4 json body]; prints "status body"
+  local key; key="$(cat "$ETC/api-key-$1" 2>/dev/null)"
+  docker exec -e K="$key" -e M="$2" -e P="$3" -e B="${4:-}" "$1" node -e '
+    const h = { "Content-Type": "application/json" };
+    if (process.env.K) h.Authorization = "Bearer " + process.env.K;
+    fetch("http://127.0.0.1:30001" + process.env.P, { method: process.env.M, headers: h, body: process.env.B || undefined })
+      .then(async (r) => console.log(r.status, (await r.text()).slice(0, 300)))
+      .catch((e) => console.log(0, e.message));' 2>/dev/null
+}
+
+ensure_api_key() {  # one-time: log in as an admin, create an API key, keep only the key
+  local c="$1" st
+  if [ -s "$ETC/api-key-$c" ]; then
+    st="$(api "$c" GET /plugins | cut -d' ' -f1)"; [ "$st" = 200 ] && return 0
+    warn "the saved Termix API key no longer works"
+  fi
+  local interactive=1
+  [ -n "${TERMIX_ADMIN_USER:-}" ] && [ -n "${TERMIX_ADMIN_PASS:-}" ] && interactive=0
+  if [ "$interactive" = 1 ] && { [ "$service" = 1 ] || ! (exec </dev/tty) 2>/dev/null; }; then
+    warn "no Termix admin key yet: run the one-liner once in a terminal to set it up"; return 1
+  fi
+  echo; echo "  One-time setup: a Termix admin login, to create an API key for the updater."
+  echo "  ${D}(the password is only used now and is not saved)${N}"
+  local user pass out
+  for _ in 1 2 3; do
+    if [ "$interactive" = 1 ]; then
+      read -r -p "  Termix admin username: " user </dev/tty
+      read -r -s -p "  Termix admin password: " pass </dev/tty; echo
+    else user="$TERMIX_ADMIN_USER"; pass="$TERMIX_ADMIN_PASS"; fi
+    out="$(docker exec -i -e U="$user" -e PW="$pass" "$c" node -e '
+      const base = "http://127.0.0.1:30001", j = { "Content-Type": "application/json" };
+      const jwtOf = (r) => ((r.headers.getSetCookie?.() || []).join(";").match(/jwt=([^;]+)/) || [])[1];
+      const ask = () => new Promise((res) => { process.stderr.write("  2FA code: "); process.stdin.once("data", (d) => res(String(d).trim())); });
+      (async () => {
+        let r = await fetch(base + "/users/login", { method: "POST", headers: j, body: JSON.stringify({ username: process.env.U, password: process.env.PW }) });
+        let body = await r.json().catch(() => ({}));
+        let jwt = jwtOf(r);
+        if (body.requires_totp) {
+          const code = await ask();
+          r = await fetch(base + "/users/totp/verify-login", { method: "POST", headers: j, body: JSON.stringify({ temp_token: body.temp_token, totp_code: code }) });
+          body = await r.json().catch(() => ({})); jwt = jwtOf(r);
+        }
+        if (!jwt || !body.is_admin) { console.log("ERR " + (body.error || (jwt ? "not an admin account" : "login failed"))); return; }
+        const k = await fetch(base + "/users/api-keys", { method: "POST", headers: { ...j, Cookie: "jwt=" + jwt }, body: JSON.stringify({ name: "termix-autoupdate", userId: body.userId }) });
+        const kb = await k.json().catch(() => ({}));
+        console.log(kb.token ? "KEY " + kb.token : "ERR " + (kb.error || "could not create the API key"));
+      })().catch((e) => console.log("ERR " + e.message)).finally(() => process.stdin.pause());' < "$( [ "$interactive" = 1 ] && echo /dev/tty || echo /dev/null )")"
+    if [[ "$out" == KEY\ * ]]; then
+      install -d -m 700 "$ETC"; (umask 077; echo "${out#KEY }" > "$ETC/api-key-$c"); ok "API key created and saved in $ETC (root only)"; return 0
+    fi
+    fail "${out#ERR }"
+    [ "$interactive" = 0 ] && return 1
+  done
+  return 1
+}
+
+install_plugins() {  # $1 container
+  local c="$1" p id new cur changed=() fresh=() owner
+  fetch_repo || { fail "could not download the plugins"; return 1; }
+  owner="$(data_owner "$c")"
+  for p in "$WORK/repo/plugins"/*/; do
+    id="$(basename "$p")"
+    new="$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$p/manifest.json" | head -1)"
+    cur="$(docker exec "$c" sh -c "sed -n 's/.*\"version\": *\"\\([^\"]*\\)\".*/\\1/p' /app/data/plugins/$id/manifest.json 2>/dev/null | head -1")"
+    if [ -n "$cur" ] && [ "$cur" = "$new" ] && [ "$(docker exec "$c" sh -c "cat /app/data/plugins/$id/dist/*.js" 2>/dev/null | sha256sum)" = "$(cat "$p"dist/*.js | sha256sum)" ]; then
+      ok "plugin $id $cur is current"; continue
+    fi
+    [ "$check" = 1 ] && { warn "plugin $id: ${cur:-not installed} → $new"; continue; }
+    docker exec -u 0 "$c" sh -c "rm -rf /app/data/plugins/.$id.new && mkdir -p /app/data/plugins/.$id.new" &&
+    docker cp "$p." "$c:/app/data/plugins/.$id.new" >/dev/null &&
+    docker exec -u 0 "$c" sh -c "chown -R $owner /app/data/plugins/.$id.new /app/data/plugins && rm -rf /app/data/plugins/$id && mv /app/data/plugins/.$id.new /app/data/plugins/$id" \
+      || { fail "could not install plugin $id"; continue; }
+    if [ -z "$cur" ]; then fresh+=("$id"); ok "plugin $id $new installed"; else changed+=("$id"); ok "plugin $id $cur → $new"; fi
+  done
+  [ "$check" = 1 ] && return 0
+
+  # Termix only discovers a new plugin folder when it starts.
+  if [ ${#fresh[@]} -gt 0 ]; then
+    info "restarting Termix once so it sees the new plugins…"
+    docker restart "$c" >/dev/null && wait_termix "$c"
+    changed=()   # a fresh start loads the new code of the others too
+  fi
+
+  ensure_api_key "$c" || return 1
+  local cap st
+  for p in "$WORK/repo/plugins"/*/; do
+    id="$(basename "$p")"
+    for cap in $(tr -d '\n ' < "$p/manifest.json" | sed -n 's/.*"capabilities":\[\([^]]*\)\].*/\1/p' | tr -d '"' | tr ',' ' '); do
+      api "$c" POST "/plugins/$id/grants" "{\"capability\":\"$cap\"}" >/dev/null
+    done
+    if [[ " ${changed[*]:-} " == *" $id "* ]]; then  # new code without a restart: reload just this plugin
+      api "$c" PATCH "/plugins/$id/state" '{"enabled":false}' >/dev/null
+    fi
+    st="$(api "$c" PATCH "/plugins/$id/state" '{"enabled":true}')"
+    [ "${st%% *}" = 200 ] && ok "plugin $id enabled" || fail "could not enable $id: ${st#* }"
+  done
+}
+
+install_host_updater() {  # $1 container: the service behind the "Update now" button
+  local c="$1" data owner unit name
+  name="termix-autoupdate-updater-$(tr -c 'A-Za-z0-9_.-' '_' <<<"$c" | sed 's/_$//').service"
+  data="$(data_host_path "$c")"; [ -n "$data" ] || { warn "no data folder for $c; the Update button will not work"; return 1; }
+  fetch_repo || return 1
+  install -d "$LIB"
+  local changed=0
+  cmp -s "$WORK/repo/updater.py" "$LIB/updater.py" || { install -m 755 "$WORK/repo/updater.py" "$LIB/updater.py"; changed=1; }
+  cmp -s "$WORK/repo/update.sh" "$LIB/update.sh" || install -m 755 "$WORK/repo/update.sh" "$LIB/update.sh"
+  # an earlier hand-made updater on the same socket would fight this one
+  local old_unit=/etc/systemd/system/termix-updater.service old_home
+  old_home="$(getent passwd "$(sed -n 's/^User=//p' "$old_unit" 2>/dev/null)" | cut -d: -f6)"
+  if [ -f "$old_unit" ] && grep -q "termix-updater.py" "$old_unit" && [ -n "$old_home" ] && [ "$(realpath -m "$old_home/termix/data")" = "$(realpath -m "$data")" ]; then
+    systemctl disable --now termix-updater.service >/dev/null 2>&1; info "retired the old termix-updater.service"; changed=1
+  fi
+  owner="$(data_owner "$c")"
+  unit="[Unit]
+Description=Termix Updater host service (Unix socket for the termix-updater plugin)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Environment=UPDATER_SOCKET=$data/host-updater/updater.sock
+Environment=TERMIX_CONTAINER=$c
+Environment=SOCKET_OWNER=$owner
+Environment=UPDATE_SCRIPT=$LIB/update.sh
+Environment=INVOKING_USER=$INVOKING_USER
+Environment=INVOKING_HOME=$INVOKING_HOME
+ExecStart=/usr/bin/python3 $LIB/updater.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target"
+  if [ "$(cat "/etc/systemd/system/$name" 2>/dev/null)" != "$unit" ]; then
+    echo "$unit" > "/etc/systemd/system/$name"
+    systemctl daemon-reload; changed=1
+  fi
+  systemctl enable "$name" >/dev/null 2>&1
+  if [ "$changed" = 1 ] || ! systemctl is-active -q "$name"; then
+    systemctl restart "$name"
+  fi
+  systemctl is-active -q "$name" && ok "Update button service running" || fail "Update button service did not start"
 }
 
 update_termix() {
   echo; echo "  Termix"
-  if ! docker_ready; then warn "Docker is not available here, skipping Termix"; return 0; fi
-  local containers; containers="$($DOCKER ps -a --format '{{.Names}}\t{{.Image}}' | awk -F'\t' 'tolower($2) ~ /termix/ && $2 !~ /rollback/ {print $1}')"
-  [ -n "$containers" ] || { info "no Termix container found"; return 0; }
-  local c
-  for c in $containers; do
-    local image before after old_ver new_ver wd files service
-    image="$($DOCKER inspect -f '{{.Config.Image}}' "$c")"
-    before="$($DOCKER inspect -f '{{.Image}}' "$c")"
-    old_ver="$(termix_version "$c")"
-    info "$c: Termix $old_ver ($image)"
-    if [ "$check" = 1 ]; then info "$c: --check, not pulling"; continue; fi
-    if ! $DOCKER pull -q "$image" >/dev/null 2>&1; then fail "$c: could not pull $image"; continue; fi
-    after="$($DOCKER image inspect -f '{{.Id}}' "$image")"
-    if [ "$before" = "$after" ]; then ok "$c: already up to date"; continue; fi
-    backup_termix "$c"
-    $DOCKER tag "$before" "${image%:*}:rollback-$old_ver" >/dev/null 2>&1 && info "old image kept as ${image%:*}:rollback-$old_ver"
-    wd="$($DOCKER inspect -f '{{index .Config.Labels "com.docker.compose.project.working_dir"}}' "$c" 2>/dev/null)"
-    files="$($DOCKER inspect -f '{{index .Config.Labels "com.docker.compose.project.config_files"}}' "$c" 2>/dev/null)"
-    service="$($DOCKER inspect -f '{{index .Config.Labels "com.docker.compose.service"}}' "$c" 2>/dev/null)"
-    if [ -n "$wd" ] && [ -n "$files" ] && [ -n "$service" ] && [ -f "${files%%,*}" ]; then
-      local fargs=(); IFS=',' read -ra fl <<<"$files"; for f in "${fl[@]}"; do fargs+=(-f "$f"); done
-      $DOCKER compose --project-directory "$wd" "${fargs[@]}" up -d "$service" >/dev/null 2>&1 \
-        || { fail "$c: docker compose up failed"; continue; }
-    else
-      recreate_plain "$c" "$image" || continue
-    fi
-    for _ in $(seq 1 60); do new_ver="$(termix_version "$c")"; [ "$new_ver" != "?" ] && break; sleep 2; done
-    ok "$c: Termix $old_ver → $new_ver"
+  docker_ready || { warn "Docker is not available here, skipping Termix"; return 0; }
+  local cs c; cs="$(termix_containers)"
+  [ -n "$cs" ] || { info "no Termix container found"; return 0; }
+  for c in $cs; do
+    update_termix_image "$c"
+    docker ps --format '{{.Names}}' | grep -qx "$c" || { warn "$c is not running; skipping its plugins"; continue; }
+    install_plugins "$c"
+    # never from inside the button's own service: restarting it would kill this run
+    [ "$check" = 1 ] || [ -n "${UPDATER_CHILD:-}" ] || install_host_updater "$c"
   done
 }
 
 # ------------------------------------------------------------------ Aegis × Burrow
-# Where it is installed: the discovery file each version writes, then running
-# services, then the default location.
 find_aegis_homes() {
   local f h
-  for f in "$HOME/.config/aegis/aegis.json" /home/*/.config/aegis/aegis.json /root/.config/aegis/aegis.json; do
+  for f in "${INVOKING_HOME:-/root}/.config/aegis/aegis.json" /home/*/.config/aegis/aegis.json /root/.config/aegis/aegis.json; do
     [ -r "$f" ] || continue
     h="$(sed -n 's/.*"home": *"\([^"]*\)".*/\1/p' "$f" | head -1)"; [ -n "$h" ] && echo "$h"
   done
-  for f in /etc/systemd/system/*.service "$HOME"/.config/systemd/user/*.service /home/*/.config/systemd/user/*.service; do
+  for f in /etc/systemd/system/*.service /home/*/.config/systemd/user/*.service; do
     [ -r "$f" ] || continue
     grep -q "server.mjs" "$f" || continue
     h="$(sed -n 's/^Environment="\{0,1\}AEGIS_HOME=\([^"]*\)"\{0,1\}$/\1/p' "$f" | head -1)"
     [ -z "$h" ] && h="$(sed -n 's#^ExecStart=.* \(/[^ ]*\)/app/\(aegis\|server\)/server.mjs.*#\1#p' "$f" | head -1)"
     [ -n "$h" ] && echo "$h"
   done
-  for h in "$HOME/.local/share/aegis" /home/*/.local/share/aegis; do [ -d "$h/app" ] && echo "$h"; done
+  for h in /home/*/.local/share/aegis /root/.local/share/aegis; do [ -d "$h/app" ] && echo "$h"; done
 }
-
 ver_lt() { [ "$1" != "$2" ] && [ "$(printf '%s\n%s\n' "$1" "$2" | sort -V | head -1)" = "$1" ]; }
 
 update_aegis() {
   echo; echo "  Aegis × Burrow"
-  local homes; homes="$(find_aegis_homes | awk '!seen[$0]++')"
+  local homes latest home; homes="$(find_aegis_homes | awk '!seen[$0]++')"
   [ -n "$homes" ] || { info "not installed here"; return 0; }
-  local latest; latest="$(curl -fsSL "https://raw.githubusercontent.com/$AEGIS_REPO/main/package.json" | sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' | head -1)"
+  latest="$(curl -fsSL "https://raw.githubusercontent.com/$AEGIS_REPO/main/package.json" | sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' | head -1)"
   [ -n "$latest" ] || { fail "could not reach GitHub"; return 0; }
-  local home
   while IFS= read -r home; do
     [ -f "$home/app/package.json" ] || continue
     local cur owner as=()
     cur="$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$home/app/package.json" | head -1)"
     owner="$(stat -c %U "$home")"
-    if [ "$owner" != "$(id -un)" ]; then
-      if [ "$(id -u)" = 0 ]; then as=(runuser -u "$owner" --); else as=($SUDO -u "$owner" -H); fi
-    fi
+    [ "$owner" != root ] && as=(runuser -u "$owner" --)
     info "$home: v${cur:-?} (owner $owner)"
-    if [ -n "$cur" ] && ! ver_lt "$cur" "$latest"; then ok "already up to date (v$cur)"
-    elif [ "$check" = 1 ]; then warn "update available: v${cur:-?} → v$latest"; continue; else
+    if [ -n "$cur" ] && ! ver_lt "$cur" "$latest"; then ok "Aegis is up to date (v$cur)"
+    elif [ "$check" = 1 ]; then warn "update available: v${cur:-?} → v$latest"; continue
+    else
       local tmp src; tmp="$(mktemp -d)"; chmod 755 "$tmp"
-      if ! curl -fsSL "https://codeload.github.com/$AEGIS_REPO/tar.gz/refs/heads/main" | tar -xz -C "$tmp"; then
-        fail "download failed"; rm -rf "$tmp"; continue
-      fi
-      src="$(ls -d "$tmp"/*/ | head -1)"; chmod -R a+rX "$tmp"
-      if ${as[@]+"${as[@]}"} env AEGIS_HOME="$home" "$src/bin/aegis" upgrade --setup browser </dev/null; then
-        ok "Aegis × Burrow v${cur:-?} → v$latest"
-      else
-        fail "upgrade failed (backups of the old code stay in $home)"
-      fi
+      if curl -fsSL "https://codeload.github.com/$AEGIS_REPO/tar.gz/refs/heads/main" | tar -xz -C "$tmp"; then
+        src="$(ls -d "$tmp"/*/ | head -1)"; chmod -R a+rX "$tmp"
+        if ${as[@]+"${as[@]}"} env HOME="$(getent passwd "$owner" | cut -d: -f6)" AEGIS_HOME="$home" "$src/bin/aegis" upgrade --setup browser </dev/null; then
+          ok "Aegis × Burrow v${cur:-?} → v$latest"
+        else fail "upgrade failed (the old code is kept in $home)"; fi
+      else fail "download failed"; fi
       rm -rf "$tmp"
     fi
     [ "$check" = 1 ] && continue
-    # the built-in updater keeps it current from now on (2.4+)
-    ${as[@]+"${as[@]}"} env AEGIS_HOME="$home" "$home/app/bin/aegis" update auto on >/dev/null 2>&1 \
+    ${as[@]+"${as[@]}"} env HOME="$(getent passwd "$owner" | cut -d: -f6)" AEGIS_HOME="$home" "$home/app/bin/aegis" update auto on >/dev/null 2>&1 \
       && ok "Aegis built-in auto-update is on"
   done <<<"$homes"
 }
 
-# ------------------------------------------------------------------ auto-update
-install_auto() {
-  mkdir -p "$(dirname "$LOCAL_COPY")" "$LOG_DIR"
-  if curl -fsSL "$SCRIPT_URL" -o "$LOCAL_COPY.tmp" 2>/dev/null; then mv "$LOCAL_COPY.tmp" "$LOCAL_COPY"
-  elif [ -f "${BASH_SOURCE[0]:-}" ]; then cp "${BASH_SOURCE[0]}" "$LOCAL_COPY"; fi
-  chmod +x "$LOCAL_COPY" 2>/dev/null || { warn "could not save a local copy, no auto-update"; return; }
-  local line="17 4 * * * $LOCAL_COPY --cron >> $LOG_DIR/update.log 2>&1 # termix-aegis-update"
-  ( crontab -l 2>/dev/null | grep -v "termix-aegis-update"; echo "$line" ) | crontab - \
-    && ok "auto-update: daily at 04:17 (log: $LOG_DIR/update.log, remove: $LOCAL_COPY --uninstall-auto)"
+# ------------------------------------------------------------------ the daily timer
+install_timer() {
+  fetch_repo || return 1
+  install -d "$LIB"; install -m 755 "$WORK/repo/update.sh" "$LIB/update.sh"
+  cat > /etc/systemd/system/termix-autoupdate.service <<EOF
+[Unit]
+Description=Update Termix, its plugins and Aegis × Burrow
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=INVOKING_USER=$INVOKING_USER
+Environment=INVOKING_HOME=$INVOKING_HOME
+ExecStart=/bin/bash $LIB/update.sh --service
+EOF
+  cat > /etc/systemd/system/termix-autoupdate.timer <<'EOF'
+[Unit]
+Description=Daily Termix + Aegis × Burrow update
+
+[Timer]
+OnCalendar=*-*-* 04:17
+RandomizedDelaySec=20m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+  systemctl daemon-reload && systemctl enable --now termix-autoupdate.timer >/dev/null 2>&1 \
+    && ok "auto-update: daily ~04:17 (log: journalctl -u termix-autoupdate)"
+  # the first version used a crontab line and a copy in ~/.local/bin
+  if [ "$INVOKING_USER" != root ]; then
+    runuser -u "$INVOKING_USER" -- sh -c 'crontab -l 2>/dev/null | grep -v termix-aegis-update | crontab - 2>/dev/null; rm -f "$HOME/.local/bin/termix-aegis-update"' 2>/dev/null
+  fi
 }
 
 echo; echo "  Termix + Aegis × Burrow updater"
 [ "$do_termix" = 1 ] && update_termix
 [ "$do_aegis" = 1 ] && update_aegis
-if [ "$auto" = 1 ]; then echo; install_auto; fi
+if [ "$auto" = 1 ]; then echo; install_timer; fi
 echo

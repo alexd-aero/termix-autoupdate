@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "bgShell": "BG Shell"
+  },
+  "permissions": {
+    "use": {
+      "title": "Use BG Shell",
+      "description": "Move terminal sessions to the background and reopen them from any device."
+    }
+  },
+  "palette": {
+    "open": "Open BG Shell"
+  },
+  "bgShell": {
+    "moveToBg": "Move to BG Shell",
+    "moving": "Moving \"{{label}}\" to BG Shell...",
+    "moved": "\"{{label}}\" moved to BG Shell",
+    "movedDescription": "It keeps running. Open BG Shell from any device to pick it up.",
+    "open": "Open",
+    "moveFailed": "Could not move to BG Shell: {{error}}",
+    "moveFailedDetached": "The session is still running on the server for now. Reopen BG Shell to check on it.",
+    "notConnected": "This terminal is not connected, so there is nothing to keep running.",
+    "title": "BG Shell",
+    "subtitle": "Sessions that keep running when you close the page",
+    "emptyTitle": "No background sessions",
+    "emptyBody": "Right-click a connected terminal tab and choose \"Move to BG Shell\". The session keeps running on the server, and you can pick it up here after a refresh, a reboot or from another device.",
+    "selectSession": "Select a session to open it",
+    "statusLive": "Running",
+    "statusAttaching": "Connecting",
+    "statusReconnecting": "Reconnecting",
+    "statusAway": "Open in a terminal tab",
+    "statusNeedsAuth": "Waiting for sign-in",
+    "statusEnded": "Ended",
+    "awayHint": "This session is attached to a terminal tab somewhere else. It returns here when that tab disconnects.",
+    "needsAuthHint": "The server lost its sign-in for this session. It reconnects as soon as you open BG Shell while signed in.",
+    "endedHint": "This session has ended. The last screen is shown below.",
+    "started": "Started {{time}}",
+    "movedAt": "Moved {{time}}",
+    "endedAt": "Ended {{time}}",
+    "rename": "Rename",
+    "renamePlaceholder": "Session name",
+    "terminate": "Terminate",
+    "terminateTitle": "Terminate \"{{label}}\"?",
+    "terminateBody": "This closes the SSH session and stops every process running in it. This cannot be undone.",
+    "terminated": "\"{{label}}\" terminated",
+    "dismiss": "Remove",
+    "dismissed": "Removed \"{{label}}\"",
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Sessions",
+    "count": "{{count}} running",
+    "viewerCount": "{{count}} viewing",
+    "resizeHint": "Sized for another device. Click or type to fit this window.",
+    "connectionLost": "Connection to the server lost. Reconnecting...",
+    "justNow": "just now",
+    "minutesAgo": "{{count}} min ago",
+    "hoursAgo": "{{count}} h ago",
+    "daysAgo": "{{count}} d ago",
+    "errorGeneric": "Something went wrong",
+    "openFull": "Open BG Shell",
+    "panelHint": "Right-click a terminal tab and choose \"Move to BG Shell\" to keep it running here."
+  }
+}

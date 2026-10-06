@@ -1,0 +1,27 @@
+{
+  "id": "termix-updater",
+  "name": "Termix Updater",
+  "version": "1.0.0",
+  "description": "One-click Termix updates: backs up the data, pulls the new image and restarts the container through a host-side updater service.",
+  "author": { "name": "adatskov" },
+  "license": "MIT",
+  "category": "Infrastructure",
+  "icon": "CloudDownload",
+  "engine": { "termix": ">=2.9.0", "api": "1" },
+  "capabilities": ["network:serve", "ui:surface"],
+  "locales": "locales",
+  "platforms": ["linux"],
+  "contributes": {
+    "dashboardCards": [
+      { "id": "termix_update", "titleKey": "updater.title", "icon": "CloudDownload" }
+    ],
+    "permissions": [
+      {
+        "name": "update",
+        "titleKey": "permissions.update.title",
+        "descriptionKey": "permissions.update.description",
+        "defaultRoles": ["admin"]
+      }
+    ]
+  }
+}

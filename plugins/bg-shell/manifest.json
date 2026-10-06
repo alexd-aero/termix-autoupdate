@@ -1,0 +1,71 @@
+{
+  "id": "bg-shell",
+  "name": "BG Shell",
+  "version": "1.0.0",
+  "description": "Keep SSH terminal sessions running in the background. Move a terminal tab to BG Shell and pick it up again after a refresh, a reboot or from another device.",
+  "author": {
+    "name": "adatskov"
+  },
+  "license": "MIT",
+  "category": "Terminal",
+  "icon": "SquareChevronRight",
+  "engine": {
+    "termix": ">=2.9.0",
+    "api": "1"
+  },
+  "capabilities": [
+    "network:serve",
+    "ui:surface",
+    "files:own",
+    "secrets:own"
+  ],
+  "dependencies": {
+    "ssh-terminal": "^1.0.0"
+  },
+  "requires": [
+    {
+      "service": "sessions.live",
+      "versionRange": "^1.0.0"
+    }
+  ],
+  "locales": "locales",
+  "platforms": [
+    "linux",
+    "win32",
+    "darwin"
+  ],
+  "contributes": {
+    "tabs": [
+      {
+        "id": "bg-shell",
+        "titleKey": "nav.bgShell",
+        "icon": "SquareChevronRight",
+        "openFrom": [
+          "rail",
+          "palette"
+        ]
+      }
+    ],
+    "permissions": [
+      {
+        "name": "use",
+        "titleKey": "permissions.use.title",
+        "descriptionKey": "permissions.use.description",
+        "defaultRoles": [
+          "admin",
+          "user"
+        ]
+      }
+    ],
+    "uses": [
+      "terminal.resolveTheme"
+    ],
+    "panels": [
+      {
+        "id": "bg-shell",
+        "titleKey": "nav.bgShell",
+        "icon": "SquareChevronRight"
+      }
+    ]
+  }
+}

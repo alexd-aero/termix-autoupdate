@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "update": {
+      "title": "Update Termix",
+      "description": "Install new Termix versions from the dashboard."
+    }
+  },
+  "updater": {
+    "title": "Termix Update",
+    "palette": "Update Termix",
+    "current": "Running {{version}}",
+    "latest": "Latest {{version}}",
+    "upToDate": "Termix is up to date.",
+    "available": "Termix {{version}} is available",
+    "updateNow": "Update now",
+    "releaseNotes": "Release notes",
+    "confirmTitle": "Update Termix to {{version}}?",
+    "confirmBody": "Your data is backed up first, then Termix restarts with the new version. Open terminals, including BG Shell sessions, are closed by the restart. This takes about a minute.",
+    "cancel": "Cancel",
+    "started": "Updating Termix. The page reconnects when it is back.",
+    "running": "Updating...",
+    "done": "Update finished",
+    "failed": "Update failed: {{error}}",
+    "unavailable": "The host updater service is not running.",
+    "checkAgain": "Check again"
+  }
+}
