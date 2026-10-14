@@ -239,7 +239,7 @@ __iconData.node;
 var CloudDownload = createLucideIcon(__iconData);
 
 // src/frontend/index.tsx
-import { useTranslation } from "@termix/plugin-sdk/frontend";
+import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -250,7 +250,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   Button
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 var app = null;
 var confirmListeners = /* @__PURE__ */ new Set();

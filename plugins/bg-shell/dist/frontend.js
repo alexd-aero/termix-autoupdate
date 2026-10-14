@@ -513,13 +513,13 @@ var X = createLucideIcon(__iconData21);
 
 // src/frontend/BgShellPanel.tsx
 import { useEffect as useEffect4, useMemo as useMemo6, useRef as useRef3, useState as useState5 } from "react";
-import { useTranslation as useTranslation6 } from "@termix/plugin-sdk/frontend";
-import { Button as Button2 } from "@termix/plugin-sdk/ui";
+import { useTranslation as useTranslation6 } from "@termix-ssh/plugin-sdk/frontend";
+import { Button as Button2 } from "@termix-ssh/plugin-sdk/ui";
 
 // src/frontend/BgShellTab.tsx
 import { useCallback as useCallback2, useEffect as useEffect3, useMemo as useMemo5, useState as useState4 } from "react";
 import { toast as toast4 } from "sonner";
-import { useTranslation as useTranslation5 } from "@termix/plugin-sdk/frontend";
+import { useTranslation as useTranslation5 } from "@termix-ssh/plugin-sdk/frontend";
 import {
   AlertDialog as AlertDialog2,
   AlertDialogAction as AlertDialogAction2,
@@ -538,7 +538,7 @@ import {
   EmptyState,
   Input as Input2,
   useIsMobile as useIsMobile2
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 
 // src/frontend/BgTerminal.tsx
 import { useCallback, useEffect as useEffect2, useMemo as useMemo3, useRef as useRef2, useState as useState2 } from "react";
@@ -10825,8 +10825,8 @@ import {
   useSlotContributions as useSlotContributions2,
   useTheme,
   useTranslation as useTranslation2
-} from "@termix/plugin-sdk/frontend";
-import { copyToClipboard, readFromClipboard } from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/frontend";
+import { copyToClipboard, readFromClipboard } from "@termix-ssh/plugin-sdk/ui";
 
 // src/frontend/runtime.ts
 import { useSyncExternalStore } from "react";
@@ -11061,14 +11061,14 @@ import {
   ActionSlot,
   ComponentSlot,
   useIsMobile
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import {
   usePluginUiPreferences,
   useHostActions,
   useTabs,
   useTranslation,
   useSlotContributions
-} from "@termix/plugin-sdk/frontend";
+} from "@termix-ssh/plugin-sdk/frontend";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 var TOOLBAR_SLOT_ID = TERMINAL_TOOLBAR_SLOT;
 var DENSITY_OPTIONS = [
@@ -12101,7 +12101,7 @@ function BgTerminal({
 
 // src/frontend/DeleteSessionDialog.tsx
 import { toast as toast2 } from "sonner";
-import { useTranslation as useTranslation3 } from "@termix/plugin-sdk/frontend";
+import { useTranslation as useTranslation3 } from "@termix-ssh/plugin-sdk/frontend";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12111,7 +12111,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 async function deleteSession(id) {
   try {
@@ -12157,7 +12157,7 @@ function DeleteSessionDialog({
 // src/frontend/NewSessionDialog.tsx
 import { useMemo as useMemo4, useState as useState3 } from "react";
 import { toast as toast3 } from "sonner";
-import { useHosts, useTranslation as useTranslation4 } from "@termix/plugin-sdk/frontend";
+import { useHosts, useTranslation as useTranslation4 } from "@termix-ssh/plugin-sdk/frontend";
 import {
   Dialog,
   DialogContent,
@@ -12165,7 +12165,7 @@ import {
   DialogHeader,
   DialogTitle,
   Input
-} from "@termix/plugin-sdk/ui";
+} from "@termix-ssh/plugin-sdk/ui";
 import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 function isSshHost(host) {
   if (host.enableSsh === false) return false;
@@ -12970,29 +12970,66 @@ function isDisconnectMessage(data) {
     return false;
   }
 }
-function closeTabKeepingSession(tabId, handle) {
+function tabInstanceOf(data) {
+  if (!data.includes("tabInstanceId")) return null;
+  try {
+    const msg = JSON.parse(data);
+    const id = msg.data?.tabInstanceId;
+    return typeof id === "string" || typeof id === "number" ? String(id) : null;
+  } catch {
+    return null;
+  }
+}
+var socketByTab = /* @__PURE__ */ new Map();
+var held = /* @__PURE__ */ new Set();
+var holdAllUntil = 0;
+var hooked = false;
+function hookTerminalSockets() {
+  if (hooked || typeof WebSocket === "undefined") return;
+  hooked = true;
   const proto = WebSocket.prototype;
   const nativeSend = proto.send;
-  const guardedSend = function(data) {
-    if (typeof this.url === "string" && this.url.includes(SSH_TERMINAL_SOCKET) && isDisconnectMessage(data)) {
-      return;
+  proto.send = function(data) {
+    if (typeof data === "string" && typeof this.url === "string" && this.url.includes(SSH_TERMINAL_SOCKET)) {
+      const tab = tabInstanceOf(data);
+      if (tab) {
+        socketByTab.set(tab, this);
+        this.addEventListener("close", () => {
+          if (socketByTab.get(tab) === this) socketByTab.delete(tab);
+        });
+      }
+      if (isDisconnectMessage(data) && (held.has(this) || Date.now() < holdAllUntil)) return;
     }
     return nativeSend.call(this, data);
   };
+}
+function holdDisconnect(tabInstanceId) {
+  const ws2 = socketByTab.get(tabInstanceId);
+  if (!ws2) {
+    holdAllUntil = Date.now() + 5e3;
+    return;
+  }
+  held.add(ws2);
+  const release = () => held.delete(ws2);
+  ws2.addEventListener("close", release);
+  setTimeout(release, 3e4);
+}
+function closeTabKeepingSession(tab, handle) {
+  hookTerminalSockets();
+  holdDisconnect(String(tab.instanceId ?? tab.id));
   const originalDisconnect = handle?.disconnect;
   let confirmSetting = null;
   try {
     confirmSetting = localStorage.getItem("confirmTabClose");
   } catch {
   }
-  proto.send = guardedSend;
   try {
     if (handle && typeof originalDisconnect === "function") {
       handle.disconnect = () => {
       };
     }
     if (confirmSetting === "true") localStorage.setItem("confirmTabClose", "false");
-    app().tabs.closeTab(tabId);
+    app().tabs.closeTab(tab.id);
   } finally {
     if (confirmSetting === "true") {
       try {
@@ -13003,7 +13040,6 @@ function closeTabKeepingSession(tabId, handle) {
     if (handle && typeof originalDisconnect === "function") {
       handle.disconnect = originalDisconnect;
     }
-    if (proto.send === guardedSend) proto.send = nativeSend;
   }
 }
 var moving = false;
@@ -13035,7 +13071,7 @@ async function moveToBgShell(handle, tab) {
       });
       return;
     }
-    closeTabKeepingSession(tab.id, handle ?? null);
+    closeTabKeepingSession(tab, handle ?? null);
     try {
       await api.post("/move/commit", { moveId });
       toast5.success(t("bgShell.moved", { label }), {
@@ -13059,6 +13095,7 @@ async function moveToBgShell(handle, tab) {
 
 // src/frontend/index.tsx
 var MOVE_ACTION = "bg-shell.moveTab";
+hookTerminalSockets();
 function activate(app2) {
   setApp(app2);
   app2.onDispose(() => setApp(null));

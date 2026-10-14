@@ -1,7 +1,7 @@
 {
   "id": "termix-updater",
   "name": "Termix Updater",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "One-click Termix updates: backs up the data, pulls the new image and restarts the container through a host-side updater service.",
   "author": { "name": "adatskov" },
   "license": "MIT",

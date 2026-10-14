@@ -262,6 +262,11 @@ install_plugins() {  # $1 container
     if [ -n "$cur" ] && [ "$cur" = "$new" ] && [ "$(docker exec "$c" sh -c "cat $pd/$id/dist/*.js" 2>/dev/null | sha256sum)" = "$(cat "$p"dist/*.js | sha256sum)" ]; then
       ok "plugin $id $cur is current"; continue
     fi
+    # never go backwards: a newer build installed by hand (or a same-version local
+    # fix) is kept; only a higher version from the repo replaces it
+    if [ -n "$cur" ] && [ "$(printf '%s\n%s\n' "$cur" "$new" | sort -V | tail -1)" = "$cur" ]; then
+      ok "plugin $id $cur kept (the repo has $new)"; continue
+    fi
     [ "$check" = 1 ] && { warn "plugin $id: ${cur:-not installed} → $new"; continue; }
     docker exec -u 0 "$c" sh -c "rm -rf $pd/.$id.new && mkdir -p $pd/.$id.new" &&
     docker cp "$p." "$c:$pd/.$id.new" >/dev/null &&
@@ -270,6 +275,18 @@ install_plugins() {  # $1 container
     if [ -z "$cur" ]; then fresh+=("$id"); ok "plugin $id $new installed"; else changed+=("$id"); ok "plugin $id $cur → $new"; fi
   done
   [ "$check" = 1 ] && return 0
+  # Termix 26.10 renamed the plugin SDK (@termix/plugin-sdk -> @termix-ssh/plugin-sdk):
+  # a bundle built before that loads on the server but its browser import fails,
+  # and the plugin silently vanishes from the sidebar. Rename it in place.
+  if docker exec "$c" grep -q '@termix-ssh/plugin-sdk' /app/html/index.html 2>/dev/null; then
+    for p in "$WORK/repo/plugins"/*/; do
+      id="$(basename "$p")"
+      if docker exec "$c" sh -c "grep -lq '@termix/plugin-sdk' $pd/$id/dist/*.js" 2>/dev/null; then
+        docker exec -u 0 "$c" sh -c "sed -i 's#@termix/plugin-sdk#@termix-ssh/plugin-sdk#g' $pd/$id/dist/*.js" \
+          && { ok "plugin $id: moved to the new SDK name"; [[ " ${changed[*]:-} " == *" $id "* ]] || changed+=("$id"); }
+      fi
+    done
+  fi
 
   # Termix only discovers a new plugin folder when it starts.
   if [ ${#fresh[@]} -gt 0 ]; then
